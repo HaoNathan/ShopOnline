@@ -1,0 +1,62 @@
+﻿
+@section Css
+   {
+    <link rel="stylesheet" href="~/Areas/Admin/Asset/css/font.css">
+    <link rel="stylesheet" href="~/Areas/Admin/Asset/css/xadmin.css">
+    <script type="text/javascript" src="~/Areas/Admin/Asset/js/xadmin.js"></script>
+}
+<div class="layui-fluid">
+    <div class="layui-row">
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <label for="RolesName" class="layui-form-label">
+                    <span class="x-red">*</span>一级类别名
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="RolesName" name="categoryName" required="" lay-verify="required"
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">
+                </label>
+                <button class="layui-btn" lay-filter="add" lay-submit>
+                    增加
+                </button>
+            </div>
+        </form>
+    </div>  
+</div>
+@section js
+{
+    <script>
+        layui.use(['form', 'layer', 'jquery'],
+            function() {
+                var form = layui.form;
+                var layer = layui.layer;
+                $ = layui.$;
+                form.on('submit(add)',
+                    function(data) {
+                        //发异步，
+                        $.post("@Url.Action("AddFirstCategory","ProductCategory")",
+                            data.field,
+                            function(data) {
+                                layer.alert(data.Info,
+                                    {
+                                        icon: 6
+                                    },
+                                    function() {
+                                        //关闭当前frame
+                                        xadmin.close();
+                                        // 可以对父窗口进行刷新
+                                        xadmin.father_reload();
+                                    });
+                            });
+                        return false;
+                    });
+            });
+    </script>
+
+}
+
+

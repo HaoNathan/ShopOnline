@@ -47,7 +47,7 @@ namespace ShopOnline.WebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddRoles(string rolesName)
+        public async Task<JsonResult> AddRoles(string rolesName)
         {
             var result = await _manager.AddRoles(new RolesDto()
             {

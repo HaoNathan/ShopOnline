@@ -153,6 +153,7 @@
     <Compile Include="Areas\Admin\Controllers\AdminMainBoardController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
@@ -423,6 +424,8 @@
     <Content Include="Areas\Admin\Views\Admin\UpdateAdmins.cshtml" />
     <Content Include="Areas\Admin\Views\Product\ProductList.cshtml" />
     <Content Include="Areas\Admin\Views\Product\AddProduct.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductCategory\FirstCategoryList.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductCategory\AddFirstCategory.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

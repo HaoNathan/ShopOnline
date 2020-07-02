@@ -43,7 +43,12 @@
   <ItemGroup>
     <Compile Include="IAdminService.cs" />
     <Compile Include="IBaseService.cs" />
+    <Compile Include="IFirstCategoryService.cs" />
+    <Compile Include="IProductService.cs" />
     <Compile Include="IRolesService.cs" />
+    <Compile Include="ISecondCategoryService.cs" />
+    <Compile Include="IThirdCategoryService.cs" />
+    <Compile Include="IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

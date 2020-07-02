@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using log4net;
 using log4net.Config;
 
@@ -29,9 +25,6 @@ namespace ShopOnlineTools
         private ILog logger = null;
         #endregion
 
-        #region 属性
-
-        #endregion
 
         #region 方法
         public void Info(string strMessage = "系统消息：", Exception exp = null)
