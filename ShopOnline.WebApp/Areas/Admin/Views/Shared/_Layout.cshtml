@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>@ViewBag.Title</title>
+    <link href="~/Areas/Admin/Asset/layui/css/layui.css" rel="stylesheet" />
+    @RenderSection("Css", false)
+</head>
+<body>
+
+    <!-- 你的HTML代码 -->
+    @RenderBody()
+    <script src="~/Areas/Admin/Asset/layui/layui.js"></script>
+    <script>
+            layui.config({
+                base:"/Areas/Admin/Asset/layui/"
+            }).extend({
+                request:'request'
+            });
+
+    </script>
+</body>
+@RenderSection("js", false)
+
+</html>
