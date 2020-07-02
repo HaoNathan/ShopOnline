@@ -20,7 +20,7 @@ namespace ShopOnline.IDal
 
         Task<int> DeleteAsync(T model);
 
-        IQueryable<T> QueryAllAsync();
+        IQueryable<T> QueryAllAsync(bool isRemove);
 
         IQueryable<T> QueryAllAsync(Expression<Func<T, bool>> lambdaFunc);
 

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using ShopOnline.Dto;
 using ShopOnline.IBll;
 using ShopOnline.IDal;
@@ -24,5 +25,15 @@ namespace ShopOnline.Bll
             });
         }
 
+        public IQueryable<RolesDto> GetAllRoles()
+        {
+            return  _manager.QueryAllAsync(false).Select(m=>new RolesDto()
+            {
+                RolesName = m.RolesName,
+                Id = m.Id,
+                CreateTime = m.CreateTime,
+                IsRemove = m.IsRemove
+            });
+        }
     }
 }

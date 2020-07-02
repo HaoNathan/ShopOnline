@@ -24,7 +24,7 @@ namespace ShopOnline.Bll
         /// <returns></returns>
         public  IQueryable<AdminDto> GetAllAdmin()
         {
-            return  _service.QueryAllAsync().Select(m=>new AdminDto()
+            return  _service.QueryAllAsync(false).Select(m=>new AdminDto()
             {
                 Id = m.Id,
                 RolesName = m.Roles.RolesName,
@@ -47,7 +47,8 @@ namespace ShopOnline.Bll
             {
                 Id = data.Id,
                 AdminName = data.AdminName,
-                ImagePath = data.ImagePath
+                ImagePath = data.ImagePath,
+                RolesId = data.RolesId
             };
         }
 
@@ -59,7 +60,8 @@ namespace ShopOnline.Bll
         public  AdminDto AdminLogin(AdminDto model)
         {
             var data=  _service.QueryAllAsync(m => m.AdminName == model.AdminName
-                         && m.AdminPassword == model.AdminPassword).FirstOrDefault();
+                         && m.AdminPassword == model.AdminPassword
+                         &&m.IsRemove==false).FirstOrDefault();
             if (data==null)
             {
                 return null;
@@ -96,7 +98,7 @@ namespace ShopOnline.Bll
         {
             IRolesService service = new RolesService();
 
-            var data = service.QueryAllAsync().Select(m => new RolesDto()
+            var data = service.QueryAllAsync(true).Select(m => new RolesDto()
             {
                 Id = m.Id,
                 RolesName = m.RolesName
@@ -120,6 +122,13 @@ namespace ShopOnline.Bll
             admin.UpdateTime=DateTime.Now;
             var res= await _service.EditAsync(admin);
             return res;
+        }
+
+        public async Task<int> UpdateAdminState(string state,Guid id)
+        {
+            var admin = await _service.QueryAsync(id);
+            admin.IsRemove= bool.Parse(state);
+            return await _service.EditAsync(admin);
         }
     }
 }

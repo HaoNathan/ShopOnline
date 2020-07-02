@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using ShopOnline.Dto;
 using ShopOnline.IBll;
 using ShopOnline.WebApp.Common;
+using ShopOnlineTools;
 
 namespace ShopOnline.WebApp.Areas.Admin.Controllers
 {
@@ -28,21 +29,40 @@ namespace ShopOnline.WebApp.Areas.Admin.Controllers
         /// </summary>
         /// <returns></returns>
          [HttpGet]
-        public ActionResult AdminList()
+        public async Task< ActionResult> AdminList()
         {
+            var rolesList = await _manager.GetRoles().ToListAsync();
+            ViewBag.RolesList = new SelectList(rolesList, "Id", "RolesName");
             return View();
         }
         [HttpGet]
-        public  ActionResult GetAdminList()
+        public  JsonResult GetAdminList(int page, int limit, string adminName, string rolesId, string createTime)
         {
             var data =  _manager.GetAllAdmin();
+
+            if (!string.IsNullOrEmpty(adminName))
+            {
+                data = data.Where(m => m.AdminName.Contains(adminName));
+            }
+            if (!string.IsNullOrEmpty(rolesId))
+            {
+                data = data.Where(m => m.RolesId.ToString().Equals(rolesId));
+            }
+            if (!string.IsNullOrEmpty(createTime))
+            {
+                data = data.Where(m => m.CreateTime.ToString("yyyy-MM-dd").Equals(createTime));
+            }
+
             var dataCount = data.Count();
-            var jsonResult = new
+            var newData = data.ToList().Skip((page-1) * limit).Take(limit);
+
+            var jsonResult = new        
             {
                 code = 0,
                 count=dataCount,
-                data
+                data=newData
             };
+
             return Json(jsonResult,JsonRequestBehavior.AllowGet);
         }
 
@@ -135,5 +155,42 @@ namespace ShopOnline.WebApp.Areas.Admin.Controllers
             return Json(_msg);
         }
 
+        [HttpGet]
+        public async Task< ActionResult> UpdateAdmins(Guid id)
+        {
+            var admin = await _manager.QueryAdmin(id);
+            var data = await _manager.GetRoles().ToListAsync();
+            ViewBag.RolesList = new SelectList(data, "Id", "RolesName");
+            return View(admin);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> UpdateAdminState(string stateId,string adminId)
+        {
+            try
+            {
+                _msg = new MsgResult();
+                var result = await _manager.UpdateAdminState(stateId, Guid.Parse(adminId));
+
+                if (result == 1)
+                {
+                    _msg.IsSuccess = true;
+                    _msg.Info = "操作成功";
+                }
+                else
+                {
+                    _msg.IsSuccess = false;
+                    _msg.Info = "error";
+                }
+
+            }
+            catch (Exception e)
+            {
+                LogHelper log = new LogHelper(typeof(AdminController));
+                log.Error("修改管理员状态错误信息", new Exception(e.Message));
+            }
+
+            return Json(_msg, JsonRequestBehavior.AllowGet);
+        }
     }
 }

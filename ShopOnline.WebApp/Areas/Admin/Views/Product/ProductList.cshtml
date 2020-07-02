@@ -1,6 +1,8 @@
 ﻿
 
 
+
+
 @section Css
     {
     <link rel="stylesheet" href="~/Areas/Admin/Asset/css/font.css">
@@ -35,16 +37,16 @@
                             <input class="layui-input" autocomplete="off" placeholder="开始日" name="start" id="start">
                         </div>
                         <div class="layui-inline layui-show-xs-block">
-                            @Html.DropDownList("RolesId", (SelectList)ViewBag.RolesList, "请选择")
+                            @* @Html.DropDownList("RolesId", (SelectList)ViewBag.RolesList, "请选择")**@
                         </div>
                         <div class="layui-inline layui-show-xs-block">
-                            <button class="layui-btn"  id="btnSearch" ><i class="layui-icon">&#xe615;查询</i></button>
+                            <button class="layui-btn" id="btnSearch"><i class="layui-icon">&#xe615;查询</i></button>
                         </div>
                     </div>
                 </div>
                 <div class="layui-card-header">
                     <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-                    <button class="layui-btn" onclick="xadmin.open('添加用户', '@Url.Action("AddAdmin","Admin")', 680, 500)">
+                    <button class="layui-btn" onclick="xadmin.open('添加产品', '@Url.Action("AddProduct","Product")', 780, 600)">
                         <i class="layui-icon"></i>添加
                     </button>
                 </div>
@@ -74,10 +76,8 @@
 
                 table.render({
                     elem: '#AdminTable',
-                    url: '@Url.Action("GetAdminList", "Admin")' //数据接口
-                    ,
-                    page: true //开启分页
-                    ,
+                    url: '@Url.Action("GetProductList", "Product")' ,//数据接口,
+                    page: true, //开启分页,
                     cols: [
                         [//表头
                             { field: 'ImagePath', title: '头像', width: '3%', templet: "<div class='layui-table-cell' > <img src='{{d.ImagePath}}' class='layui-nav-img' width='88%'> </div>", fixed: 'left' },
@@ -85,8 +85,8 @@
                             { field: 'AdminName', title: '用户名', width: '10%' },
                             { field: 'RolesName', title: '权限名', width: '10%', sort: true },
                             { title: '创建时间', templet: "#newDate", width: '10%' },
-                            { field: 'IsRemove', title: '是否启用', templet: '#switchTpl', width: '10%', sort: true },
-                            { field: 'userStateName', title: '状态', templet: '#barDemo', width: '14%' }
+                            { field: 'IsRemove', title: '状态', templet: '#switchTpl', width: '10%', sort: true },
+                            {  title: '操作', templet: '#barDemo', width: '14%' }
                         ]
                     ],
                     limits: [8, 16, 24],
@@ -112,7 +112,7 @@
                         if (obj.elem.checked === false) {
                             state = true;
                         };
-                        $.post('@Url.Action("UpdateAdminState", "Admin")',
+                        $.post('@Url.Action("GetProductList", "Product")',
                             {stateId: state,adminId:id },
                             function (res) {
                                 layer.msg(res.Info);

@@ -14,5 +14,6 @@ namespace ShopOnline.IBll
         Task<int> InsertAdmin(AdminDto model);
         IQueryable<RolesDto> GetRoles();
         Task<int> UpdateAdmin(AdminDto model);
+        Task<int> UpdateAdminState(string state,Guid id);
     }
 }

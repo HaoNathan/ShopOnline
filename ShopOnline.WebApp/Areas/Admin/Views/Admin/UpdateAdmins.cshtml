@@ -18,7 +18,7 @@
                     <span class="x-red">*</span>头像
                 </label>
                 <div class="layui-input-inline">
-                    <img src="@Model.ImagePath" id="displayImg" alt="Alternate Text" width="50%"/>
+                    <img src="@Model.ImagePath" id="displayImg" alt="Alternate Text" width="50%" />
                     <button type="button" class="layui-btn" id="UploadImage">
                         <i class="layui-icon">&#xe67c;</i>上传图片
                     </button>
@@ -44,7 +44,7 @@
             <div class="layui-form-item layui-col-xs7">
                 <label class="layui-form-label "><span class="x-red">*</span>角色</label>
                 <div class="layui-input-block ">
-                    <select name="RolesId" lay-filter="aihao" disabled="disabled">
+                    <select name="RolesId" >
                         @foreach (var item in (SelectList)ViewBag.RolesList)
                         {
                             if (item.Value.ToString().Equals(@Model.RolesId))
@@ -53,11 +53,11 @@
                             }
                             else
                             {
-                                <option value="@item.Value" >@item.Text</option>
+                                <option value="@item.Value">@item.Text</option>
                             }
                         }
                     </select>
-                   
+
                 </div>
             </div>
             <div class="layui-form-item">

@@ -55,9 +55,16 @@ namespace ShopOnline.Dal
             return await _db.SaveChangesAsync();
         }
 
-        public IQueryable<T> QueryAllAsync()
+        public IQueryable<T> QueryAllAsync(bool isRemove=true)
         {
-            return _db.Set<T>().AsNoTracking().Where(m=>!m.IsRemove);
+            if (isRemove)
+            {
+                return _db.Set<T>().AsNoTracking().Where(m => !m.IsRemove).AsNoTracking();
+            }
+            else
+            {
+                return _db.Set<T>().AsNoTracking().AsNoTracking();
+            }
         }
 
         public IQueryable<T> QueryAllAsync(Expression<Func<T, bool>> lambdaFunc)

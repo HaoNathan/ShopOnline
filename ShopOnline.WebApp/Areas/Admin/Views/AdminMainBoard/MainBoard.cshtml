@@ -17,12 +17,12 @@
     </div>
     <div class="left_open">
         <a><i title="展开左侧栏" class="iconfont">&#xe699;</i></a>
-    </div>
+    </div><!--
     <ul class="layui-nav left fast-add" lay-filter="">
         <li class="layui-nav-item">
             <a href="javascript:;">+新增</a>
             <dl class="layui-nav-child">
-                <!-- 二级菜单 -->
+                 二级菜单
                 <dd>
                     <a onclick="xadmin.open('最大化','http://www.baidu.com','','',true)">
                         <i class="iconfont">&#xe6a2;</i>弹出最大化
@@ -50,7 +50,7 @@
                 </dd>
             </dl>
         </li>
-    </ul>
+    </ul> -->
     <ul class="layui-nav right" lay-filter="">
         <li class="layui-nav-item to-index">
             <img src="@Model.ImagePath" class="layui-nav-img" />
@@ -159,8 +159,8 @@
             </li>
             <li>
                 <a href="javascript:;">
-                    <i class="iconfont left-nav-li" lay-tips="分类管理">&#xe723;</i>
-                    <cite>分类管理</cite>
+                    <i class="iconfont left-nav-li" lay-tips="商品分类管理">&#xe723;</i>
+                    <cite>商品分类管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
                 <ul class="sub-menu">
@@ -175,14 +175,14 @@
             <li>
                 <a href="javascript:;">
                     <i class="iconfont left-nav-li" lay-tips="城市联动">&#xe723;</i>
-                    <cite>城市联动</cite>
+                    <cite>商品管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('三级地区联动','city.html')">
+                        <a onclick="xadmin.add_tab('商品列表', '@Url.Action("ProductList","Product")')">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>三级地区联动</cite>
+                            <cite>商品列表</cite>
                         </a>
                     </li>
                 </ul>
@@ -239,42 +239,14 @@
                             <cite>拆线图</cite>
                         </a>
                     </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('地图','echarts3.html')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>地图</cite>
-                        </a>
-                    </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('饼图','echarts4.html')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>饼图</cite>
-                        </a>
-                    </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('雷达图','echarts5.html')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>雷达图</cite>
-                        </a>
-                    </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('k线图','echarts6.html')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>k线图</cite>
-                        </a>
-                    </li>
+                  
                     <li>
                         <a onclick="xadmin.add_tab('热力图','echarts7.html')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>热力图</cite>
                         </a>
                     </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('仪表图','echarts8.html')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>仪表图</cite>
-                        </a>
-                    </li>
+                    
                 </ul>
             </li>
             <li>

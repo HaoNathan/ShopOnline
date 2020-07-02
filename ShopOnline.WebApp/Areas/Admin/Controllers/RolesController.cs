@@ -19,6 +19,7 @@ namespace ShopOnline.WebApp.Areas.Admin.Controllers
             _manager = manager;
         }
         // GET: Admin/Roles
+        [HttpGet]
         public ActionResult RolesList()
         {
             return View();
@@ -27,6 +28,22 @@ namespace ShopOnline.WebApp.Areas.Admin.Controllers
         public ActionResult AddRoles()
         {
             return View();
+        }
+        [HttpGet]
+        public JsonResult GetRolesList()
+        {
+                var data = _manager.GetAllRoles();
+                var dataCount = data.Count();
+
+                var jsonResult = new
+                {
+                    code = 0,
+                    count = dataCount,
+                    data
+                };
+
+                return Json(jsonResult, JsonRequestBehavior.AllowGet);
+            
         }
 
         [HttpPost]

@@ -152,7 +152,10 @@
     <Compile Include="Areas\Admin\Controllers\AdminLoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminMainBoardController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Common\MsgResult.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -417,6 +420,9 @@
     <Content Include="Areas\Admin\Views\Roles\RolesList.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\AddRoles.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\UpdateAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\UpdateAdmins.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\ProductList.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\AddProduct.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -447,6 +453,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\Order\" />
+    <Folder Include="Areas\Admin\Views\User\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -478,6 +486,10 @@
     <ProjectReference Include="..\ShopOnline.IBll\ShopOnline.IBll.csproj">
       <Project>{a59e95a7-cad0-4ab9-bd79-186a7c407b62}</Project>
       <Name>ShopOnline.IBll</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ShopOnlineTools\ShopOnlineTools.csproj">
+      <Project>{558edb8c-08c5-4862-b840-0c61d1faff7c}</Project>
+      <Name>ShopOnlineTools</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
