@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO.Compression;
 
 namespace ShopOnline.Dto
 {
@@ -20,13 +21,23 @@ namespace ShopOnline.Dto
        
         public Guid ColorId { get; set; }
 
+        public string ColorName { get; set; }
+
         public Guid SizeId { get; set; }
+
+        public string SizeName { get; set; }
 
         public Guid FirstProductCategoryId { get; set; }
 
+        public string FirstProductCategoryName { get; set; }
+
         public Guid SecondProductCategoryId { get; set; }
 
+        public string SecondProductCategoryName { get; set; }
+
         public Guid ThirdProductCategoryId { get; set; }
+
+        public string ThirdProductCategoryName { get; set; }
 
         public int GS1Id { get; set; }
         public DateTime CreateTime { get; set; }

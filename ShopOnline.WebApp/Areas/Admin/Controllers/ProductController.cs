@@ -28,27 +28,61 @@ namespace ShopOnline.WebApp.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult ProductList()
         {
-
             return View();
         }
-        [HttpPost]
-        public JsonResult GetProductList(int limit)
+
+        [HttpGet]
+        public JsonResult GetProductList(int page, int limit, string productName, string categoryId)
         {
-            return Json(null);
+            var data = _manager.GetAllProducts();
+
+            if (!string.IsNullOrEmpty(productName))
+            {
+                data = data.Where(m => m.ProductName.Contains(productName));
+            }
+
+            if (!string.IsNullOrEmpty(categoryId))
+            {
+                data = data.Where(m => m.FirstProductCategoryId.ToString().Equals(categoryId));
+            }
+
+            var dataCount = data.Count();
+            var newData = data.ToList().Skip((page - 1) * limit).Take(limit);
+
+            var jsonResult = new
+            {
+                code = 0,
+                count = dataCount,
+                data = newData
+            };
+            return Json(jsonResult, JsonRequestBehavior.AllowGet);
         }
+
         [HttpGet]
         public async Task< ActionResult> AddProduct()
         {
-            var firstCategoryList =await _manager.GetFirstCategoryList().ToListAsync();
-            var secondCategoryList =await _manager.GetSecondCategoryList().ToListAsync();
-            var thirdCategoryList =await _manager.GetThirdCategoryList().ToListAsync();
-
-            ViewBag.FirstCategoryList = new SelectList(firstCategoryList,"Id","CategoryName");
-            ViewBag.SecondCategoryList = new SelectList(secondCategoryList, "Id", "CategoryName");
-            ViewBag.ThirdCategoryList = new SelectList(thirdCategoryList, "Id", "CategoryName");
-
+            await GetCategoryList();
             return View();
         }
+        [HttpGet]
+        public async Task<ActionResult> UpdateProduct(Guid id)
+        {
+            await GetCategoryList();
+            var data = await _manager.QueryProduct(id);
+            return View(data);
+        }
+
+        public async Task  GetCategoryList()
+        {
+            var firstCategoryList = await _manager.GetFirstCategoryList().ToListAsync();
+            var secondCategoryList = await _manager.GetSecondCategoryList().ToListAsync();
+            var thirdCategoryList = await _manager.GetThirdCategoryList().ToListAsync();
+
+            ViewBag.FirstCategoryList = new SelectList(firstCategoryList, "Id", "CategoryName");
+            ViewBag.SecondCategoryList = new SelectList(secondCategoryList, "Id", "CategoryName");
+            ViewBag.ThirdCategoryList = new SelectList(thirdCategoryList, "Id", "CategoryName");
+        }
+
         [HttpPost]
         public JsonResult UploadImage(HttpPostedFileBase file)
         {
@@ -70,10 +104,21 @@ namespace ShopOnline.WebApp.Areas.Admin.Controllers
             var result = await _manager.AddProduct(model);
             if (result==1)
             {
-                _msg=new MsgResult();
-                _msg.Info = "新增成功";
-                _msg.IsSuccess = true;
+                _msg = new MsgResult
+                {
+                    Info = "新增成功",
+                    IsSuccess = true
+                };
             }
+            else
+            {
+                _msg = new MsgResult
+                {
+                    Info = "新增成功",
+                    IsSuccess = true
+                };
+            }
+
             return Json(_msg);
         }
         

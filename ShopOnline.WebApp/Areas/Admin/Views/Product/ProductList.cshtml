@@ -1,8 +1,5 @@
 ﻿
 
-
-
-
 @section Css
     {
     <link rel="stylesheet" href="~/Areas/Admin/Asset/css/font.css">
@@ -46,7 +43,7 @@
                 </div>
                 <div class="layui-card-header">
                     <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-                    <button class="layui-btn" onclick="xadmin.open('添加产品', '@Url.Action("AddProduct","Product")', 780, 600)">
+                    <button class="layui-btn" onclick="xadmin.open('添加产品', '@Url.Action("AddProduct","Product")', 1000, 700)">
                         <i class="layui-icon"></i>添加
                     </button>
                 </div>
@@ -76,17 +73,25 @@
 
                 table.render({
                     elem: '#AdminTable',
-                    url: '@Url.Action("GetProductList", "Product")' ,//数据接口,
+                    url: '@Url.Action("GetProductList", "Product")', //数据接口,
                     page: true, //开启分页,
                     cols: [
                         [//表头
-                            { field: 'ImagePath', title: '头像', width: '3%', templet: "<div class='layui-table-cell' > <img src='{{d.ImagePath}}' class='layui-nav-img' width='88%'> </div>", fixed: 'left' },
-                            { field: 'Id', title: 'ID', width: '10%', hide: true, fixed: 'left' },
-                            { field: 'AdminName', title: '用户名', width: '10%' },
-                            { field: 'RolesName', title: '权限名', width: '10%', sort: true },
-                            { title: '创建时间', templet: "#newDate", width: '10%' },
-                            { field: 'IsRemove', title: '状态', templet: '#switchTpl', width: '10%', sort: true },
-                            {  title: '操作', templet: '#barDemo', width: '14%' }
+                            { field: 'ImagePath', title: '商品图', width: '4%', templet: "#productImage", fixed: 'left' },
+                            { field: 'Id', title: 'ID', width: '10%', hide: true },
+                            { field: 'ProductName', title: '商品名称', width: '10%' },
+                            { field: 'ProductPrice', title: '价格', width: '4%', sort: true },
+                            { field: 'ProductCost', title: '成本', width: '4%', sort: true },
+                            { field: 'ProductNumber', title: '数量', width: '4%', sort: true },
+                            { field: 'ColorName', title: '颜色', width: '10%', sort: true },
+                            { field: 'SizeName', title: '规格', width: '10%', sort: true },
+                            { field: 'FirstProductCategoryName', title: '一级类别', width: '10%', sort: true },
+                            { field: 'SecondProductCategoryName', title: '二级类别', width: '10%', sort: true },
+                            { field: 'ThirdProductCategoryName', title: '三级类别', width: '10%', sort: true }, 
+                            { field: 'GS1Id', title: '商品编号', width: '6%', sort: true },
+                            { title: '创建时间', templet: "#newDate", width: '6%' },
+                            { field: 'IsRemove', title: '状态', templet: '#switchTpl', width: '5%' },
+                            { title: '操作', templet: '#barDemo', width: '5%' }
                         ]
                     ],
                     limits: [8, 16, 24],
@@ -113,8 +118,8 @@
                             state = true;
                         };
                         $.post('@Url.Action("GetProductList", "Product")',
-                            {stateId: state,adminId:id },
-                            function (res) {
+                            { stateId: state, adminId: id },
+                            function(res) {
                                 layer.msg(res.Info);
                             });
                     });
@@ -126,7 +131,7 @@
                         var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
                         var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
                         if (layEvent === 'edit') { //编辑
-                            xadmin.open('个人信息', '/Admin/Admin/UpdateAdmins?id=' + data.Id, 680, 580);
+                            xadmin.open('个人信息', '/Admin/Product/UpdateProduct?id=' + data.Id, 1100, 780);
                         }
                     });
             });
@@ -140,7 +145,12 @@
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     </script>
     <script type="text/html" id="switchTpl">
-        <input type="checkbox" name="StateName" value="{{d.Id}}" lay-skin="switch" lay-text="启用|注销" lay-filter="stateDemo" {{ d.IsRemove== false ? 'checked' : ' ' }}>
+        <input type="checkbox" name="StateName" value="{{d.Id}}" lay-skin="switch" lay-text="上架|下架" lay-filter="stateDemo" {{ d.IsRemove== false ? 'checked' : ' ' }}>
+    </script>
+    <script type="text/html" id="productImage">
+        <!--拆分图片路径 -->
+        {{# var imagePath=d.ProductImagePath; var str=imagePath.split('#'); }}
+        <img src="{{str[0]}}" alt="Alternate Text"/>
     </script>
 }
 

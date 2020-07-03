@@ -434,6 +434,7 @@
     <Content Include="Areas\Admin\Views\ProductCategorySecond\AddSecondCategory.cshtml" />
     <Content Include="Areas\Admin\Views\ProductCategorySecond\SecondCategoryList.cshtml" />
     <Content Include="Areas\Admin\Views\ProductCategoryThird\ThirdCategoryList.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\UpdateProduct.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
