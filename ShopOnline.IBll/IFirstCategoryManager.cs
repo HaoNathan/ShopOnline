@@ -15,7 +15,7 @@ namespace ShopOnline.IBll
 
         Task< ProductCategoryDto> QueryCategory(Guid id);
 
-        Task<int> EditCategory(Guid id,bool state);
+        Task<int> EditCategoryState(Guid id,bool state);
 
     }
 }

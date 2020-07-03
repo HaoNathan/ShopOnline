@@ -10,6 +10,7 @@ namespace ShopOnline.WebApp.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         // GET: Admin/Product
+
         [HttpGet]
         public ActionResult ProductList()
         {
@@ -23,6 +24,7 @@ namespace ShopOnline.WebApp.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult AddProduct()
         {
+           
             return View();
         }
         [HttpPost]

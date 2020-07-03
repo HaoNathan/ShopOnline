@@ -41,19 +41,19 @@
             <div class="layui-form-item layui-col-xs7">
                 <label class="layui-form-label "><span class="x-red">*</span>角色</label>
                 <div class="layui-input-block ">
-                    @*@Html.DropDownList("RolesId", (SelectList)ViewBag.RolesList, "请选择")*@
+                    @Html.DropDownList("FirstProductCategoryId", (SelectList)ViewBag.FirstCategoryList, "请选择")
                 </div>
             </div>
             <div class="layui-form-item layui-col-xs7">
                 <label class="layui-form-label "><span class="x-red">*</span>角色</label>
                 <div class="layui-input-block ">
-                    @*@Html.DropDownList("RolesId", (SelectList)ViewBag.RolesList, "请选择")*@
+                    @Html.DropDownList("SecondProductCategoryId", (SelectList)ViewBag.SecondCategoryList, "请选择")
                 </div>
             </div>
             <div class="layui-form-item layui-col-xs7">
                 <label class="layui-form-label "><span class="x-red">*</span>角色</label>
                 <div class="layui-input-block ">
-                    @*@Html.DropDownList("RolesId", (SelectList)ViewBag.RolesList, "请选择")*@
+                    @Html.DropDownList("ThirdProductCategoryId", (SelectList)ViewBag.ThirdCategoryList, "请选择")
                 </div>
             </div>
             <div class="layui-form-item">
@@ -91,26 +91,13 @@
 @section js
    {
     <script>
-           layui.use(['form', 'layer'],
+           layui.use(['form', 'layer','upload'],
                function() {
                    $ = layui.jquery;
                    var form = layui.form;
                    var layer = layui.layer;
-
-                   //自定义验证规则
-                   form.verify({
-                       nikename: function(value) {
-                           if (value.length < 5) {
-                               return '昵称至少得5个字符啊';
-                           }
-                       },
-                       pass: [/(.+){6,12}$/, '密码必须6到12位'],
-                       repass: function(value) {
-                           if ($('#L_pass').val() !== $('#L_repass').val()) {
-                               return '两次密码不一致';
-                           }
-                       }
-                   });
+                   var upload = layui.upload;
+                  
                    upload.render({
                        elem: '#test2'
                        ,url: 'https://httpbin.org/post' //改成您自己的上传接口

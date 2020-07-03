@@ -11,6 +11,10 @@ namespace ShopOnline.IBll
 
         Task<int> EditCategory(ProductCategoryDto model);
 
-        IQueryable<ProductCategoryDto> QueryCategory(Guid id);
+        Task<int> AddCategory(string categoryName);
+
+        Task<ProductCategoryDto> QueryCategory(Guid id);
+
+        Task<int> EditCategoryState(Guid id, bool state);
     }
 }

@@ -15,7 +15,7 @@ namespace ShopOnline.WebApp.Areas.Admin.Controllers
     {
         private readonly IFirstCategoryManager _manager;
         private MsgResult _msg;
-        private LogHelper log=new LogHelper(typeof(ProductCategoryController));
+        private readonly LogHelper _log=new LogHelper(typeof(ProductCategoryController));
         public ProductCategoryController(IFirstCategoryManager manager)
         {
             _manager = manager;
@@ -79,32 +79,14 @@ namespace ShopOnline.WebApp.Areas.Admin.Controllers
             }
             catch (Exception e)
             {
-                log.Error("添加以及商品分类错误", e);
+                _log.Error("添加以及商品分类错误", e);
             }
 
             return Json(_msg);
         }
-        [HttpGet]
-        public ActionResult SecondCategoryList()
-        {
-            return View();
-        }
-        [HttpGet]
-        public JsonResult AddSecondCategory(ProductCategoryDto model)
-        {
-            return Json(null);
-        }
-        [HttpGet]
-        public ActionResult ThirdCategoryList()
-        {
-            return View();
-        }
-        [HttpGet]
-        public JsonResult AddThirdCategory(ProductCategoryDto model)
-        {
-            return Json(null);
-        }
-
+       
+       
+        
         
     }
 }

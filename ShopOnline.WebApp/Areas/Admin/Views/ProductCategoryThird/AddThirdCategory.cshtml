@@ -25,7 +25,7 @@
                 </button>
             </div>
         </form>
-    </div>  
+    </div>
 </div>
 @section js
 {
@@ -35,11 +35,10 @@
                 var form = layui.form;
                 var layer = layui.layer;
                 $ = layui.$;
-         
                 form.on('submit(add)',
                     function(data) {
                         //发异步，
-                        $.post("@Url.Action("AddFirstCategory","ProductCategory")",
+                        $.post("@Url.Action("AddThirdCategory","ProductCategoryThird")",
                             data.field,
                             function(data) {
                                 layer.alert(data.Info,

@@ -8,22 +8,21 @@ using ShopOnline.Model;
 
 namespace ShopOnline.Bll
 {
-    public class FirstCategoryManager:IFirstCategoryManager
+    public class ThirdCategoryManager:IThirdCategoryManager
     {
-        private readonly IFirstCategoryService _service;
+        private readonly IThirdCategoryService _service;
 
-        public FirstCategoryManager(IFirstCategoryService service)
+        public ThirdCategoryManager(IThirdCategoryService service)
         {
             _service = service;
         }
-
         public IQueryable<ProductCategoryDto> GetAllCategory()
         {
             var data = _service.QueryAllAsync(false)
                 .Select(m => new ProductCategoryDto()
                 {
                     Id = m.Id,
-                    CategoryName = m.FirstProductCategoryName,
+                    CategoryName = m.ThirdProductCategoryName,
                     CreateTime = m.CreateTime,
                     UpdateTime = m.UpdateTime,
                     IsRemove = m.IsRemove
@@ -34,36 +33,36 @@ namespace ShopOnline.Bll
 
         public async Task<int> EditCategory(ProductCategoryDto model)
         {
-            return await _service.EditAsync(new FirstProductCategory()
+            return await _service.EditAsync(new ThirdProductCategory()
             {
                 UpdateTime = DateTime.Now,
-                FirstProductCategoryName = model.CategoryName
+                ThirdProductCategoryName = model.CategoryName
             });
         }
 
         public async Task<int> AddCategory(string categoryName)
         {
-            return await _service.AddAsync(new FirstProductCategory()
+            return await _service.AddAsync(new ThirdProductCategory()
             {
-                FirstProductCategoryName = categoryName
+                ThirdProductCategoryName = categoryName
             });
         }
 
         public async Task<ProductCategoryDto> QueryCategory(Guid id)
         {
-            var category=await _service.QueryAsync(id);
+            var category = await _service.QueryAsync(id);
             return new ProductCategoryDto()
             {
                 Id = category.Id,
                 CreateTime = category.CreateTime,
-                CategoryName = category.FirstProductCategoryName,
+                CategoryName = category.ThirdProductCategoryName,
                 IsRemove = category.IsRemove
             };
         }
 
         public async Task<int> EditCategoryState(Guid id, bool state)
         {
-            return await _service.EditAsync(new FirstProductCategory()
+            return await _service.EditAsync(new ThirdProductCategory()
             {
                 IsRemove = state
             });

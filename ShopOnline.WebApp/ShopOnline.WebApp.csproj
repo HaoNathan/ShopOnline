@@ -154,6 +154,8 @@
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductCategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductCategorySecondController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductCategoryThirdController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
@@ -426,6 +428,10 @@
     <Content Include="Areas\Admin\Views\Product\AddProduct.cshtml" />
     <Content Include="Areas\Admin\Views\ProductCategory\FirstCategoryList.cshtml" />
     <Content Include="Areas\Admin\Views\ProductCategory\AddFirstCategory.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductCategoryThird\AddThirdCategory.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductCategorySecond\AddSecondCategory.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductCategorySecond\SecondCategoryList.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductCategoryThird\ThirdCategoryList.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

@@ -14,5 +14,12 @@ namespace ShopOnline.IBll
         Task<int> AddProduct(ProductDto model);
 
         Task<ProductDto> QueryProduct(Guid id);
+
+        IQueryable<ProductCategoryDto> GetFirstCategoryList();
+
+        IQueryable<ProductCategoryDto> GetSecondCategoryList();
+
+        IQueryable<ProductCategoryDto> GetThirdCategoryList();
+
     }
 }
