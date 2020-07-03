@@ -53,11 +53,13 @@
   <ItemGroup>
     <Compile Include="AdminService.cs" />
     <Compile Include="BaseService.cs" />
+    <Compile Include="ColorService.cs" />
     <Compile Include="FirstCategoryService.cs" />
     <Compile Include="ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RolesService.cs" />
     <Compile Include="SecondCategoryService.cs" />
+    <Compile Include="SizeService.cs" />
     <Compile Include="ThirdCategoryService.cs" />
     <Compile Include="UserService.cs" />
   </ItemGroup>

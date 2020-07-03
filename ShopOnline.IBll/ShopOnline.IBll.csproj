@@ -46,6 +46,7 @@
     <Compile Include="IProductManager.cs" />
     <Compile Include="IRolesManager.cs" />
     <Compile Include="ISecondCategoryManager.cs" />
+    <Compile Include="IProductAttributesManager.cs" />
     <Compile Include="IThirdCategoryManager.cs" />
     <Compile Include="IUserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

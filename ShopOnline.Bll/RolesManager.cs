@@ -9,17 +9,17 @@ namespace ShopOnline.Bll
 {
     public class RolesManager:IRolesManager
     {
-        private readonly IRolesService _manager;
+        private readonly IRolesService _service;
 
-        public RolesManager(IRolesService manager)
+        public RolesManager(IRolesService service)
         {
-            _manager = manager;
+            _service = service;
         }
 
 
         public async Task<int> AddRoles(RolesDto model)
         {
-            return await _manager.AddAsync(new Roles()
+            return await _service.AddAsync(new Roles()
             {
                 RolesName = model.RolesName
             });
@@ -27,7 +27,7 @@ namespace ShopOnline.Bll
 
         public IQueryable<RolesDto> GetAllRoles()
         {
-            return  _manager.QueryAllAsync(false).Select(m=>new RolesDto()
+            return  _service.QueryAllAsync(false).Select(m=>new RolesDto()
             {
                 RolesName = m.RolesName,
                 Id = m.Id,

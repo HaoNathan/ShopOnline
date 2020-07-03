@@ -153,6 +153,7 @@
     <Compile Include="Areas\Admin\Controllers\AdminMainBoardController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductAttributesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductCategorySecondController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductCategoryThirdController.cs" />
@@ -396,6 +397,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\wangEditor.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -443,6 +445,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\wangEditor.min.js" />
     <Content Include="Upload\Admin\th1.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -463,8 +466,11 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\Order\" />
+    <Folder Include="Areas\Admin\Views\ProductAttributes\" />
     <Folder Include="Areas\Admin\Views\User\" />
+    <Folder Include="Config\" />
     <Folder Include="Models\" />
+    <Folder Include="Upload\Product\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -43,11 +43,13 @@
   <ItemGroup>
     <Compile Include="AdminDto.cs" />
     <Compile Include="BusinessDto.cs" />
+    <Compile Include="ColorDto.cs" />
     <Compile Include="ProductCategoryDto.cs" />
     <Compile Include="OrderDto.cs" />
     <Compile Include="ProductDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RolesDto.cs" />
+    <Compile Include="SizeDto.cs" />
     <Compile Include="UserDto.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
