@@ -68,8 +68,41 @@ namespace ShopOnline.WebApp.Areas.Admin.Controllers
         public async Task<ActionResult> UpdateProduct(Guid id)
         {
             await GetCategoryList();
+
             var data = await _manager.QueryProduct(id);
             return View(data);
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public async Task<JsonResult> UpdateProducts(ProductDto model)
+        {
+            try
+            {
+                var res = await _manager.EditProduct(model);
+                if (res == 1)
+                {
+                    _msg = new MsgResult
+                    {
+                        Info = "修改成功",
+                        IsSuccess = true
+                    };
+                }
+                else
+                {
+                    _msg = new MsgResult
+                    {
+                        Info = "修改失败",
+                        IsSuccess = false
+                    };
+                }
+            }
+            catch (Exception e)
+            {
+                LogHelper log=new LogHelper(typeof(ProductController));
+                log.Error("修改商品错误",e);
+            }
+
+            return Json(_msg);
         }
 
         public async Task  GetCategoryList()

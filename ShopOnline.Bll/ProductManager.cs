@@ -42,21 +42,21 @@ namespace ShopOnline.Bll
 
         public async Task<int> EditProduct(ProductDto model)
         {
-            return await _service.EditAsync(new Product()
-            {
-                ProductName = model.ProductName,
-                ProductCost = model.ProductCost,
-                ProductPrice = model.ProductPrice,
-                ProductDescription = model.ProductDescription,
-                ProductImagePath = model.ProductImagePath,
-                FirstProductCategoryId = model.FirstProductCategoryId,
-                SecondProductCategoryId = model.SecondProductCategoryId,
-                ThirdProductCategoryId = model.ThirdProductCategoryId,
-                SizeId = model.SizeId,
-                ColorId = model.ColorId,
-                ProductNumber = model.ProductNumber,
-                GS1Id = model.GS1Id
-            });
+            var product = await _service.QueryAsync(model.Id);
+            product.ProductName = model.ProductName;
+            product.ProductCost = model.ProductCost;
+            product.ProductPrice = model.ProductPrice;
+            product.ProductDescription = model.ProductDescription;
+            product.ProductImagePath = model.ProductImagePath;
+            product.FirstProductCategoryId = model.FirstProductCategoryId;
+            product.SecondProductCategoryId = model.SecondProductCategoryId;
+            product.ThirdProductCategoryId = model.ThirdProductCategoryId;
+            product.SizeId = model.SizeId;
+            product.ColorId = model.ColorId;
+            product.ProductNumber = model.ProductNumber;
+            product.GS1Id = model.GS1Id;
+
+            return await _service.EditAsync(product);
         }
 
         public async Task<int> AddProduct(ProductDto model)
@@ -81,8 +81,14 @@ namespace ShopOnline.Bll
         public async Task<ProductDto> QueryProduct(Guid id)
         {
             var product = await _service.QueryAsync(id);
-            return new ProductDto()
+            IColorService service=new ColorService();
+            ISizeService service2=new SizeService();
+
+            
+
+            var productDto = new ProductDto()
             {
+                Id = product.Id,
                 ProductName = product.ProductName,
                 ProductCost = product.ProductCost,
                 ProductPrice = product.ProductPrice,
@@ -97,6 +103,12 @@ namespace ShopOnline.Bll
                 GS1Id = product.GS1Id
             };
 
+            var color =await service.QueryAsync(m => m.Id.Equals(productDto.ColorId));
+            var size =await service2.QueryAsync(m=>m.Id.Equals(productDto.SizeId));
+            productDto.ColorName = color.ColorName;
+            productDto.SizeName = size.SizeName;
+
+            return productDto;
         }
 
         public IQueryable<ProductCategoryDto> GetFirstCategoryList()

@@ -48,7 +48,7 @@
                     </button>
                 </div>
                 <div class="layui-card-body ">
-                    <table id="AdminTable" lay-filter="AdminList"></table>
+                    <table id="ProductTable" lay-filter="ProductList"></table>
                 </div>
             </div>
         </div>
@@ -72,7 +72,7 @@
                 });
 
                 table.render({
-                    elem: '#AdminTable',
+                    elem: '#ProductTable',
                     url: '@Url.Action("GetProductList", "Product")', //数据接口,
                     page: true, //开启分页,
                     cols: [
@@ -124,7 +124,7 @@
                             });
                     });
                 //监听工具条
-                table.on('tool(AdminList)',
+                table.on('tool(ProductList)',
                     function(obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
                         layer = self === parent ? self : top.layui.layer;
                         var data = obj.data; //获得当前行数据
