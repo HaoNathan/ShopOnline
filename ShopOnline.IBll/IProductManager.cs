@@ -11,6 +11,8 @@ namespace ShopOnline.IBll
 
         Task<int> EditProduct(ProductDto model);
 
+        Task<int> UpdateProductState(Guid id, bool state);
+
         Task<int> AddProduct(ProductDto model);
 
         Task<ProductDto> QueryProduct(Guid id);

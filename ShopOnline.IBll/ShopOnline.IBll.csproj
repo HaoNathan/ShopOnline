@@ -42,11 +42,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IAdminManager.cs" />
+    <Compile Include="IBusinessManager.cs" />
     <Compile Include="IFirstCategoryManager.cs" />
+    <Compile Include="IOrderManager.cs" />
+    <Compile Include="IProductCommentManager.cs" />
     <Compile Include="IProductManager.cs" />
     <Compile Include="IRolesManager.cs" />
     <Compile Include="ISecondCategoryManager.cs" />
     <Compile Include="IProductAttributesManager.cs" />
+    <Compile Include="IShoppingCartManager.cs" />
     <Compile Include="IThirdCategoryManager.cs" />
     <Compile Include="IUserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

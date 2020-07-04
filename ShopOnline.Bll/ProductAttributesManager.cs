@@ -40,7 +40,7 @@ namespace ShopOnline.Bll
         {
             if (sizeName != "")
             {
-                var color = await _service.QueryAsync(m => m.SizeName.Equals(sizeName));
+                var color = await _service.QueryAsync(true,m => m.SizeName.Equals(sizeName));
                 return new SizeDto()
                 {
                     Id = color.Id,
@@ -74,7 +74,7 @@ namespace ShopOnline.Bll
             IColorService service = new ColorService();
             if (colorName!="")
             {
-                var color = await service.QueryAsync(m=>m.ColorName.Equals(colorName));
+                var color = await service.QueryAsync(true,m=>m.ColorName.Equals(colorName));
                 return new ColorDto()
                 {
                     Id = color.Id,

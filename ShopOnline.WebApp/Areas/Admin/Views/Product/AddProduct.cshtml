@@ -40,16 +40,10 @@
                                 <button class="layui-btn layui-btn-sm layui-col-md-offset9"  lay-filter="addAttributes" lay-submit="">
                                     <i class="layui-icon layui-icon-add-circle-fine"></i> 添加
                                 </button>
-
-
                             </div>
                         </div>
-
-
-
                     </div>
                 </div>
-
 
             </div>
         </form>
@@ -220,6 +214,13 @@
                             layer.msg("请先添加商品参数再新增商品");
                             return false;
                         }
+
+                        //判断是否上传商品图片
+                        if ($("#ProductImagePath").val()==="") {
+                            layer.msg("还未添加商品图片");
+                            return false;
+                        }
+
                         //此方法用于传输提交富文本内容
 
                         var content = editor.txt.html();

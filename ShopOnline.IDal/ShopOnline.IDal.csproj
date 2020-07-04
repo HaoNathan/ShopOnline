@@ -43,13 +43,19 @@
   <ItemGroup>
     <Compile Include="IAdminService.cs" />
     <Compile Include="IBaseService.cs" />
+    <Compile Include="IBusinessService.cs" />
+    <Compile Include="ICollectService.cs" />
     <Compile Include="IColorService.cs" />
     <Compile Include="IFirstCategoryService.cs" />
+    <Compile Include="IOrderService.cs" />
+    <Compile Include="IProductCommentService.cs" />
     <Compile Include="IProductService.cs" />
     <Compile Include="IRolesService.cs" />
     <Compile Include="ISecondCategoryService.cs" />
+    <Compile Include="IShoppingCartService.cs" />
     <Compile Include="ISizeService.cs" />
     <Compile Include="IThirdCategoryService.cs" />
+    <Compile Include="IUserDistributionService.cs" />
     <Compile Include="IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

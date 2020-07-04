@@ -9,9 +9,15 @@ namespace ShopOnline.WebApp.Areas.Admin.Controllers
     public class UserController : Controller
     {
         // GET: Admin/User
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult UserList()
         {
             return View();
+        }
+        [HttpPost]
+        public JsonResult GetUserList()
+        {
+            return Json(null);
         }
     }
 }

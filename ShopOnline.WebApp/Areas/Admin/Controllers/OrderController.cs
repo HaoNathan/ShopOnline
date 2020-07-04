@@ -9,9 +9,15 @@ namespace ShopOnline.WebApp.Areas.Admin.Controllers
     public class OrderController : Controller
     {
         // GET: Admin/Order
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult OrderList()
         {
             return View();
+        }
+        [HttpPost]
+        public JsonResult GetOrderList()
+        {
+            return Json(null);
         }
     }
 }

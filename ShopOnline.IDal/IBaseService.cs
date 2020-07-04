@@ -24,16 +24,11 @@ namespace ShopOnline.IDal
 
         IQueryable<T> QueryAllAsync(Expression<Func<T, bool>> lambdaFunc);
 
-        Task<T> QueryAsync(Expression<Func<T, bool>> lambdaFunc);
+        Task<T> QueryAsync(bool isRemove,Expression<Func<T, bool>> lambdaFunc);
 
         Task<T> QueryAsync(Guid id);
 
         Task<bool> IsExistsAsync(Expression<Func<T, bool>> lambdaFunc);
 
-        Task<bool> IsExistsAsync(Guid id);
-
-        Task<int> GetCountsAsync(Expression<Func<T, bool>> lambdaFunc);
-
-        IQueryable<T> QueryByPage(int pageSize, int pageIndex, Expression<Func<T, bool>> lambdaFunc);
     }
 }

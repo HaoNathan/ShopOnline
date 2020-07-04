@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using ShopOnline.IDal;
@@ -14,7 +15,7 @@ namespace ShopOnline.Dal
     {
         private readonly CSContext _db;
 
-        public BaseService(CSContext db)
+        protected BaseService(CSContext db)
         {
             _db = db;
         }
@@ -58,13 +59,9 @@ namespace ShopOnline.Dal
         public IQueryable<T> QueryAllAsync(bool isRemove=true)
         {
             if (isRemove)
-            {
                 return _db.Set<T>().AsNoTracking().Where(m => !m.IsRemove).AsNoTracking();
-            }
             else
-            {
                 return _db.Set<T>().AsNoTracking().AsNoTracking();
-            }
         }
 
         public IQueryable<T> QueryAllAsync(Expression<Func<T, bool>> lambdaFunc)
@@ -72,9 +69,12 @@ namespace ShopOnline.Dal
             return  _db.Set<T>().Where(lambdaFunc);
         }
 
-        public async Task<T> QueryAsync(Expression<Func<T, bool>> lambdaFunc)
+        public async Task<T> QueryAsync(bool isRemove, Expression<Func<T, bool>> lambdaFunc)
         {
-            return await _db.Set<T>().Where(lambdaFunc).FirstOrDefaultAsync();
+            if (isRemove)
+                return await _db.Set<T>().Where(lambdaFunc).FirstOrDefaultAsync();
+            else
+                return await _db.Set<T>().Where(m=>!m.IsRemove).Where(lambdaFunc).FirstOrDefaultAsync();
         }
 
         public async Task<T> QueryAsync(Guid id)
@@ -82,24 +82,12 @@ namespace ShopOnline.Dal
             return await _db.Set<T>().Where(m=>m.Id==id).FirstOrDefaultAsync();
         }
 
+        
+
         public async Task<bool> IsExistsAsync(Expression<Func<T, bool>> lambdaFunc)
         {
             return await _db.Set<T>().AnyAsync(lambdaFunc);
         }
 
-        public async Task<bool> IsExistsAsync(Guid id)
-        {
-            return await _db.Set<T>().AnyAsync(m => m.Id == id);
-        }
-
-        public async Task<int> GetCountsAsync(Expression<Func<T, bool>> lambdaFunc)
-        {
-            return await _db.Set<T>().Where(lambdaFunc).CountAsync();
-        }
-
-        public IQueryable<T> QueryByPage(int pageSize, int pageIndex, Expression<Func<T, bool>> lambdaFunc)
-        {
-            return _db.Set<T>().Where(lambdaFunc).Skip(pageIndex * pageSize).Take(pageSize);
-        }
     }
 }

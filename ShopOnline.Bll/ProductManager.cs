@@ -11,7 +11,7 @@ namespace ShopOnline.Bll
 {
     public class ProductManager : IProductManager
     {
-        private IProductService _service;
+        private readonly IProductService _service;
 
         public ProductManager(IProductService service)
         {
@@ -59,6 +59,13 @@ namespace ShopOnline.Bll
             return await _service.EditAsync(product);
         }
 
+        public async Task<int> UpdateProductState(Guid id,bool state)
+        {
+            var product = await _service.QueryAsync(id);
+            product.IsRemove = state;
+            return await _service.EditAsync(product);
+        }
+
         public async Task<int> AddProduct(ProductDto model)
         {
             return await _service.AddAsync(new Product()
@@ -103,8 +110,8 @@ namespace ShopOnline.Bll
                 GS1Id = product.GS1Id
             };
 
-            var color =await service.QueryAsync(m => m.Id.Equals(productDto.ColorId));
-            var size =await service2.QueryAsync(m=>m.Id.Equals(productDto.SizeId));
+            var color =await service.QueryAsync(true,m => m.Id.Equals(productDto.ColorId));
+            var size =await service2.QueryAsync(true,m=>m.Id.Equals(productDto.SizeId));
             productDto.ColorName = color.ColorName;
             productDto.SizeName = size.SizeName;
 

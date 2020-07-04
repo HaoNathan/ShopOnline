@@ -33,17 +33,15 @@
                         <div class="layui-inline layui-show-xs-block">
                             <input class="layui-input" autocomplete="off" placeholder="开始日" name="start" id="start">
                         </div>
-                        <div class="layui-inline layui-show-xs-block">
-                            @* @Html.DropDownList("RolesId", (SelectList)ViewBag.RolesList, "请选择")**@
-                        </div>
+                       
                         <div class="layui-inline layui-show-xs-block">
                             <button class="layui-btn" id="btnSearch"><i class="layui-icon">&#xe615;查询</i></button>
                         </div>
                     </div>
                 </div>
                 <div class="layui-card-header">
-                    <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-                    <button class="layui-btn" onclick="xadmin.open('添加产品', '@Url.Action("AddProduct","Product")', 1000, 700)">
+       
+                    <button class="layui-btn layui-col-md-offset11" onclick="xadmin.open('添加产品', '@Url.Action("AddProduct","Product")', 1000, 700)">
                         <i class="layui-icon"></i>添加
                     </button>
                 </div>
@@ -113,12 +111,12 @@
                 form.on('switch(stateDemo)',
                     function(obj) {
                         var state = false;
-                        var id = this.value;
+                        var productId = this.value;
                         if (obj.elem.checked === false) {
                             state = true;
                         };
-                        $.post('@Url.Action("GetProductList", "Product")',
-                            { stateId: state, adminId: id },
+                        $.post('@Url.Action("UpdateProductState", "Product")',
+                            { state: state, id: productId },
                             function(res) {
                                 layer.msg(res.Info);
                             });
