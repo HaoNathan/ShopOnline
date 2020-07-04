@@ -1,4 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using ShopOnline.Dto;
 
 namespace ShopOnline.IBll
 {
@@ -6,7 +9,8 @@ namespace ShopOnline.IBll
     {
         Task<int> AddShoppingCart();
         Task<int> UpdateShoppingCart();
-        Task<int> QueryShoppingCart();
+        Task<ShoppingCartDto> QueryShoppingCart(Guid id);
+        IQueryable<ShoppingCartDto> QueryAllShoppingCart();
 
     }
 }
