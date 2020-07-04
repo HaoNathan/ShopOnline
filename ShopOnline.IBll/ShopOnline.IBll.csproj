@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="IAdminManager.cs" />
     <Compile Include="IBusinessManager.cs" />
+    <Compile Include="ICollectManager.cs" />
     <Compile Include="IFirstCategoryManager.cs" />
     <Compile Include="IOrderManager.cs" />
     <Compile Include="IProductCommentManager.cs" />
