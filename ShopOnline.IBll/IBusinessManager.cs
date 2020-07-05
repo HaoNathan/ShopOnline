@@ -7,8 +7,8 @@ namespace ShopOnline.IBll
 {
     public interface IBusinessManager
     {
-        Task<int> AddBusiness();
-        Task<int> UpdateBusiness();
+        Task<int> AddBusiness(BusinessDto model);
+        Task<int> UpdateBusiness(BusinessDto model);
         Task<BusinessDto> QueryBusiness(Guid id);
         IQueryable<BusinessDto> QueryAllBusiness();
     }

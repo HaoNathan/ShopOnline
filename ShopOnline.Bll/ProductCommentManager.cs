@@ -4,29 +4,83 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using ShopOnline.Dto;
 using ShopOnline.IBll;
+using ShopOnline.IDal;
+using ShopOnline.Model;
 
 namespace ShopOnline.Bll
 {
     public class ProductCommentManager:IProductCommentManager
     {
-        public async Task<int> AddComment()
+        private readonly IProductCommentService _service;
+
+        public ProductCommentManager(IProductCommentService service)
         {
-            throw new NotImplementedException();
+            _service = service;
         }
 
-        public async Task<ProductCommentDto> QueryComment()
+        public async Task<int> AddComment(ProductCommentDto model)
         {
-            throw new NotImplementedException();
+            return await _service.AddAsync(new ProductComment()
+            {
+                Comment = model.Comment,
+                ProductId = model.ProductId,
+                UserId = model.UserId
+            });
         }
 
-        public IQueryable<ProductCommentDto> QueryAllComment()
+        public async Task<ProductCommentDto> QueryComment(Guid id)
         {
-            throw new NotImplementedException();
+            var comment= await _service.QueryAsync(id);
+            return new ProductCommentDto()
+            {
+                Comment = comment.Comment,
+                CreateTime = comment.CreateTime,
+                ProductId = comment.ProductId,
+                UserId = comment.UserId,
+                Oppose = comment.Oppose,
+                Praise = comment.Praise
+            };
         }
 
-        public IQueryable<ProductCommentDto> QueryAllComment(Expression<Func<string, bool>> lambdaFunc)
+        public IQueryable<ProductCommentDto> QueryAllComment(bool isRemove)
         {
-            throw new NotImplementedException();
+            if (isRemove)
+                return _service.QueryAllAsync(false)
+                    .Select(m => new ProductCommentDto()
+                {
+                    Comment = m.Comment,
+                    CreateTime = m.CreateTime,
+                    ProductId = m.ProductId,
+                    UserId = m.UserId,
+                    Oppose = m.Oppose,
+                    Praise = m.Praise
+                });
+            else
+                return _service.QueryAllAsync(true)
+                    .Select(m => new ProductCommentDto()
+                {
+                    Comment = m.Comment,
+                    CreateTime = m.CreateTime,
+                    ProductId = m.ProductId,
+                    UserId = m.UserId,
+                    Oppose = m.Oppose,
+                    Praise = m.Praise
+                });
+        }
+
+        public IQueryable<ProductCommentDto> QueryAllComment(Guid productId)
+        {
+            return _service.QueryAllAsync(true)
+                .Where(m=>m.ProductId.Equals(productId))
+                .Select(m => new ProductCommentDto()
+            {
+                Comment = m.Comment,
+                CreateTime = m.CreateTime,
+                ProductId = m.ProductId,
+                UserId = m.UserId,
+                Oppose = m.Oppose,
+                Praise = m.Praise
+            });
         }
     }
 }

@@ -32,7 +32,7 @@
                     </form>
                 </div>
                 <div class="layui-card-header">
-                    <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
+                  
                     <button class="layui-btn" onclick="xadmin.open('添加用户', '@Url.Action("AddRoles","Roles")', 600, 400)"><i class="layui-icon"></i>添加</button>
                 </div>
                 <div class="layui-card-body ">
@@ -46,83 +46,42 @@
 @section js
 {
     <script>
-        layui.use(['laydate', 'form','table'], function () {
-            var laydate = layui.laydate;
-            var form = layui.form;
-            var table = layui.table;
-            //执行一个laydate实例
-            laydate.render({
-                elem: '#start' //指定元素
-            });
+        layui.use(['laydate', 'form', 'table'],
+            function() {
+                var laydate = layui.laydate;
+                var form = layui.form;
+                var table = layui.table;
+                //执行一个laydate实例
+                laydate.render({
+                    elem: '#start' //指定元素
+                });
 
-            //执行一个laydate实例
-            laydate.render({
-                elem: '#end' //指定元素
+                //执行一个laydate实例
+                laydate.render({
+                    elem: '#end' //指定元素
+                });
+                table.render({
+                    elem: '#RolesTable',
+                    url: '@Url.Action("GetRolesList", "Roles")' //数据接口
+                    ,
+                    page: true //开启分页
+                    ,
+                    cols: [
+                        [//表头
+                            { field: 'Id', title: 'ID', width: '10%', hide: true, fixed: 'left' },
+                            { field: 'RolesName', title: 'ID', width: '10%', fixed: 'left' },
+                            { title: '创建时间', templet: "#newDate", width: '10%' },
+                            { field: 'IsRemove', title: '是否启用', width: '10%', sort: true }
+                        ]
+                    ],
+                    limits: [8, 16, 24],
+                    toolbar: true
+                });
             });
-            table.render({
-                elem: '#RolesTable',
-                url: '@Url.Action("GetRolesList","Roles")' //数据接口
-                ,
-                page: true //开启分页
-                ,
-                cols: [
-                    [//表头
-                        { field: 'Id', title: 'ID', width: '10%', hide: true, fixed: 'left' },
-                        { field: 'RolesName', title: 'ID', width: '10%',  fixed: 'left' },
-                        { title: '创建时间', templet: "#newDate", width: '10%' },
-                        { field: 'IsRemove', title: '是否启用', width: '10%', sort: true }
-                    ]
-                ],
-                limits: [8, 16, 24],
-                toolbar: true
-            });
+        $().click(function() {
         });
 
-        /*用户-停用*/
-        function member_stop(obj, id) {
-            layer.confirm('确认要停用吗？', function (index) {
 
-                if ($(obj).attr('title') == '启用') {
-
-                    //发异步把用户状态进行更改
-                    $(obj).attr('title', '停用')
-                    $(obj).find('i').html('&#xe62f;');
-
-                    $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-                    layer.msg('已停用!', { icon: 5, time: 1000 });
-
-                } else {
-                    $(obj).attr('title', '启用')
-                    $(obj).find('i').html('&#xe601;');
-
-                    $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-                    layer.msg('已启用!', { icon: 5, time: 1000 });
-                }
-
-            });
-        }
-
-        /*用户-删除*/
-        function member_del(obj, id) {
-            layer.confirm('确认要删除吗？', function (index) {
-                //发异步删除数据
-                $(obj).parents("tr").remove();
-                layer.msg('已删除!', { icon: 1, time: 1000 });
-            });
-        }
-
-
-
-        function delAll(argument) {
-
-            var data = tableCheck.getData();
-
-            layer.confirm('确认要删除吗？' + data, function (index) {
-                //捉到所有被选中的，发异步进行删除
-                layer.msg('删除成功', { icon: 1 });
-                $(".layui-form-checked").not('.header').parents('tr').remove();
-            });
-        }
     </script>
     <script type="text/html" id="newDate">
         {{# var date=parseInt( d.CreateTime.replace("/Date(","").replace(")/",""));}}

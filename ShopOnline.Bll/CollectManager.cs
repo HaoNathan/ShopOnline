@@ -1,8 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using ShopOnline.Dto;
 using ShopOnline.IBll;
 using ShopOnline.IDal;
+using ShopOnline.Model;
 
 namespace ShopOnline.Bll
 {
@@ -10,30 +12,51 @@ namespace ShopOnline.Bll
     {
         private readonly ICollectService _service;
 
-        public CollectManager(ICollectService service)
-        {
-            _service = service;
-        }
+        public CollectManager(ICollectService service) => _service = service;
 
 
-        public async Task<int> AddCollect()
+        public async Task<int> AddCollect(CollectDto model) =>
+            await _service.AddAsync(new Collect()
+            {
+                ProductId = model.ProductId,
+                UserId = model.UserId
+            });
+
+        public async Task<int> UpdateCollect(CollectDto model)
         {
-            throw new System.NotImplementedException();
+            var collect = await _service.QueryAsync(model.Id);
+            collect.ProductId = model.ProductId;
+            collect.UserId = model.UserId;
+
+            return await _service.EditAsync(collect);
+
         }
 
-        public async Task<int> UpdateCollect()
+        public async Task<CollectDto> QueryCollect(Guid userId)
         {
-            throw new System.NotImplementedException();
+            var collect = await _service.QueryAsync(false, m => m.UserId.Equals(userId));
+
+            if (collect == null) 
+                return null;
+            else
+                return new CollectDto()
+                {
+                    Id = collect.Id,
+                    ProductId = collect.ProductId,
+                    UserId = collect.UserId,
+                    
+                };
         }
 
-        public async Task<CollectDto> QueryCollect()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public IQueryable<CollectDto> QueryAllCollect()
-        {
-            throw new System.NotImplementedException();
-        }
+        public IQueryable<CollectDto> QueryAllCollect() =>
+            _service.QueryAllAsync(true).Select(m => new CollectDto
+            {
+                Id=m.Id,
+                CreateTime = m.CreateTime,
+                ProductId = m.ProductId,
+                UserName = m.User.UserName,
+                UserId = m.UserId
+                
+            });
     }
 }

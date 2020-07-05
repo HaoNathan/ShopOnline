@@ -7,8 +7,8 @@ namespace ShopOnline.IBll
 {
     public interface IShoppingCartManager
     {
-        Task<int> AddShoppingCart();
-        Task<int> UpdateShoppingCart();
+        Task<int> AddShoppingCart(ShoppingCartDto model);
+        Task<int> UpdateShoppingCart(ShoppingCartDto model);
         Task<ShoppingCartDto> QueryShoppingCart(Guid id);
         IQueryable<ShoppingCartDto> QueryAllShoppingCart();
 
