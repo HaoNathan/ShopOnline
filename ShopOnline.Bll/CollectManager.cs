@@ -34,7 +34,7 @@ namespace ShopOnline.Bll
 
         public async Task<CollectDto> QueryCollect(Guid userId)
         {
-            var collect = await _service.QueryAsync(false, m => m.UserId.Equals(userId));
+            var collect = await _service.QueryAsync(m => m.UserId.Equals(userId)&&m.IsRemove==false);
 
             if (collect == null) 
                 return null;
@@ -49,7 +49,7 @@ namespace ShopOnline.Bll
         }
 
         public IQueryable<CollectDto> QueryAllCollect() =>
-            _service.QueryAllAsync(true).Select(m => new CollectDto
+            _service.QueryAllAsync().Where(m=>m.IsRemove==false).Select(m => new CollectDto
             {
                 Id=m.Id,
                 CreateTime = m.CreateTime,

@@ -59,7 +59,8 @@ namespace ShopOnline.Bll
 
         public IQueryable<ShoppingCartDto> QueryAllShoppingCart()
         {
-            return _service.QueryAllAsync(true).Select(m => new ShoppingCartDto()
+            return _service.QueryAllAsync().Where(m=>m.IsRemove==false)
+                .Select(m => new ShoppingCartDto()
             {
                 ProductId = m.ProductId,
                 ColorId = m.ColorId,

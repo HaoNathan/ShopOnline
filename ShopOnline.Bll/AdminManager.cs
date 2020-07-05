@@ -24,14 +24,15 @@ namespace ShopOnline.Bll
         /// <returns></returns>
         public  IQueryable<AdminDto> GetAllAdmin()
         {
-            return  _service.QueryAllAsync(false).Select(m=>new AdminDto()
+            return  _service.QueryAllAsync().Select(m=>new AdminDto()
             {
                 Id = m.Id,
                 RolesName = m.Roles.RolesName,
                 AdminName = m.AdminName,
                 CreateTime = m.CreateTime,
                 IsRemove = m.IsRemove,
-                ImagePath = m.ImagePath
+                ImagePath = m.ImagePath,
+                RolesId = m.RolesId
             });
         }
 
@@ -57,21 +58,28 @@ namespace ShopOnline.Bll
         /// </summary>
         /// <param name="model">登陆对象</param>
         /// <returns></returns>
-        public  AdminDto AdminLogin(AdminDto model)
+        public async Task<AdminDto> AdminLogin(AdminDto model)
         {
-            var data=  _service.QueryAllAsync(m => m.AdminName == model.AdminName
-                         && m.AdminPassword == model.AdminPassword
-                         &&m.IsRemove==false).FirstOrDefault();
-            if (data==null)
-            {
+            var data=  _service.QueryAllAsync(m => m.AdminName.Equals(model.AdminName)
+                         && m.AdminPassword.Equals(model.AdminPassword) 
+                         && m.IsRemove == false).FirstOrDefault();
+
+            if (data == null)
                 return null;
-            }
-            return new AdminDto()
+
+            var admin= new AdminDto()
             {
                 Id = data.Id,
                 AdminName = data.AdminName,
-                ImagePath = data.ImagePath
+                ImagePath = data.ImagePath,
+                RolesId = data.RolesId
             };
+            IRolesService service = new RolesService();
+            var roles= await service.QueryAsync(admin.RolesId);
+            admin.RolesName = roles.RolesName;
+
+            return admin;
+
         }
 
         /// <summary>
@@ -98,7 +106,8 @@ namespace ShopOnline.Bll
         {
             IRolesService service = new RolesService();
 
-            var data = service.QueryAllAsync(true).Select(m => new RolesDto()
+            var data = service.QueryAllAsync().Where(m=>m.IsRemove==false)
+                .Select(m => new RolesDto()
             {
                 Id = m.Id,
                 RolesName = m.RolesName

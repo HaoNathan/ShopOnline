@@ -38,7 +38,8 @@ namespace ShopOnline.WebApp.Areas.Admin.Controllers
                
                 if (!string.IsNullOrEmpty(createTime))
                 {
-                    data = data.Where(m => m.CreateTime>DateTime.Parse( createTime));
+                    var time= DateTime.Parse(createTime);
+                    data = data.Where(m => m.CreateTime>time);
                 }
 
                 var dataCount = data.Count();
@@ -84,9 +85,39 @@ namespace ShopOnline.WebApp.Areas.Admin.Controllers
 
             return Json(_msg);
         }
-       
-       
-        
-        
+
+
+        public async Task<JsonResult> UpdateProductState(string id,bool state)
+        {
+            try
+            {
+                _msg=new MsgResult();
+                var result = await _manager.EditCategoryState(Guid.Parse(id), state);
+
+                switch (result)
+                {
+                    case 1:
+                        _msg.IsSuccess = true;
+                        _msg.Info = "修改状态成功";
+                        break;
+                    default:
+                        _msg.IsSuccess = false;
+                        _msg.Info = "修改状态失败";
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+                LogHelper log=new LogHelper(typeof(ProductCategoryController));
+                log.Error("修改一级商品类别错误",e);
+            }
+
+            return Json(_msg);
+
+        }
+
+
+
+
     }
 }

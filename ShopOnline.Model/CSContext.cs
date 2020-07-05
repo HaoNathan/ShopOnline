@@ -30,6 +30,8 @@ namespace ShopOnline.Model
         public virtual DbSet<ThirdProductCategory> ThirdProductCategory { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserDistribution> UserDistribution { get; set; }
+        public virtual DbSet<Order> Order { get; set; }
+        
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

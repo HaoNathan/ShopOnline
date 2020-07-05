@@ -16,20 +16,17 @@
         <div class="layui-col-md12">
             <div class="layui-card">
                 <div class="layui-card-body ">
-                    <form class="layui-form layui-col-space5">
+                    <div class="layui-form layui-col-space5">
                         <div class="layui-inline layui-show-xs-block">
-                            <input class="layui-input" autocomplete="off" placeholder="开始日" name="start" id="start">
+                            <input type="text" name="categoryName" placeholder="请输入名称" autocomplete="off" class="layui-input">
                         </div>
                         <div class="layui-inline layui-show-xs-block">
-                            <input class="layui-input" autocomplete="off" placeholder="截止日" name="end" id="end">
+                            <input class="layui-input" autocomplete="off" placeholder="创建日期" name="start" id="start">
                         </div>
                         <div class="layui-inline layui-show-xs-block">
-                            <input type="text" name="username" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                            <button class="layui-btn" lay-filter="sreach" id="btnSearch"><i class="layui-icon">&#xe615;</i>查询</button>
                         </div>
-                        <div class="layui-inline layui-show-xs-block">
-                            <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
                 <div class="layui-card-header">
                     <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
@@ -78,9 +75,9 @@
                     toolbar: true
                 });
                 $("#btnSearch").click(function() {
-                    var name = $("input[name='adminName']").val();
+                    var name = $("input[name='categoryName']").val();
                     var time = $("input[name='start']").val();
-                    table.reload("AdminTable",
+                    table.reload("CategoryTable",
                         {
                             where: {
                                 categoryName: name,
@@ -95,8 +92,8 @@
                         if (obj.elem.checked === false) {
                             state = true;
                         };
-                        $.post('@Url.Action("UpdateAdminState", "Admin")',
-                            {stateId: state,adminId:id },
+                        $.post('@Url.Action("UpdateCategoryState", "ProductCategoryThird")',
+                            {state: state,id:id },
                             function (res) {
                                 layer.msg(res.Info);
                             });

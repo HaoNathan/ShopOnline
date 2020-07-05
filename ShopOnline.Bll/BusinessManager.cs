@@ -54,9 +54,8 @@ namespace ShopOnline.Bll
             };
         }
 
-        public IQueryable<BusinessDto> QueryAllBusiness()
-        {
-            return _service.QueryAllAsync(false).Select(m=>new BusinessDto()
+        public IQueryable<BusinessDto> QueryAllBusiness() =>
+            _service.QueryAllAsync().Where(m=>!m.IsRemove).Select(m=>new BusinessDto()
             {
                 TotalPrice = m.TotalPrice,
                 Number = m.Number,
@@ -65,6 +64,5 @@ namespace ShopOnline.Bll
                 PayTypeId = m.PayTypeId,
                 ProductId = m.ProductId
             });
-        }
     }
 }

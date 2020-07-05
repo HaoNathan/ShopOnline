@@ -45,7 +45,7 @@ namespace ShopOnline.Bll
         public IQueryable<ProductCommentDto> QueryAllComment(bool isRemove)
         {
             if (isRemove)
-                return _service.QueryAllAsync(false)
+                return _service.QueryAllAsync()
                     .Select(m => new ProductCommentDto()
                 {
                     Comment = m.Comment,
@@ -56,7 +56,7 @@ namespace ShopOnline.Bll
                     Praise = m.Praise
                 });
             else
-                return _service.QueryAllAsync(true)
+                return _service.QueryAllAsync().Where(m => m.IsRemove == false)
                     .Select(m => new ProductCommentDto()
                 {
                     Comment = m.Comment,
@@ -70,7 +70,7 @@ namespace ShopOnline.Bll
 
         public IQueryable<ProductCommentDto> QueryAllComment(Guid productId)
         {
-            return _service.QueryAllAsync(true)
+            return _service.QueryAllAsync().Where(m => m.IsRemove == false)
                 .Where(m=>m.ProductId.Equals(productId))
                 .Select(m => new ProductCommentDto()
             {

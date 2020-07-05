@@ -10,7 +10,7 @@ namespace ShopOnline.IBll
     {
         IQueryable<AdminDto> GetAllAdmin();
         Task<AdminDto> QueryAdmin(Guid id);
-        AdminDto AdminLogin(AdminDto model);
+        Task<AdminDto>AdminLogin(AdminDto model);
         Task<int> InsertAdmin(AdminDto model);
         IQueryable<RolesDto> GetRoles();
         Task<int> UpdateAdmin(AdminDto model);

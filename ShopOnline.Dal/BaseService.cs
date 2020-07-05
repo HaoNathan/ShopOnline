@@ -56,12 +56,9 @@ namespace ShopOnline.Dal
             return await _db.SaveChangesAsync();
         }
 
-        public IQueryable<T> QueryAllAsync(bool isRemove=true)
+        public IQueryable<T> QueryAllAsync()
         {
-            if (isRemove)
-                return _db.Set<T>().AsNoTracking().Where(m => !m.IsRemove).AsNoTracking();
-            else
-                return _db.Set<T>().AsNoTracking().AsNoTracking();
+                return _db.Set<T>().AsNoTracking();
         }
 
         public IQueryable<T> QueryAllAsync(Expression<Func<T, bool>> lambdaFunc)
@@ -69,12 +66,10 @@ namespace ShopOnline.Dal
             return  _db.Set<T>().Where(lambdaFunc);
         }
 
-        public async Task<T> QueryAsync(bool isRemove, Expression<Func<T, bool>> lambdaFunc)
+        public async Task<T> QueryAsync( Expression<Func<T, bool>> lambdaFunc)
         {
-            if (isRemove)
+           
                 return await _db.Set<T>().Where(lambdaFunc).FirstOrDefaultAsync();
-            else
-                return await _db.Set<T>().Where(m=>!m.IsRemove).Where(lambdaFunc).FirstOrDefaultAsync();
         }
 
         public async Task<T> QueryAsync(Guid id)

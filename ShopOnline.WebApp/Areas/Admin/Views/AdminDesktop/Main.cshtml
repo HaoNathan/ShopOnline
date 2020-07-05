@@ -8,7 +8,8 @@
                 <div class="layui-card-body ">
                     <blockquote class="layui-elem-quote">
                         欢迎管理员：
-                        <span class="x-red">@Model.AdminName</span>！
+                        <span class="x-red">@Model.AdminName</span>！当前时间：
+                         <span id="time" class="time"></span><br />
                     </blockquote>
                 </div>
             </div>
@@ -170,7 +171,37 @@
 {
     <script type="text/javascript" src="~/Areas/Admin/Asset/js/xadmin.js"></script>
     <script>
-        
+        window.load(startInterval());
+        function getTime() {
+            var now = new Date();
+            //获取相对于1900的时间差，比如2019年，获取的数字是 119
+            var year = now.getYear();
+            //获取完整的年份
+            year = now.getFullYear();
+            //范围0~11， 跟中国的月份相差1
+            var month = now.getMonth()+1;
+            //getDate表示获取当前时间对应的月份中的天数
+            var days = now.getDate(); 
+            //表示获取星期数 ,西方国家的星期数是 0~6,0代表的是周日,其他的分别是周一到周六
+            var  dayOfWeek = now.getDay() ;  
+            //获取当前小时
+            var hour = now.getHours();
+            //获取当前分钟
+            var minutes = now.getMinutes();
+            //获取当前秒
+            var seconds = now.getSeconds();
+            //拼接时间格式, 年-月-日  时:分:秒
+            var time1 = year+"-"+month+"-"+days+"  "+hour+":"+minutes+":"+seconds;
+                         
+            document.getElementById("time").innerText = time1;
+        }
+        //定义将使用的定时器
+        var timeout = setInterval();
+            
+        //打开定时器
+        function startInterval() {
+            timeout = setInterval("getTime()",1000);
+        }　　　　　　　　　　　　　　//setInterval(调用方法，刷新间隔)
     </script>
 }
 

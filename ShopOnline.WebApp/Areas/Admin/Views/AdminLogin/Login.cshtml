@@ -40,7 +40,7 @@
                             function (res) {
                                 layer.msg(res.Info);
                                 if (res.IsSuccess) {
-                                    location.href="@Url.Action("MainBoard","AdminMainBoard")";
+                                    location.href =res.RedirectUrl;
                                 }
                             });
 

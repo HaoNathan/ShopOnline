@@ -158,6 +158,7 @@
     <Compile Include="Areas\Admin\Controllers\ProductCategorySecondController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductCategoryThirdController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ReportController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Common\MsgResult.cs" />
@@ -440,6 +441,7 @@
     <Content Include="Config\Log4.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Areas\Admin\Views\Order\OrderList.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -471,8 +473,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\Order\" />
     <Folder Include="Areas\Admin\Views\ProductAttributes\" />
+    <Folder Include="Areas\Admin\Views\Report\" />
     <Folder Include="Filter\" />
     <Folder Include="Models\" />
     <Folder Include="Upload\Product\" />

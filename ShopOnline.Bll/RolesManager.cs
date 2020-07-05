@@ -27,7 +27,7 @@ namespace ShopOnline.Bll
 
         public IQueryable<RolesDto> GetAllRoles()
         {
-            return  _service.QueryAllAsync(false).Select(m=>new RolesDto()
+            return  _service.QueryAllAsync().Select(m=>new RolesDto()
             {
                 RolesName = m.RolesName,
                 Id = m.Id,

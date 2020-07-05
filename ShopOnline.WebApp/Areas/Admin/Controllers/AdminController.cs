@@ -46,11 +46,13 @@ namespace ShopOnline.WebApp.Areas.Admin.Controllers
             }
             if (!string.IsNullOrEmpty(rolesId))
             {
-                data = data.Where(m => m.RolesId.ToString().Equals(rolesId));
+                Guid roles = Guid.Parse(rolesId);
+                data = data.Where(m => m.RolesId.Equals(roles));
             }
             if (!string.IsNullOrEmpty(createTime))
             {
-                data = data.Where(m => m.CreateTime.ToString("yyyy-MM-dd").Equals(createTime));
+                DateTime time=DateTime.Parse(createTime);
+                data = data.Where(m => m.CreateTime>(time));
             }
 
             var dataCount = data.Count();

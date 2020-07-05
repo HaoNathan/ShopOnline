@@ -19,6 +19,13 @@ namespace ShopOnline.Model
         public User User { get; set; }
 
         public int PayState { get; set; }
+        [StringLength(11)]
+        public string Phone { get; set; }
+
+        public string AcceptName { get; set; }
+        [Required]
+        [StringLength(255)]
+        public string Address { get; set; }
 
         [ForeignKey(nameof(UserDistribution))]
         public Guid UserDistributionId { get; set; }

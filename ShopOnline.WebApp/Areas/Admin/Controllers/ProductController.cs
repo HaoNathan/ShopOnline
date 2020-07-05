@@ -26,36 +26,57 @@ namespace ShopOnline.WebApp.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult ProductList()
+        public async Task< ActionResult> ProductList()
         {
+            await GetCategoryList();
+
             return View();
         }
 
         [HttpGet]
-        public JsonResult GetProductList(int page, int limit, string productName, string categoryId)
+        public JsonResult GetProductList(int page, int limit, string productName, string  firstCategoryId,string secondCategoryId, string createTime)
         {
-            var data = _manager.GetAllProducts();
-
-            if (!string.IsNullOrEmpty(productName))
+            try
             {
-                data = data.Where(m => m.ProductName.Contains(productName));
+                var data = _manager.GetAllProducts();
+
+                if (!string.IsNullOrEmpty(productName)) data = data.Where(m => m.ProductName.Contains(productName));
+
+                if (!string.IsNullOrEmpty(firstCategoryId))
+                {
+                    Guid category = Guid.Parse(firstCategoryId);
+                    data = data.Where(m => m.FirstProductCategoryId.Equals(category));
+                }
+                if (!string.IsNullOrEmpty(secondCategoryId))
+                {
+                    Guid category = Guid.Parse(secondCategoryId);
+
+                    data = data.Where(m => m.SecondProductCategoryId.Equals(category));
+                }
+                if (!string.IsNullOrEmpty(createTime))
+                {
+                    var time = DateTime.Parse(createTime);
+                    data = data.Where(m => m.CreateTime > time);
+                }
+
+                var dataCount = data.Count();
+                var newData = data.ToList().Skip((page - 1) * limit).Take(limit);
+
+                var jsonResult = new
+                {
+                    code = 0,
+                    count = dataCount,
+                    data = newData
+                };
+                return Json(jsonResult, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                LogHelper log=new LogHelper(typeof(ProductController));
+                log.Error("查询商品错误",e);
             }
 
-            if (!string.IsNullOrEmpty(categoryId))
-            {
-                data = data.Where(m => m.FirstProductCategoryId.ToString().Equals(categoryId));
-            }
-
-            var dataCount = data.Count();
-            var newData = data.ToList().Skip((page - 1) * limit).Take(limit);
-
-            var jsonResult = new
-            {
-                code = 0,
-                count = dataCount,
-                data = newData
-            };
-            return Json(jsonResult, JsonRequestBehavior.AllowGet);
+            return Json(_msg=new MsgResult(){Info = "error"});
         }
 
         [HttpGet]

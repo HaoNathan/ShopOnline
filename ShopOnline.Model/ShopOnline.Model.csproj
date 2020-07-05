@@ -68,7 +68,12 @@
     <Compile Include="Migrations\202007011310227_addImagePathLength.designer.cs">
       <DependentUpon>202007011310227_addImagePathLength.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007050407105_createOrderTable.cs" />
+    <Compile Include="Migrations\202007050407105_createOrderTable.designer.cs">
+      <DependentUpon>202007050407105_createOrderTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Order.cs" />
     <Compile Include="OrderInfo.cs" />
     <Compile Include="PayType.cs" />
     <Compile Include="Product.cs" />
@@ -92,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007011310227_addImagePathLength.resx">
       <DependentUpon>202007011310227_addImagePathLength.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007050407105_createOrderTable.resx">
+      <DependentUpon>202007050407105_createOrderTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

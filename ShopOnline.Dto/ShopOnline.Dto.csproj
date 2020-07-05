@@ -45,8 +45,9 @@
     <Compile Include="BusinessDto.cs" />
     <Compile Include="CollectDto.cs" />
     <Compile Include="ColorDto.cs" />
-    <Compile Include="ProductCategoryDto.cs" />
     <Compile Include="OrderDto.cs" />
+    <Compile Include="ProductCategoryDto.cs" />
+    <Compile Include="OrderInfoDto.cs" />
     <Compile Include="ProductCommentDto.cs" />
     <Compile Include="ProductDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

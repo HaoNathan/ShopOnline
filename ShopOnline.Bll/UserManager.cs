@@ -18,7 +18,7 @@ namespace ShopOnline.Bll
         }
         public IQueryable<UserDto> GetAllUser()
         {
-            return _service.QueryAllAsync(false).Select(m=>new UserDto()
+            return _service.QueryAllAsync().Select(m=>new UserDto()
             {
                 Id =m.Id,
                 CreateTime = m.CreateTime,
@@ -35,8 +35,9 @@ namespace ShopOnline.Bll
 
         public async Task<UserDto> UserLogin(string userName,string userPwd)
         {
-            var user= await _service.QueryAsync(false,m => m.UserName.Equals(userName) 
-                                   && m.UserPassword.Equals(userPwd));
+            var user= await _service.QueryAsync(m => m.UserName.Equals(userName) 
+                                   && m.UserPassword.Equals(userPwd)
+                                   &&m.IsRemove==false);
 
             if (user==null)
                 return null;
@@ -52,7 +53,14 @@ namespace ShopOnline.Bll
 
         public async Task<UserDto> QueryUser(Guid id)
         {
-            throw new NotImplementedException();
+            var user= await _service.QueryAsync(id);
+            return new UserDto()
+            {
+                Id = user.Id,
+                ImagePath = user.ImagePath,
+                UserName = user.UserName,
+                IsMember = user.IsMember
+            };
         }
 
         public async Task<int> EditUser(UserDto model)

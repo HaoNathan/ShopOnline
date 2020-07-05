@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Threading.Tasks;
 using ShopOnline.Dto;
 using ShopOnline.IBll;
@@ -18,7 +19,7 @@ namespace ShopOnline.Bll
         }
         public IQueryable<ProductCategoryDto> GetAllCategory()
         {
-            var data = _service.QueryAllAsync(false)
+            var data = _service.QueryAllAsync()
                 .Select(m => new ProductCategoryDto()
                 {
                     Id = m.Id,
@@ -62,10 +63,9 @@ namespace ShopOnline.Bll
 
         public async Task<int> EditCategoryState(Guid id, bool state)
         {
-            return await _service.EditAsync(new ThirdProductCategory()
-            {
-                IsRemove = state
-            });
+            var category = await _service.QueryAsync(id);
+            category.IsRemove = state;
+            return await _service.EditAsync(category);
         }
     }
 }

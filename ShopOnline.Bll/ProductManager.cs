@@ -20,7 +20,7 @@ namespace ShopOnline.Bll
 
         public IQueryable<ProductDto> GetAllProducts()
         {
-            return _service.QueryAllAsync(false).Select(m => new ProductDto()
+            return _service.QueryAllAsync().Select(m => new ProductDto()
             {
                 Id = m.Id,
                 ColorName = m.Color.ColorName,
@@ -30,6 +30,9 @@ namespace ShopOnline.Bll
                 ThirdProductCategoryName = m.ThirdProductCategory.ThirdProductCategoryName,
                 CreateTime = m.CreateTime,
                 ProductCost = m.ProductCost,
+                FirstProductCategoryId = m.FirstProductCategoryId,
+                SecondProductCategoryId = m.SecondProductCategoryId,
+                ThirdProductCategoryId = m.ThirdProductCategoryId,
                 ProductPrice = m.ProductPrice,
                 ProductImagePath = m.ProductImagePath,
                 IsRemove = m.IsRemove,
@@ -110,8 +113,8 @@ namespace ShopOnline.Bll
                 GS1Id = product.GS1Id
             };
 
-            var color =await service.QueryAsync(true,m => m.Id.Equals(productDto.ColorId));
-            var size =await service2.QueryAsync(true,m=>m.Id.Equals(productDto.SizeId));
+            var color =await service.QueryAsync(m => m.Id.Equals(productDto.ColorId));
+            var size =await service2.QueryAsync(m=>m.Id.Equals(productDto.SizeId));
             productDto.ColorName = color.ColorName;
             productDto.SizeName = size.SizeName;
 
@@ -121,7 +124,8 @@ namespace ShopOnline.Bll
         public IQueryable<ProductCategoryDto> GetFirstCategoryList()
         {
             IFirstCategoryService service = new FirstCategoryService();
-            return service.QueryAllAsync(true).Select(m => new ProductCategoryDto()
+            return service.QueryAllAsync().Where(m=>m.IsRemove==false)
+                .Select(m => new ProductCategoryDto()
             {
                 Id = m.Id,
                 CategoryName = m.FirstProductCategoryName
@@ -133,7 +137,8 @@ namespace ShopOnline.Bll
         {
             ISecondCategoryService service = new SecondCategoryService();
 
-            return service.QueryAllAsync(true).Select(m => new ProductCategoryDto()
+            return service.QueryAllAsync().Where(m=>m.IsRemove==false)
+                .Select(m => new ProductCategoryDto()
             {
                 Id = m.Id,
                 CategoryName = m.SecondProductCategoryName
@@ -144,7 +149,8 @@ namespace ShopOnline.Bll
         {
             IThirdCategoryService service = new ThirdCategoryService();
 
-            return service.QueryAllAsync(true).Select(m => new ProductCategoryDto()
+            return service.QueryAllAsync().Where(m=>m.IsRemove==false)
+                .Select(m => new ProductCategoryDto()
             {
                 Id = m.Id,
                 CategoryName = m.ThirdProductCategoryName

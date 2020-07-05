@@ -37,7 +37,8 @@ namespace ShopOnline.WebApp.Areas.Admin.Controllers
 
             if (!string.IsNullOrEmpty(createTime))
             {
-                data = data.Where(m => m.CreateTime > DateTime.Parse(createTime));
+                var time = DateTime.Parse(createTime);
+                data = data.Where(m => m.CreateTime > time);
             }
 
             var dataCount = data.Count();
@@ -79,6 +80,27 @@ namespace ShopOnline.WebApp.Areas.Admin.Controllers
             catch (Exception e)
             {
                 _log.Error("添加以及商品分类错误", e);
+            }
+
+            return Json(_msg);
+        }
+        [HttpPost]
+        public async Task<JsonResult> UpdateCategoryState(string id, bool state)
+        {
+            var result = await _manager.EditCategoryState(Guid.Parse(id), state);
+
+            _msg = new MsgResult();
+
+            switch (result)
+            {
+                case 1:
+                    _msg.IsSuccess = true;
+                    _msg.Info = "修改成功";
+                    break;
+                default:
+                    _msg.IsSuccess = false;
+                    _msg.Info = "修改失败";
+                    break;
             }
 
             return Json(_msg);

@@ -33,7 +33,7 @@ namespace ShopOnline.IDal
         /// 查询所有数据
         /// </summary>
         /// <param name="isRemove">是否需要将已移除的数据查出</param>
-        IQueryable<T> QueryAllAsync(bool isRemove);
+        IQueryable<T> QueryAllAsync();
 
         /// <summary>
         /// 查询所有数据按某一条件
@@ -46,7 +46,7 @@ namespace ShopOnline.IDal
         /// </summary>
         /// <param name="isRemove">是否需要将已移除的数据查出</param>
         /// <param name="lambdaFunc">where条件</param>
-        Task<T> QueryAsync(bool isRemove,Expression<Func<T, bool>> lambdaFunc);
+        Task<T> QueryAsync(Expression<Func<T, bool>> lambdaFunc);
 
         /// <summary>
         /// 查询单个数据
