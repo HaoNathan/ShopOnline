@@ -56,6 +56,11 @@ namespace ShopOnline.Dal
             return await _db.SaveChangesAsync();
         }
 
+        public async Task<int> GetCountAsync()
+        {
+            return await _db.Set<T>().Where(m=>m.IsRemove==false).CountAsync();
+        }
+
         public IQueryable<T> QueryAllAsync()
         {
                 return _db.Set<T>().AsNoTracking();

@@ -30,6 +30,12 @@ namespace ShopOnline.IDal
         Task<int> DeleteAsync(T model);
 
         /// <summary>
+        /// 获得某一数据的数量
+        /// </summary>
+        /// <returns></returns>
+        Task<int> GetCountAsync();
+
+        /// <summary>
         /// 查询所有数据
         /// </summary>
         /// <param name="isRemove">是否需要将已移除的数据查出</param>

@@ -52,6 +52,7 @@
     <Compile Include="ISecondCategoryManager.cs" />
     <Compile Include="IProductAttributesManager.cs" />
     <Compile Include="IShoppingCartManager.cs" />
+    <Compile Include="IStatisticsManager.cs" />
     <Compile Include="IThirdCategoryManager.cs" />
     <Compile Include="IUserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -86,9 +86,9 @@ namespace ShopOnline.Bll
             {
                 UserName = model.UserName,
                 UserPassword = model.UserPassword,
-                Email = model.Email,
+                Email ="",
                 Phone = model.Phone,
-                ImagePath = model.ImagePath
+                ImagePath ="/Upload/User/th1.png"
             });
         }
     }

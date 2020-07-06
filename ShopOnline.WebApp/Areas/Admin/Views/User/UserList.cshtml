@@ -82,8 +82,7 @@
                             { field: 'Phone', title: '电话', width: '10%', sort: true },
                             { title: '创建时间', templet: "#newDate", width: '10%' },
                             { field: 'IsRemove', title: '是否启用', templet: '#switchTpl', width: '10%', sort: true },
-                            { field: 'IsMember', title: '是否会员', templet: '#switchTpl2', width: '10%', sort: true },
-
+                            { field: 'IsMember', title: '是否会员', templet: '#member', width: '10%', sort: true },
                             { field: 'userStateName', title: '状态', templet: '#barDemo', width: '14%' }
                         ]
                     ],
@@ -111,8 +110,8 @@
                             state = true;
                         };
                         $.post('@Url.Action("UpdateUserState", "User")',
-                            {stateId: state,adminId:id },
-                            function (res) {
+                            { stateId: state, adminId: id },
+                            function(res) {
                                 layer.msg(res.Info);
                             });
                     });
@@ -138,10 +137,12 @@
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     </script>
     <script type="text/html" id="switchTpl">
-        <input type="checkbox" name="StateName" value="{{d.Id}}" lay-skin="switch" lay-text="启用|注销" lay-filter="stateDemo" {{ d.IsRemove== false ? 'checked' : ' ' }}>
+        <input type="checkbox" name="StateName" value="{{d.Id}}" lay-skin="switch" lay-text="在使用|注销" lay-filter="stateDemo" {{ d.IsRemove== false ? 'checked' : ' ' }}>
     </script>
-    <script type="text/html" id="switchTpl2">
-        <input type="checkbox" name="StateName" value="{{d.Id}}" lay-skin="switch" lay-text="启用|注销" lay-filter="stateDemo" {{ d.IsMember== false ? 'checked' : ' ' }}>
+    <script type="text/html" id="member">
+
+        <button name="StateName" class="layui-btn layui-btn-sm  {{d.IsRemove== true ? 'layui-btn-warm' : ' layui-btn-primary' }} "> {{ d.IsRemove== true ? '会员用户' : ' 普通用户' }}</button>
+
     </script>
 }
 

@@ -201,7 +201,15 @@
         //打开定时器
         function startInterval() {
             timeout = setInterval("getTime()",1000);
-        }　　　　　　　　　　　　　　//setInterval(调用方法，刷新间隔)
+        }
+        //setInterval(调用方法，刷新间隔)
+        $(document).ready(function() {
+            $.get("@Url.Action("GetCount","AdminDesktop")",
+                { },
+                function(res) {
+
+                });
+        });
     </script>
 }
 
