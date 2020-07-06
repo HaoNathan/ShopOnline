@@ -2,7 +2,7 @@
 
 namespace ShopOnline.IDal
 {
-    public interface IOrderService:IBaseService<OrderInfo>
+    public interface IOrderInfoService:IBaseService<OrderInfo>
     {
         
     }

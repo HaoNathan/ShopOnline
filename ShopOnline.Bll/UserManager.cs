@@ -66,6 +66,7 @@ namespace ShopOnline.Bll
         public async Task<int> EditUser(UserDto model)
         {
             var user = await _service.QueryAsync(model.Id);
+
             user.UserName = model.UserName;
             user.UserPassword = model.UserPassword;
             user.Email = model.Email;
@@ -76,6 +77,8 @@ namespace ShopOnline.Bll
             return await _service.EditAsync(user);
 
         }
+
+        public async Task<bool> IsExistUser(string name) => await _service.IsExistsAsync(m => m.UserName.Equals(name));
 
         public async Task<int> AddUser(UserDto model)
         {

@@ -24,23 +24,18 @@
                 <div class="layui-card-body ">
                     <div class="layui-form layui-col-space5">
                         <div class="layui-inline">
-                            <label class="layui-form-label">商品名：</label>
+                            <label class="layui-form-label">买家昵称：</label>
                             <div class="layui-inline layui-show-xs-block">
-                                <input type="text" name="prxoductName" placeholder="请输入商品名" autocomplete="off" class="layui-input">
+                                <input type="text" name="prxoductName" placeholder="请输入昵称" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <label class="layui-form-label">一级分类：</label>
+                            <label class="layui-form-label">商品名称：</label>
                             <div class="layui-inline layui-show-xs-block">
-                        
+                                <input type="text" name="prxoductName" placeholder="请输入名称" autocomplete="off" class="layui-input">
                             </div>
                         </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">二级分类：</label>
-                            <div class="layui-inline layui-show-xs-block">
-    
-                            </div>
-                        </div>
+
                         <div class="layui-inline">
                             <label class="layui-form-label">创建时间：</label>
                             <div class="layui-inline layui-show-xs-block">
@@ -59,7 +54,7 @@
                     </button>
                 </div>
                 <div class="layui-card-body ">
-                    <table id="ProductTable" lay-filter="ProductList"></table>
+                    <table id="OrderTable" lay-filter="OrderList"></table>
                 </div>
             </div>
         </div>
@@ -83,25 +78,25 @@
                 });
 
                 table.render({
-                    elem: '#ProductTable',
-                    url: '@Url.Action("GetProductList", "Product")', //数据接口,
+                    elem: '#OrderTable',
+                    url: '@Url.Action("GetOrderList", "Order")', //数据接口,
                     page: true, //开启分页,
                     cols: [
                         [//表头
-                            { field: 'ImagePath', title: '商品图', width: '4%', templet: "#productImage" },
                             { field: 'Id', title: 'ID', width: '10%', hide: true },
+                            { field: 'UserName', title: '买家名称', width: '10%' },
                             { field: 'ProductName', title: '商品名称', width: '10%' },
-                            { field: 'ProductPrice', title: '价格', width: '4%', sort: true },
-                            { field: 'ProductCost', title: '成本', width: '4%', sort: true },
-                            { field: 'ProductNumber', title: '数量', width: '4%', sort: true },
-                            { field: 'ColorName', title: '颜色', width: '10%', sort: true },
-                            { field: 'SizeName', title: '规格', width: '10%', sort: true },
-                            { field: 'FirstProductCategoryName', title: '一级类别', width: '10%', sort: true },
-                            { field: 'SecondProductCategoryName', title: '二级类别', width: '10%', sort: true },
-                            { field: 'ThirdProductCategoryName', title: '三级类别', width: '10%', sort: true },
-                            { field: 'GS1Id', title: '商品编号', width: '6%', sort: true },
+                            
+                            { field: 'Email', title: '邮箱', width: '10%', sort: true },
+                            { field: 'Phone', title: '手机号', width: '10%', sort: true },
+                            { field: 'Address', title: '住址', width: '10%', sort: true },
+
                             { title: '创建时间', templet: "#newDate", width: '6%' },
+                            { title: '支付状态', templet: '#payState', width: '5%' },
+
+                            {  title: '是否发货', templet: '#switchTpl2', width: '5%' },
                             { field: 'IsRemove', title: '状态', templet: '#switchTpl', width: '5%' },
+
                             { title: '操作', templet: '#barDemo', width: '5%' , fixed: 'right'}
                         ]
                     ],
@@ -109,17 +104,17 @@
                     toolbar: true
                 });
                 $("#btnSearch").click(function() {
-                    var name = $("input[name='productName']").val();
+                    var name = $("input[name='userName']").val();
+                    var name2 = $("input[name='productName']").val();
                     var time = $("input[name='start']").val();
-                    var firstCategory = $("select[name='firstCategoryId']").val();
-                    var secondCategory = $("select[name='secondCategoryId']").val();
-                    table.reload("ProductTable",
+                  
+                    table.reload("OrderTable",
                         {
                             where: {
-                                productName: name,
+                                acceptName: name,
+                                productName: name2,
                                 createTime: time,
-                                firstCategoryId: firstCategory,
-                                secondCategoryId: secondCategory
+                                
                             }
                         });
                 });
@@ -130,14 +125,14 @@
                         if (obj.elem.checked === false) {
                             state = true;
                         };
-                        $.post('@Url.Action("UpdateProductState", "Product")',
+                        $.post('@Url.Action("UpdateOrderState", "Order")',
                             { state: state, id: productId },
                             function(res) {
                                 layer.msg(res.Info);
                             });
                     });
                 //监听工具条
-                table.on('tool(ProductList)',
+                table.on('tool(OrderList)',
                     function(obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
                         layer = self === parent ? self : top.layui.layer;
                         var data = obj.data; //获得当前行数据
@@ -158,7 +153,10 @@
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     </script>
     <script type="text/html" id="switchTpl">
-        <input type="checkbox" name="StateName" value="{{d.Id}}" lay-skin="switch" lay-text="上架|下架" lay-filter="stateDemo" {{ d.IsRemove== false ? 'checked' : ' ' }}>
+        <input type="checkbox" name="StateName" value="{{d.Id}}"  lay-text="已取消|未取消" lay-filter="stateDemo1" {{ d.IsRemove== false ? 'checked' : ' ' }}>
+    </script>
+    <script type="text/html" id="switchTpl2">
+        <input type="checkbox" name="StateName" value="{{d.Id}}" lay-skin="switch" lay-text="上架|下架" lay-filter="stateDemo" {{ d.DeliverySate== false ? 'checked' : ' ' }}>
     </script>
     <script type="text/html" id="productImage">
         <!--拆分图片路径 -->

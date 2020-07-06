@@ -14,6 +14,9 @@ namespace ShopOnline.IBll
 
         Task<int> EditUser(UserDto model);
 
+        Task<bool> IsExistUser(string name);
+
+
         Task<int> AddUser(UserDto model);
     }
 }

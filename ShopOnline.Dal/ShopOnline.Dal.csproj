@@ -57,7 +57,7 @@
     <Compile Include="CollectService.cs" />
     <Compile Include="ColorService.cs" />
     <Compile Include="FirstCategoryService.cs" />
-    <Compile Include="OrderService.cs" />
+    <Compile Include="OrderInfoService.cs" />
     <Compile Include="ProductCommentService.cs" />
     <Compile Include="ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

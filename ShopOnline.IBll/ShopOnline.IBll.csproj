@@ -45,7 +45,7 @@
     <Compile Include="IBusinessManager.cs" />
     <Compile Include="ICollectManager.cs" />
     <Compile Include="IFirstCategoryManager.cs" />
-    <Compile Include="IOrderManager.cs" />
+    <Compile Include="IOrderInfoManager.cs" />
     <Compile Include="IProductCommentManager.cs" />
     <Compile Include="IProductManager.cs" />
     <Compile Include="IRolesManager.cs" />

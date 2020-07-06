@@ -8,11 +8,11 @@ using ShopOnline.Model;
 
 namespace ShopOnline.Bll
 {
-    public class OrderManager:IOrderManager
+    public class OrderInfoManager : IOrderInfoManager
     {
-        private readonly IOrderService _service;
+        private readonly IOrderInfoService _service;
 
-        public OrderManager(IOrderService service)
+        public OrderInfoManager(IOrderInfoService service)
         {
             _service = service;
         }
@@ -22,11 +22,13 @@ namespace ShopOnline.Bll
             return await _service.AddAsync(new OrderInfo()
             {
                 PayState = model.PayState,
-                DeliverySate = model.DeliverySate,
                 UserDistributionId = model.UserDistributionId,
                 ProductId = model.ProductId,
-                UserId = model.UserId
-        });
+                UserId = model.UserId,
+                Phone = model.Phone,
+                Address = model.Address,
+                AcceptName = model.AcceptName
+            });
         }
 
         public async Task<int> UpdateOrder(OrderInfoDto model)
@@ -36,16 +38,24 @@ namespace ShopOnline.Bll
             order.PayState = order.PayState;
             order.DeliverySate = order.DeliverySate;
             order.UserDistributionId = model.UserDistributionId;
-            order.UpdateTime=DateTime.Now;
+            order.UpdateTime = DateTime.Now;
             order.ProductId = model.ProductId;
+
+            return await _service.EditAsync(order);
+        }
+
+        public async Task<int> UpdateOrderState(Guid id, bool state)
+        {
+            var order = await _service.QueryAsync(id);
+            order.IsRemove = state;
 
             return await _service.EditAsync(order);
         }
 
         public async Task<OrderInfoDto> QueryOrder(Guid id)
         {
-            var order=await _service.QueryAsync(id);
-            return  new OrderInfoDto()
+            var order = await _service.QueryAsync(id);
+            return new OrderInfoDto()
             {
                 PayState = order.PayState,
                 DeliverySate = order.DeliverySate,
@@ -57,7 +67,7 @@ namespace ShopOnline.Bll
 
         public IQueryable<OrderInfoDto> QueryAllOrder(bool isRemove)
         {
-            if(isRemove)
+            if (isRemove)
                 return _service.QueryAllAsync().Select(m => new OrderInfoDto()
                 {
                     PayState = m.PayState,
@@ -69,7 +79,7 @@ namespace ShopOnline.Bll
                     IsRemove = m.IsRemove
                 });
             else
-                return _service.QueryAllAsync().Where(m=>m.IsRemove==false).Select(m => new OrderInfoDto()
+                return _service.QueryAllAsync().Where(m => m.IsRemove == false).Select(m => new OrderInfoDto()
                 {
                     PayState = m.PayState,
                     DeliverySate = m.DeliverySate,

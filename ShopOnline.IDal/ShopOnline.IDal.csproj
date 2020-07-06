@@ -47,7 +47,7 @@
     <Compile Include="ICollectService.cs" />
     <Compile Include="IColorService.cs" />
     <Compile Include="IFirstCategoryService.cs" />
-    <Compile Include="IOrderService.cs" />
+    <Compile Include="IOrderInfoService.cs" />
     <Compile Include="IProductCommentService.cs" />
     <Compile Include="IProductService.cs" />
     <Compile Include="IRolesService.cs" />

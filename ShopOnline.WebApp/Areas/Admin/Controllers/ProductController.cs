@@ -10,10 +10,12 @@ using ShopOnline.Bll;
 using ShopOnline.Dto;
 using ShopOnline.IBll;
 using ShopOnline.WebApp.Common;
+using ShopOnline.WebApp.Filter;
 using ShopOnlineTools;
 
 namespace ShopOnline.WebApp.Areas.Admin.Controllers
 {
+    [AdminAuthorize()]
     public class ProductController : Controller
     {
         // GET: Admin/Product
