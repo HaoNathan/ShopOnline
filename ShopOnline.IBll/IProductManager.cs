@@ -16,6 +16,14 @@ namespace ShopOnline.IBll
         Task<int> AddProduct(ProductDto model);
 
         Task<ProductDto> QueryProduct(Guid id);
+        /// <summary>
+        /// 按类别名查询商品
+        /// </summary>
+        /// <param name="index">按哪一种类别进行查询</param>
+        /// <param name="categoryName">类别名称</param>
+        /// <returns></returns>
+        IQueryable<ProductDto> QueryProductByCategory(int index,string categoryName);
+
 
         IQueryable<ProductCategoryDto> GetFirstCategoryList();
 

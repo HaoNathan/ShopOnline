@@ -163,8 +163,10 @@
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Common\MsgResult.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filter\AdminAuthorizeAttribute.cs" />
+    <Compile Include="Filter\UserAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -554,6 +556,7 @@
     <Content Include="Asset\js\superslide.2.1.js" />
     <Content Include="Scripts\wangEditor.min.js" />
     <Content Include="Upload\Admin\th1.png" />
+    <Content Include="Upload\User\defaultPhoto.jpg" />
     <Content Include="Upload\User\th1.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -568,6 +571,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\User\LoginRegister.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\User\EditUserInfo.cshtml" />
+    <Content Include="Views\Product\GetProductList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -606,6 +611,10 @@
     <ProjectReference Include="..\ShopOnline.IBll\ShopOnline.IBll.csproj">
       <Project>{a59e95a7-cad0-4ab9-bd79-186a7c407b62}</Project>
       <Name>ShopOnline.IBll</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ShopOnline.IDal\ShopOnline.IDal.csproj">
+      <Project>{8B51CDC2-7B20-4816-BEBE-083E4AB05994}</Project>
+      <Name>ShopOnline.IDal</Name>
     </ProjectReference>
     <ProjectReference Include="..\ShopOnlineTools\ShopOnlineTools.csproj">
       <Project>{558edb8c-08c5-4862-b840-0c61d1faff7c}</Project>

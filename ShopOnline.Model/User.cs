@@ -24,7 +24,7 @@ namespace ShopOnline.Model
         [StringLength(11)]
         public string Phone { get; set; }
 
-        [StringLength(50)]
+        [StringLength(255)]
         public string ImagePath { get; set; }
 
         public bool IsMember { get; set; }

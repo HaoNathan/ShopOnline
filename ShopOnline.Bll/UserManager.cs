@@ -59,7 +59,9 @@ namespace ShopOnline.Bll
                 Id = user.Id,
                 ImagePath = user.ImagePath,
                 UserName = user.UserName,
-                IsMember = user.IsMember
+                IsMember = user.IsMember,
+                Phone = user.Phone,
+                Email = user.Email
             };
         }
 
@@ -88,7 +90,7 @@ namespace ShopOnline.Bll
                 UserPassword = model.UserPassword,
                 Email ="暂无",
                 Phone = model.Phone,
-                ImagePath ="/Upload/User/th1.png"
+                ImagePath ="/Upload/User/defaultPhoto.jpg"
             });
         }
     }

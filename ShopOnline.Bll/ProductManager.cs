@@ -121,6 +121,55 @@ namespace ShopOnline.Bll
             return productDto;
         }
 
+        public IQueryable<ProductDto> QueryProductByCategory(int index, string categoryName)
+        {
+            if (index==1)
+            {
+                return _service.QueryAllAsync()
+                    .Where(m => m.FirstProductCategory.FirstProductCategoryName
+                        .Equals(categoryName) && m.IsRemove == false).Select(m => new ProductDto()
+                    {
+                            Id = m.Id,
+                            ProductName = m.ProductName,
+                            ProductDescription = m.ProductDescription,
+                            ProductImagePath = m.ProductImagePath,
+                            ColorName = m.Color.ColorName,
+                            SizeName = m.Size.SizeName,
+                            ProductPrice = m.ProductPrice
+
+
+                    });
+            }
+            else if(index==2)
+            {
+                return _service.QueryAllAsync()
+                    .Where(m => m.SecondProductCategory.SecondProductCategoryName
+                        .Equals(categoryName) && m.IsRemove == false).Select(m => new ProductDto()
+                    {
+                        Id = m.Id,
+                        ProductName = m.ProductName,
+                        ProductDescription = m.ProductDescription,
+                        ProductImagePath = m.ProductImagePath,
+                        ColorName = m.Color.ColorName,
+                        SizeName = m.Size.SizeName,
+                        ProductPrice = m.ProductPrice
+                        });
+            }
+            else
+                return _service.QueryAllAsync()
+                    .Where(m => m.ThirdProductCategory.ThirdProductCategoryName
+                        .Equals(categoryName) && m.IsRemove == false).Select(m => new ProductDto()
+                    {
+                        Id = m.Id,
+                        ProductName = m.ProductName,
+                        ProductDescription = m.ProductDescription,
+                        ProductImagePath = m.ProductImagePath,
+                        ColorName = m.Color.ColorName,
+                        SizeName = m.Size.SizeName,
+                        ProductPrice = m.ProductPrice
+                        });
+        }
+
         public IQueryable<ProductCategoryDto> GetFirstCategoryList()
         {
             IFirstCategoryService service = new FirstCategoryService();

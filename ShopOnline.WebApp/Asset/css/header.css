@@ -62,13 +62,6 @@ a {
   margin-left: -65.3px;
 }
 
-.nav-right {
-  float: right;
-  height: 50px;
-  line-height: 50px;
-  width: 60px;
-  cursor: pointer;
-}
 
 .yc {
   display: none;

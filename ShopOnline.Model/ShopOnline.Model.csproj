@@ -76,6 +76,10 @@
     <Compile Include="Migrations\202007061241485_updateTable.designer.cs">
       <DependentUpon>202007061241485_updateTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007070849266_UpdateImagePathLength.cs" />
+    <Compile Include="Migrations\202007070849266_UpdateImagePathLength.designer.cs">
+      <DependentUpon>202007070849266_UpdateImagePathLength.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderInfo.cs" />
@@ -107,6 +111,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007061241485_updateTable.resx">
       <DependentUpon>202007061241485_updateTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007070849266_UpdateImagePathLength.resx">
+      <DependentUpon>202007070849266_UpdateImagePathLength.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
