@@ -27,10 +27,6 @@ namespace ShopOnline.Model
         [StringLength(255)]
         public string Address { get; set; }
 
-        [ForeignKey(nameof(UserDistribution))]
-        public Guid UserDistributionId { get; set; }
-        public UserDistribution UserDistribution { get; set; }
-
         public bool DeliverySate { get; set; }
     }
 }

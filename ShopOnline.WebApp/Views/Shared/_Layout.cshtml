@@ -6,14 +6,296 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
     <link href="~/Areas/Admin/Asset/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/Asset/css/header.css" rel="stylesheet" />
+    <link href="~/Asset/css/footer.css" rel="stylesheet" />
+
+    <style type="text/css">
+        body {
+            width: 100%;
+        }
+    </style>
     @RenderSection("css", false)
 </head>
 <body>
+    <div class="skheader" style="z-index: 99;">
+        <div style="background: white;">
+            <div class=" layui-layout-admin" style="padding-top: 10px; margin: 0;">
+                <div class="layui-layout-left">
+                    <a href="#">专柜查询 &nbsp;|&nbsp;</a>
+                    <a href="#">帮助中心</a>
+                </div>
+                <center><img src="~/Asset/images/Logo.png" /></center>
+                <div class="layui-layout-right">
+                    <a href="#">我的收藏&nbsp;|</a>
+                    <a href="@Url.Action("LoginRegister","User")">登录与注册 &nbsp;|&nbsp;</a>
+                    <a href="#"><img src="~/Asset/images/Shopping bag.png" class="vie" /> 我的购物袋</a>
+                </div>
+            </div>
+        </div>
+        <div class="skheader-nav">
+            <div class="container">
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="">彩妆专区</a>
+                        <div class="item-directory yc">
+                            <ul class="directory-list" style="margin-left: 20%;">
+                                <li>
+                                    <h4>唇部</h4>
+                                    <a href="">唇釉</a>
+                                    <a href="">唇膏</a>
+                                </li>
+                                <li>
+                                    <h4>面部</h4>
+                                    <a>粉底液/气垫</a>
+                                    <a>妆前隔离</a>
+                                    <a>遮瑕</a>
+                                    <a>腮红/胭脂</a>
+                                    <a>粉饼/蜜粉</a>
+                                </li>
+                                <li>
+                                    <h4>眼部</h4>
+                                    <a>眉笔</a>
+                                    <a>眼线</a>
+                                    <a>眼影</a>
+                                    <a>睫毛膏</a>
+                                    <a>美眸膏</a>
+                                    <a>眼部卸妆</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="">护肤专区</a>
+                        <div class="item-directory yc">
+                            <ul class="directory-list" style="margin-left: 10%;">
+                                <li>
+                                    <h4>[黑钥匙]护肤系列</h4>
+                                    <a href="">基础清洁</a>
+                                    <a href="">眼唇保养</a>
+                                    <a href="">精华护肤</a>
+                                    <a href="">面霜/乳液</a>
+                                    <a href="">特殊修复</a>
+                                    <a href="">修颜面霜</a>
+                                </li>
+                                <li>
+                                    <h4>光钥新肌护肤系列	</h4>
+                                    <a href="">基础清洁</a>
+                                    <a href="">眼唇保养</a>
+                                    <a href="">精华护肤</a>
+                                </li>
+                                <li>
+                                    <h4>清洁防晒综合系列</h4>
+                                    <a href="">基础清洁</a>
+                                    <a href="">防晒隔离</a>
+                                </li>
+                                <li>
+                                    <h4>男士综合护肤系列</h4>
+                                    <a href="">洁面啫喱</a>
+                                    <a href="">舒缓露</a>
+                                    <a href="">保湿乳</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="">香水专区</a>
+                        <div class="item-directory yc">
+                            <ul class="directory-list" style="margin-left: 10%;">
+                                <li>
+                                    <h4>高定私藏香氛</h4>
+                                    <a href="">全新清新系列</a>
+                                </li>
+                                <li>
+                                    <h4>女士香水系列</h4>
+                                    <a href="">阿玛尼挚爱香水</a>
+                                    <a href="">阿玛尼新寄情香水</a>
+                                </li>
+                                <li>
+                                    <h4>男士香水系列</h4>
+                                    <a href="">阿玛尼寄情香水</a>
+                                </li>
+                                <li>
+                                    <h4>明星系列</h4>
+                                    <a href="">挚爱系列</a>
+                                    <a href="">寄情系列</a>
+                                    <a href="">高定私藏香氛</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="">官网礼遇</a>
+                        <div class="item-directory yc">
+                            <ul class="directory-list ">
+                                <li style="margin-right: 20%; margin-left: 15%; height: 300px;">
+                                    <h4>会员礼遇</h4>
+                                    <a href=""><img src="~/Asset/images/KV-369x196-2.jpg" /></a>
+                                </li>
+                                <li>
+                                    <h4>限量礼盒</h4>
+                                    <a href="">臻礼定制</a>
+                                </li>
+                                <li>
+                                    <h4>选择你的底妆</h4>
+                                    <a href=""><img src="~/Asset/images/Shade-finder02.jpg" /></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="">大师匠心</a>
+                        <div class="item-directory yc">
+                            <ul class="directory-list" style="margin-left: 20%; height: 300px;">
+                                <li style="margin-right: 40%; ">
+                                    <h4>DESIGNED TO LAST</h4>
+                                    <a href=""><img src="~/Asset/images/desigh-to-last.jpg" /></a>
+                                </li>
+                                <li>
+                                    <h4>ACQUA FOR LIFE</h4>
+                                    <a href=""><img src="~/Asset/images/acqua-for-life-1.jpg" /></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+                <div class="nav-right">
+                    <ul>
+                        <li class="layui-nav-item layui-layout-right" style="margin-top: 3%;">
+                            <input type="search" class="sea" name="" placeholder="Search" value="请输入你要搜索的内容">
+                            <img src="~/Asset/images/Search.png" class="vie" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
-@RenderBody()
+    @RenderBody()
+<footer style="margin-top: 15%">
 
-<script src="~/Areas/Admin/Asset/layui/layui.all.js"></script>
-@RenderSection("scripts", required: false)
+
+
+    <ul class="foot-firstlist">
+        <li class="foot-firstlist-one">
+            <div>
+                <img src="~/Asset/images/Logo.png" width="90%" style="margin-top: 3%;" />
+            </div>
+            <div>
+                <h3>100%官方正品保证 </h3>
+                <p>乔治·阿玛尼，从时装到美妆，以大师匠心定义意式优雅。悠然信步人生，愈现真实完美。</p>
+            </div>
+        </li>
+        <li class="foot-firstlist-two">
+            <img src="~/Asset/images/无忧购物.png" width="100%" />
+            <p>尊享官网礼遇</p>
+            <p>7天无理由退货</p>
+        </li>
+        <li class="foot-firstlist-three">
+            <img src="~/Asset/images/臻品速享.png" width="100%" />
+            <p>支持多种在线支付方式</p>
+            <p>顺丰配送(偏远地区除外)</p>
+        </li>
+        <li class="foot-firstlist-four">
+            <img src="~/Asset/images/联系我们.png" width="100%" />
+            <p>15528127559</p>
+            <p>美妆专家在线答疑</p>
+        </li>
+    </ul>
+
+
+    <div class="foot-secondlist">
+        <hr />
+        <ul>
+            <li class="foot-secondlist-one">
+                彩妆专区
+                <ul>
+                    <li><a href="">唇部</a></li>
+                    <li><a href="">面部</a></li>
+                    <li><a href="">眼部</a></li>
+                </ul>
+            </li>
+
+            <li class="foot-secondlist-one">
+                护肤专区
+                <ul>
+                    <li><a href="">黑钥匙护肤系列</a></li>
+                    <li><a href="">光钥新肌护肤系列</a></li>
+                    <li><a href="">清洁防晒综合系列</a></li>
+                    <li><a href="">男士综合护肤系列</a></li>
+                </ul>
+            </li>
+
+            <li class="foot-secondlist-one">
+                香水专区
+                <ul>
+                    <li><a href="">男士</a></li>
+                    <li><a href="">女士</a></li>
+                </ul>
+            </li>
+
+            <li class="foot-secondlist-one">
+                明星产品
+                <ul>
+                    <li><a href="">阿玛尼臻致丝绒哑光唇釉</a></li>
+                    <li><a href="">阿玛尼权力「黑气垫」</a></li>
+                    <li><a href="">阿玛尼「红色挚爱」香水</a></li>
+                </ul>
+            </li>
+            <li class="foot-secondlist-one">
+                帮助中心
+                <ul>
+                    <li><a href="">常见问题</a></li>
+                    <li><a href="">订单查询</a></li>
+                </ul>
+            </li>
+        </ul>
+        <br /><br /><br /><br /><br /><br /><br />
+        <hr />
+        <center>
+            <br />
+            <br />
+            <p>国家药监局提示您：宣称用于祛斑美白、防晒、染发、烫发等的化妆品为特殊用途化妆品，产品标签上应标注“国妆特字”或者“国妆特进字”的标准文号。</p>
+            <br />
+            <p>
+                使用条款 &nbsp;&nbsp;&nbsp;cookies政策&nbsp;&nbsp;&nbsp;隐私政策&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                沪公网安备：12345678910111号&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                中国工商 沪ICP备：12345678号-90
+            </p>
+            <br /><br /><br />
+            <p>©L'Oreal China 欧莱雅 (中国)有限公司版权所有</p>
+            <br /><br /><br />
+        </center>
+    </div>
+</footer>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Areas/Admin/Asset/layui/layui.all.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(".nav-item").hover(function () {
+                $(this).children().first().css("font-weight", "bold");
+                $(this).children().eq(1).show();
+            }, function () {
+                $(this).children().first().css("font-weight", "normal");
+                $(this).children().eq(1).hide();
+            });
+        });
+        //Demo
+        layui.use('form', function () {
+            var form = layui.form;
+
+            //监听提交
+            form.on('submit(formDemo)', function (data) {
+
+                return false;
+            });
+        });
+        $(".container a").click(function () {
+            var text = $(this).text();
+            console.log(text);
+            return false;
+        });
+    </script>
+    @RenderSection("scripts", required: false)
 </body>
 </html>
 

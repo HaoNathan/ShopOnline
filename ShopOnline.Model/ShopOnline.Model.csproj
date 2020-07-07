@@ -72,6 +72,10 @@
     <Compile Include="Migrations\202007050407105_createOrderTable.designer.cs">
       <DependentUpon>202007050407105_createOrderTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007061241485_updateTable.cs" />
+    <Compile Include="Migrations\202007061241485_updateTable.designer.cs">
+      <DependentUpon>202007061241485_updateTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderInfo.cs" />
@@ -100,6 +104,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007050407105_createOrderTable.resx">
       <DependentUpon>202007050407105_createOrderTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007061241485_updateTable.resx">
+      <DependentUpon>202007061241485_updateTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -13,5 +13,6 @@ namespace ShopOnline.Model
         [StringLength(50)]
         public string SecondProductCategoryName { get; set; }
 
+       
     }
 }

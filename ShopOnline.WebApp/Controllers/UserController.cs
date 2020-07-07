@@ -24,9 +24,18 @@ namespace ShopOnline.WebApp.Controllers
         // GET: User
         
         [HttpGet]
-        public ActionResult LoginRegister()
+        public async Task<ActionResult> LoginRegister()
         {
-            return View();
+            try
+            {
+                var userId =Request.Cookies["userId"].Value;
+                var user = await _manager.QueryUser(Guid.Parse(userId));
+                return View(user);
+            }
+            catch (Exception e)
+            {
+                    return View();
+            }
         }
         public ActionResult GetCaptcha()
         {
@@ -44,6 +53,7 @@ namespace ShopOnline.WebApp.Controllers
         public async Task<JsonResult> Login(string userName,string userPwd,string remember)
         {
             _msg=new MsgResult();
+            userPwd=new Md5().MD5Encrypt(userPwd);
             var result = await _manager.UserLogin(userName, userPwd);
             if (result==null)
             {
@@ -52,7 +62,16 @@ namespace ShopOnline.WebApp.Controllers
             }
             else
             {
-                Session["User"] = result;
+                if (remember=="on")
+                {
+                    HttpCookie cookie = new HttpCookie("userId");
+                    cookie.Value = result.Id.ToString();
+                    Response.AppendCookie(cookie);
+                }
+                else
+                {
+                    Session["User"] = result;
+                }
                 _msg.IsSuccess = true;
                 _msg.Info = "欢迎回来";
                 _msg.RedirectUrl = Url.Action("Index", "Home");
@@ -61,10 +80,18 @@ namespace ShopOnline.WebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> Register(UserDto model)
+        public async Task<JsonResult> Register(UserDto model,string codeImage)
         {
             _msg = new MsgResult();
+            var captcha = Session["ImageCode"].ToString();
+            if (!captcha.Equals(codeImage))
+            {
+                _msg.IsSuccess = false;
+                _msg.Info = "验证码错误";
+                return Json(_msg);
+            }
 
+            model.UserPassword = new Md5().MD5Encrypt(model.UserPassword);
             try
             {
                 var result = await _manager.AddUser(model);
@@ -85,6 +112,19 @@ namespace ShopOnline.WebApp.Controllers
                 log.Error("新增用户错误",e);
             }
 
+            return Json(_msg);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> CheckUserName(string userName)
+        {
+            _msg=new MsgResult();
+            var result = await _manager.IsExistUser(userName);
+            if (result)
+            {
+                _msg.IsSuccess = true;
+                _msg.Info = "该昵称已存在";
+            }
             return Json(_msg);
         }
     }

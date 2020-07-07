@@ -1,0 +1,249 @@
+*{
+	margin: 0;padding: 0;
+}
+.foot-firstlist{
+				padding-top:10px ;
+			}
+			.foot-firstlist p{
+				color: gray;
+				line-height: 25px;
+				font-size: 12px;
+			}
+			.foot-firstlist-one{
+				padding-left:2%;
+				margin-top: 50px;
+				width: 40%;
+				float: left;
+				height: 105px;
+				padding-right:3%;
+			}
+			.foot-firstlist-one div{
+				float: left;
+				width: 50%;
+				
+			}
+			.foot-firstlist-two{
+				width: 18%;
+				float: left;
+				height: 155px;
+				text-align: center;
+				border-left: 1px gainsboro solid;
+			}
+			.foot-firstlist-three{
+				width: 18%;
+				float: left;
+				height: 155px;
+				text-align: center;
+				border-left: 1px gainsboro solid;
+				
+			}
+			.foot-firstlist-four{
+				width: 18%;
+				float: left;
+				height: 155px;
+				text-align: center;
+				border-left: 1px gainsboro solid;
+			}
+			.foot-secondlist{
+				margin-top: 165px;
+				background-color: #000000;
+				
+			}
+			
+			
+			.foot-secondlist>ul{
+				margin-top: 50px;
+				padding-left: 20%;
+			}
+			.foot-secondlist-one{
+				float:left;
+				margin-left: 6%;
+				color: white;
+				font-size: 17px;
+			}
+			.foot-secondlist-one>ul>li>a{
+				color: white;
+				font-size: 12px;
+			}
+			.foot-secondlist p{
+				color: white;
+			}
+			
+			
+			
+			
+			@media only screen and (min-width: 1px) and (max-width: 767px) {
+					.foot-firstlist{
+				padding-top:5px ;
+			}
+			.foot-firstlist p{
+				color: gray;
+				line-height: 20px;
+				font-size: 12px;
+			}
+			.foot-firstlist-one{
+				padding-left:10%;
+				margin-top: 50px;
+				width: 100%;
+				float: left;
+				height: 95px;
+				padding-right:10%;
+			}
+			.foot-firstlist-one div{
+				float: left;
+				width: 40%;
+				
+			}
+			.foot-firstlist-two{
+				width: 33%;
+				float: left;
+				height: 125px;
+				text-align: center;
+				border-left: 1px gainsboro solid;
+			}
+			.foot-firstlist-three{
+				width: 33%;
+				float: left;
+				height: 125px;
+				text-align: center;
+				border-left: 1px gainsboro solid;
+				
+			}
+			.foot-firstlist-four{
+				width: 33%;
+				float: left;
+				height: 125px;
+				text-align: center;
+				border-left: 1px gainsboro solid;
+			}
+			.foot-secondlist{
+				margin-top: 280px;
+				background-color: #000000
+			}
+			.foot-secondlist>ul{
+				margin-top: 50px;
+				padding-left: 3%;
+			}
+			.foot-secondlist-one{
+				float:left;
+				margin-left: 1%;
+				color: white;
+				font-size: 17px;
+			}
+			}
+			
+			@media only screen and (min-width: 768px) and (max-width: 991px) {
+				.foot-firstlist{
+				padding-top:5px ;
+			}
+			.foot-firstlist p{
+				color: gray;
+				line-height: 20px;
+				font-size: 12px;
+			}
+			.foot-firstlist-one{
+				padding-left:10%;
+				margin-top: 50px;
+				width: 100%;
+				float: left;
+				height: 95px;
+				padding-right:10%;
+			}
+			.foot-firstlist-one div{
+				float: left;
+				width: 40%;
+				
+			}
+			.foot-firstlist-two{
+				width: 33%;
+				float: left;
+				height: 145px;
+				text-align: center;
+				border-left: 1px gainsboro solid;
+			}
+			.foot-firstlist-three{
+				width: 33%;
+				float: left;
+				height: 145px;
+				text-align: center;
+				border-left: 1px gainsboro solid;
+				
+			}
+			.foot-firstlist-four{
+				width: 33%;
+				float: left;
+				height: 145px;
+				text-align: center;
+				border-left: 1px gainsboro solid;
+			}
+			.foot-secondlist{
+				margin-top: 310px;
+				background-color: #000000;
+			}
+			.foot-secondlist>ul{
+				margin-top: 40px;
+				margin-bottom: 40px;
+				padding-left: 5%;
+			}
+			.foot-secondlist-one{
+				float:left;
+				margin-left: 5%;
+				color: white;
+				font-size: 17px;
+				
+			}
+			}
+			
+			@media only screen and (min-width: 992px) and (max-width: 1200px) {
+				
+				.foot-firstlist{
+				padding-top:10px ;
+			}
+			.foot-firstlist p{
+				margin-top: 5px;
+				color: gray;
+				line-height: 25px;
+				font-size: 12px;
+			}
+			.foot-firstlist-one{
+				padding-left:2%;
+				margin-top: 50px;
+				width: 40%;
+				float: left;
+				height: 105px;
+				padding-right:3%;
+			}
+			.foot-firstlist-one div{
+				float: left;
+				width: 50%;
+			}
+			.foot-firstlist-two{
+				width: 18%;
+				float: left;
+				height: 155px;
+				text-align: center;
+				border-left: 1px gainsboro solid;
+			}
+			.foot-firstlist-three{
+				width: 18%;
+				float: left;
+				height: 155px;
+				text-align: center;
+				border-left: 1px gainsboro solid;
+				
+			}
+			.foot-firstlist-four{
+				width: 18%;
+				float: left;
+				height: 155px;
+				text-align: center;
+				border-left: 1px gainsboro solid;
+			}
+			.foot-secondlist{
+				margin-top: 165px;
+				background-color: #000000
+			}
+			}
+			@media only screen and (min-width: 1201px){
+				
+			}

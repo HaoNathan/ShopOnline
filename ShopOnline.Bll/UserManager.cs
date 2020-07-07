@@ -86,7 +86,7 @@ namespace ShopOnline.Bll
             {
                 UserName = model.UserName,
                 UserPassword = model.UserPassword,
-                Email ="",
+                Email ="暂无",
                 Phone = model.Phone,
                 ImagePath ="/Upload/User/th1.png"
             });

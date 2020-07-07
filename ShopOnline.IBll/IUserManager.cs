@@ -13,7 +13,11 @@ namespace ShopOnline.IBll
         Task<UserDto> QueryUser(Guid id);
 
         Task<int> EditUser(UserDto model);
-
+        /// <summary>
+        /// 判断是否重名
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         Task<bool> IsExistUser(string name);
 
 

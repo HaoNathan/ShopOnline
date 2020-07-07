@@ -1,0 +1,145 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+.clearfix:after {
+  content: " ";
+  display: block;
+  clear: both;
+  height: 0;
+}
+
+.clearfix {
+  zoom: 1;
+}
+
+.skheader {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 99;
+}
+
+.skheader-nav {
+  height: 50px;
+  width: 100%;
+  background-color: #000;
+}
+
+.container {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.nav-menu {
+  float: left;
+}
+
+.nav-item {
+  float: left;
+}
+
+a {
+  text-decoration: none;
+}
+
+.nav-item>a {
+  position: relative;
+  height: 50px;
+  font-size: 14px;
+  line-height: 50px;
+  color: whitesmoke;
+  padding: 0 50px;
+  cursor: pointer;
+}
+
+.nav-item:first-child {
+  margin-left: -65.3px;
+}
+
+.nav-right {
+  float: right;
+  height: 50px;
+  line-height: 50px;
+  width: 60px;
+  cursor: pointer;
+}
+
+.yc {
+  display: none;
+  margin-left: 2%;
+}
+
+.item-directory {
+  position: absolute;
+  left: 120px;
+  background: white;
+  z-index: 3;
+  width: 100%;
+  margin: 0 auto;
+  margin-left: -7.9%;
+}
+
+.directory-list {
+  float: left;
+  margin-bottom: 45px;
+  margin-left: 1%;
+}
+
+.directory-list>li {
+  float: left;
+  width: 20%;
+  margin-bottom: 45px;
+  margin-left: 2%;
+}
+
+.directory-list>li h4 {
+  margin-top: 40px;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+.directory-list>li a {
+  float: left;
+  width: 400px;
+  height: 40px;
+  font-size: 13px;
+  color: #666666;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.layui-layout-left {
+  left: 4%;
+  top: 20%;
+}
+
+.layui-layout-right {
+  right: 4%;
+  top: 20%;
+}
+
+.layui-layout {
+  padding-top: 10px;
+}
+
+.vie {
+  width: 40px;
+  height: 40px;
+}
+
+.sea {
+  width: 200px;
+  height: 40px;
+  color: gray;
+}

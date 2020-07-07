@@ -1,1 +1,327 @@
 ﻿
+@{
+    ViewBag.Title = "Index";
+}
+@section css
+{
+    <link href="~/Asset/css/bannerstyle.css" rel="stylesheet" />
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        body {
+            width: 100%;
+            height: 3000px;
+        }
+
+        .layui-layout-left {
+            left: 4%;
+            top: 20%;
+        }
+
+        .layui-layout-right {
+            right: 4%;
+            top: 20%;
+        }
+
+        .layui-layout {
+            padding-top: 10px;
+        }
+
+        .vie {
+            width: 40px;
+            height: 40px;
+        }
+
+        .sea {
+            width: 200px;
+            height: 40px;
+            color: gray;
+        }
+
+        .bd {
+            top: 24%;
+        }
+
+        .hd {
+            top: 110%;
+        }
+
+        .layui-nav {
+            background-color: black;
+        }
+
+            .layui-nav li {
+                margin-left: 3%;
+            }
+
+        .articl {
+            text-align: center;
+            margin: 0 auto;
+            color: grey;
+            margin-top: 15%;
+        }
+
+        .layui-nav-child > dd > ul > li:first-of-type {
+            font-weight: 700;
+        }
+
+        .layui-nav-child {
+            width: 1000px;
+        }
+
+            .layui-nav-child > dd > ul {
+                color: black;
+                float: left;
+            }
+
+            .layui-nav-child > dd > ul {
+                margin-left: 15%;
+            }
+
+        .layui-tab-title {
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .fullSlide {
+            z-index: -999;
+        }
+
+        .nav2 {
+            display: none;
+            color: white;
+        }
+
+        .layui-tab-content {
+            margin-left: -20%;
+        }
+
+            .layui-tab-content img {
+                width: 70%;
+                height: 75%;
+                margin: 0 auto;
+                margin-left: 3%;
+            }
+
+        .imgbox {
+            width: 30%;
+            float: left;
+            text-align: center;
+            color: black;
+            margin-left: 2%;
+            margin-top: 2%;
+            background-color: #FAFAFA;
+            padding-top: 2%;
+            padding-bottom: 2%;
+        }
+
+            .imgbox img {
+                padding-bottom: 3%;
+            }
+
+        .vandi img {
+            margin-top: 5%;
+            margin-top: 5%;
+            width: 49%;
+        }
+
+        .left1 {
+            margin-top: 3%;
+            margin-top: 3%;
+        }
+
+        .banner2 {
+            margin-top: 6%;
+            margin-bottom: 4%;
+        }
+
+        .smallnav {
+            width: 110%;
+            height: 100%;
+            background-color: white;
+            color: black;
+            margin-left: -20px;
+        }
+
+        .layui-tab-item {
+            margin-left: 20%;
+        }
+
+            .layui-tab-item ul li {
+                margin-bottom: 6%;
+                font-size: 17px;
+            }
+
+        .ul-first {
+            float: left;
+            width: 10%;
+            margin-right: 10%;
+            margin-bottom: 1%;
+            font-size: 18px;
+        }
+
+        .ul-second {
+            float: left;
+            width: 10%;
+            margin-right: 10%;
+            font-size: 18px;
+        }
+
+        .ul-third {
+            float: left;
+            width: 10%;
+        }
+
+        .layui-show {
+            margin-left: 20%;
+        }
+
+            .layui-show span {
+                font-size: 18px;
+                margin-bottom: 5%;
+                color: black;
+            }
+
+            .layui-show input {
+                width: 300px;
+                height: 40px;
+                font-size: 16px;
+                margin-top: 8%;
+                color: darkgray;
+            }
+
+        .icon-pay {
+            width: 100%;
+            height: 15%;
+        }
+
+            .icon-pay li {
+                width: 15%;
+                height: 15%;
+                float: left;
+                margin-left: 3%;
+            }
+    </style>
+}
+
+<div class="fullSlide">
+    <div class="bd">
+        <ul>
+            <li><img src="~/Asset/images/banner1.jpg" /></li>
+            <li><img src="~/Asset/images/banner2.jpg" /></li>
+            <li><img src="~/Asset/images/banner3.jpg" /></li>
+            <li><img src="~/Asset/images/banner4.jpg" /></li>
+            <li><img src="~/Asset/images/banner5.jpg" /></li>
+            <li><img src="~/Asset/images/banner6.jpg" /></li>
+            <li><img src="~/Asset/images/banner7.jpg" /></li>
+        </ul>
+    </div>
+    <div class="hd">
+        <ul></ul>
+    </div>
+    <span class="prev"></span>
+    <span class="next"></span>
+</div>
+
+<div class="articl">
+    <h1>明星产品</h1>
+    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+        <ul class="layui-tab-title">
+            <li>
+                <h2>唇妆衣橱</h2>
+            </li>
+            <li>
+                <h2>粉妆衣橱</h2>
+            </li>
+            <li>
+                <h2>香氛衣橱</h2>
+            </li>
+            <li>
+                <h2>限定礼盒</h2>
+            </li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <div class="imgbox"><img src="~/Asset/images/Lip Glaze1.png" /><br />阿玛尼[传奇红管]臻致丝绒哑光唇釉</div>
+                <div class="imgbox"><img src="~/Asset/images/Lip Glaze2.png" /><br />阿玛尼黑管镜面唇釉 </div>
+                <div class="imgbox"><img src="~/Asset/images/Lip Glaze3.png" /><br />阿玛尼[小胖丁]染唇液*持色凝彩哑光染唇 </div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="imgbox"><img src="~/Asset/images/Foundation make-up1.png" /><br />阿玛尼[权利粉底]无痕持妆粉底液 </div>
+                <div class="imgbox"><img src="~/Asset/images/Foundation make-up2.png" /><br />阿玛尼[大师粉底液]造型紧颜粉底液 </div>
+                <div class="imgbox"><img src="~/Asset/images/Foundation make-up3.png" /><br />阿玛尼[红气垫]轻垫精华粉底液 </div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="imgbox"><img src="~/Asset/images/Perfume1.png" /><br />高定私藏香氛 </div>
+                <div class="imgbox"><img src="~/Asset/images/Perfume2.png" /><br />阿玛尼[红色挚爱]香水*迷情挚爱女士香 </div>
+                <div class="imgbox"><img src="~/Asset/images/Perfume3.png" /><br />阿玛尼寄情男士香水 </div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="imgbox"><img src="~/Asset/images/Gift box1.png" /><br />阿玛尼唇情恋色礼盒 </div>
+                <div class="imgbox"><img src="~/Asset/images/Gift box2.png" /><br />阿玛尼唇情无暇礼盒 </div>
+                <div class="imgbox"><img src="~/Asset/images/Gift box3.png" /><br />阿玛尼挚爱红唇礼盒 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vandi">
+        <div class="left1">
+            <img src="~/Asset/images/video.png" />
+            <img src="~/Asset/images/Mosaic_01.jpg" />
+        </div>
+        <div class="right">
+            <img src="~/Asset/images/Mosaic_03.jpg" />
+            <img src="~/Asset/images/Mosaic_04.jpg" />
+        </div>
+    </div>
+
+    <div class="banner2">
+        <div class="fullSlide">
+            <div class="bd">
+                <ul>
+                    <li><img src="~/Asset/images/man-1920X636.jpg" /></li>
+                    <li><img src="~/Asset/images/RDA-1920X636.jpg" /></li>
+                    <li><img src="~/Asset/images/REDFACE-1920X636.jpg" /></li>
+                </ul>
+            </div>
+            <div class="hd">
+                <ul></ul>
+            </div>
+            <span class="prev"></span>
+            <span class="next"></span>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script src="~/Asset/js/jquery.js"></script>
+
+    <script src="~/Asset/js/superslide.2.1.js"></script>
+    <script type="text/javascript">
+        $(".fullSlide").hover(function () {
+            $(this).find(".prev,.next").stop(true, true).fadeTo("show", 0.5)
+        },
+            function () {
+                $(this).find(".prev,.next").fadeOut()
+            });
+        $(".fullSlide").slide({
+            titCell: ".hd ul",
+            mainCell: ".bd ul",
+            effect: "fold",
+            autoPlay: true,
+            autoPage: true,
+            trigger: "click",
+            startFun: function (i) {
+                var curLi = jQuery(".fullSlide .bd li").eq(i);
+                if (!!curLi.attr("_src")) {
+                    curLi.css("background-image", curLi.attr("_src")).removeAttr("_src")
+                }
+            }
+        });
+    </script>
+}
+

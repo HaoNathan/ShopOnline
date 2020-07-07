@@ -22,7 +22,6 @@ namespace ShopOnline.Bll
             return await _service.AddAsync(new OrderInfo()
             {
                 PayState = model.PayState,
-                UserDistributionId = model.UserDistributionId,
                 ProductId = model.ProductId,
                 UserId = model.UserId,
                 Phone = model.Phone,
@@ -37,7 +36,6 @@ namespace ShopOnline.Bll
 
             order.PayState = order.PayState;
             order.DeliverySate = order.DeliverySate;
-            order.UserDistributionId = model.UserDistributionId;
             order.UpdateTime = DateTime.Now;
             order.ProductId = model.ProductId;
 
@@ -59,7 +57,6 @@ namespace ShopOnline.Bll
             {
                 PayState = order.PayState,
                 DeliverySate = order.DeliverySate,
-                UserDistributionId = order.UserDistributionId,
                 ProductId = order.ProductId,
                 UserId = order.UserId
             };
@@ -72,7 +69,6 @@ namespace ShopOnline.Bll
                 {
                     PayState = m.PayState,
                     DeliverySate = m.DeliverySate,
-                    UserDistributionId = m.UserDistributionId,
                     ProductId = m.ProductId,
                     UserId = m.UserId,
                     CreateTime = m.CreateTime,
@@ -83,7 +79,6 @@ namespace ShopOnline.Bll
                 {
                     PayState = m.PayState,
                     DeliverySate = m.DeliverySate,
-                    UserDistributionId = m.UserDistributionId,
                     ProductId = m.ProductId,
                     UserId = m.UserId,
                     CreateTime = m.CreateTime,

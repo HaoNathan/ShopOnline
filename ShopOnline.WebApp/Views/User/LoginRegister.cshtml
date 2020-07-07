@@ -1,15 +1,20 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@using System.Activities.Validation
+@model ShopOnline.Dto.UserDto
+@{
+    string userName = string.Empty;
+    string userPwd=String.Empty;
+    if (Model!=null)
+    {
+         userName = Model.UserName;
+         userPwd= Model.UserPassword;
+
+    }
 }
 @section css{
-    <style>
-        body {
-            width: 100%;
-        }
-    </style>
+  
 
 }
-<div class="layui-container">
+<div class="layui-container"style="margin-top: 10%">
     <div class="layui-tab">
         <ul class="layui-tab-title">
             <li class="layui-this">登录</li>
@@ -22,14 +27,14 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">账号：</label>
                         <div class="layui-inline">
-                            <input type="text" name="userName" placeholder="请输入账号" class="layui-input" required />
+                            <input type="text" name="userName" value="@userName" placeholder="请输入账号" class="layui-input" required />
                         </div>
                     </div>
 
                     <div class="layui-form-item">
                         <label class="layui-form-label">密码：</label>
                         <div class="layui-inline">
-                            <input type="text" name="userPwd" placeholder="请输入密码" class="layui-input" required />
+                            <input type="password" name="userPwd" value="@userPwd" placeholder="请输入密码" class="layui-input" required />
                         </div>
                     </div>
 
@@ -55,26 +60,26 @@
             </div>
 
 
-
             <div class="layui-tab-item ">
-                <form class="layui-form" name="registerForm">
+                <div class="layui-form" name="registerForm">
                     <div class="layui-form-item">
                         <label class="layui-form-label">账号：</label>
                         <div class="layui-inline">
                             <input type="text" name="UserName" placeholder="请输入账号" lay-verify="required|username" class="layui-input" required />
+                            <p id="userMessage" hidden=""></p>
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">密码：</label>
                         <div class="layui-inline">
-                            <input type="text" name="UserPassword" placeholder="请输入密码" lay-verify="required|pass" class="layui-input" required />
+                            <input type="password" name="UserPassword" placeholder="请输入密码" lay-verify="required|pass" class="layui-input" required />
                         </div>
                     </div>
 
                     <div class="layui-form-item">
                         <label class="layui-form-label">确认密码：</label>
                         <div class="layui-inline">
-                            <input type="text" placeholder="请再次输入密码" name="confirmPwd" lay-verify="required|compare" class="layui-input" autocomplete="off" />
+                            <input type="password" placeholder="请再次输入密码" name="confirmPwd" lay-verify="required|compare" class="layui-input" autocomplete="off" />
                         </div>
                     </div>
 
@@ -88,7 +93,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">验证码：</label>
                         <div class="layui-inline">
-                            <input type="text" placeholder="请输入验证码" lay-verify="required" class="layui-input" />
+                            <input type="text" placeholder="请输入验证码" name="codeImage" lay-verify="required|compare2" class="layui-input" />
                         </div>
                         <img src='@Url.Action("GetCaptcha","User")' onclick="this.src = '@Url.Action("GetCaptcha","User")' + '?' + Math.random()"/><span>点击刷新</span>
                     </div>
@@ -99,7 +104,7 @@
                         </div>
                     </div>
 
-                </form>
+                </div>
             </div>
 
         </div>
@@ -130,12 +135,6 @@
                             return '两次密码不一致';
                         }
                     },
-                    compare2: function (value, item) { //value：表单的值、item：表单的DOM对象
-                        @*var data=@Session["ImageCode"].ToString();*@
-                        if (value !== data) {
-                            return '验证码错误';
-                        }
-                    },
 
                     //我们既支持上述函数式的方式，也支持下述数组的形式
                     //数组的两个值分别代表：[正则匹配、匹配不符时的提示文字]
@@ -146,25 +145,40 @@
 
                 form.on('submit(insert)',
                     function(data) {
-                        $.post("@Url.Action("Register","User")",
-                             data.field,
+
+                        $.post('@Url.Action("Register", "User")',
+                            data.field,
                             function(res) {
                                 layer.msg(res.Info);
+                                if (res.IsSuccess) {
+                                    location.reload();
+                                }
                             });
                     });
 
                 form.on('submit(login)',
                     function(data) {
-                        $.post("@Url.Action("Login","User")",
+                        $.post("@Url.Action("Login", "User")",
                             data.field,
                             function(res) {
                                 layer.msg(res.Info);
                                 if (res.IsSuccess) {
                                     location.href = res.RedirectUrl;
-                                    $("form[name='registerForm']").reset();
                                 }
                             });
                     });
+                $("input[name='UserName']").blur(function() {
+                    var userName = $(this).val();
+                    $.post("@Url.Action("CheckUserName", "User")",
+                        { 'userName': userName },
+                        function(res) {
+                            if (res.IsSuccess) {
+                                $("#userMessage").text(res.Info).show();
+                            } else {
+                                $("#userMessage").text("").hide();
+                            }
+                        });
+                });
             });
 
     </script>

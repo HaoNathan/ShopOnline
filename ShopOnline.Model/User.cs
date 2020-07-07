@@ -14,7 +14,7 @@ namespace ShopOnline.Model
         public string UserName { get; set; }
 
         [Required]
-        [StringLength(30)]
+        [StringLength(35)]
         public string UserPassword { get; set; }
 
         [StringLength(30)]
