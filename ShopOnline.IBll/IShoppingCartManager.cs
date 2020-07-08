@@ -7,9 +7,38 @@ namespace ShopOnline.IBll
 {
     public interface IShoppingCartManager
     {
+        /// <summary>
+        /// 添加购物车
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        /// 
         Task<int> AddShoppingCart(ShoppingCartDto model);
-        Task<int> UpdateShoppingCart(ShoppingCartDto model);
-        Task<ShoppingCartDto> QueryShoppingCart(Guid id);
+
+        /// <summary>
+        /// 修改商品数量
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="number"></param>
+        /// <returns></returns>
+        Task<int> UpdateShoppingCart(Guid id, int number);
+
+       
+        /// <summary>
+        /// 删除购物车中的商品
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<int> DeleteShoppingCart(Guid id);
+
+        /// <summary>
+        /// 查询用户购物车中的商品
+        /// </summary>
+        /// <param name="id">用户编号</param>
+        /// <returns></returns>
+        IQueryable<ShoppingCartDto> QueryShoppingCart(Guid id);
+
+
         IQueryable<ShoppingCartDto> QueryAllShoppingCart();
 
     }

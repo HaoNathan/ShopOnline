@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using ShopOnline.Dal;
 using ShopOnline.Dto;
 using ShopOnline.IBll;
 using ShopOnline.IDal;
@@ -18,43 +19,49 @@ namespace ShopOnline.Bll
         }
         public async Task<int> AddShoppingCart(ShoppingCartDto model)
         {
+            IProductService service2=new  ProductService();
+            var product =await service2.QueryAsync(model.ProductId);
             return await _service.AddAsync(new ShoppingCart()
             {
                 ProductId = model.ProductId,
-                ColorId = model.ColorId,
-                SizeId = model.SizeId,
-                Number = model.Number,
+                ColorId = product.ColorId,
+                SizeId = product.SizeId,
+                Number = 1,
                 UserId = model.UserId
             });
         }
 
-        public async Task<int> UpdateShoppingCart(ShoppingCartDto model)
+        public async Task<int> UpdateShoppingCart(Guid id,int number)
         {
-            var shoppingCart = await _service.QueryAsync(model.Id);
+            var shoppingCart = await _service.QueryAsync(id);
 
-            shoppingCart.ProductId = model.ProductId;
-            shoppingCart.ProductId = model.ProductId;
-            shoppingCart.ColorId = model.ColorId;
-            shoppingCart.SizeId = model.SizeId;
-            shoppingCart.Number = model.Number;
-            shoppingCart.UserId = model.UserId;
+            shoppingCart.Number = number;
             shoppingCart.UpdateTime=DateTime.Now;
 
             return await _service.EditAsync(shoppingCart);
         }
 
-        public async Task<ShoppingCartDto> QueryShoppingCart(Guid id)
+        public async Task<int> DeleteShoppingCart(Guid id)
         {
-            var shoppingCart= await _service.QueryAsync(id);
-            return new ShoppingCartDto()
+            var card = await _service.QueryAsync(id);
+            card.IsRemove = true;
+            return await _service.EditAsync(card);
+        }
+
+        public  IQueryable<ShoppingCartDto> QueryShoppingCart(Guid id)
+        {
+            return  _service.QueryAllAsync(m=>m.UserId.Equals(id)&&m.IsRemove==false).Select(m=>new ShoppingCartDto()
             {
-                ProductId = shoppingCart.ProductId,
-                ColorId = shoppingCart.ColorId,
-                SizeId = shoppingCart.SizeId,
-                Number = shoppingCart.Number,
-                UserId = shoppingCart.UserId,
-                Id = shoppingCart.Id
-            };
+                ProductId = m.ProductId,
+                ColorId = m.ColorId,
+                SizeId = m.SizeId,
+                Number = m.Number,
+                Id = m.Id,
+                ProductImagePath = m.Product.ProductImagePath,
+                ProductName = m.Product.ProductName,
+                ProductPrice = m.Product.ProductPrice
+            });
+           
         }
 
         public IQueryable<ShoppingCartDto> QueryAllShoppingCart()
