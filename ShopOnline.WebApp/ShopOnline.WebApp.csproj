@@ -398,6 +398,9 @@
     <Content Include="Areas\Admin\Asset\lib\layui\lay\modules\tree.js" />
     <Content Include="Areas\Admin\Asset\lib\layui\lay\modules\upload.js" />
     <Content Include="Areas\Admin\Asset\lib\layui\lay\modules\util.js" />
+    <Content Include="Asset\css\banner3.css" />
+    <Content Include="Asset\css\bootstrap.css" />
+    <Content Include="Asset\css\bootstrap.min.css" />
     <Content Include="Asset\css\footer.css" />
     <Content Include="Asset\images\150ml CN .png" />
     <Content Include="Asset\images\150ml.png" />
@@ -573,6 +576,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\User\EditUserInfo.cshtml" />
     <Content Include="Views\Product\GetProductList.cshtml" />
+    <Content Include="Views\Product\ProductInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

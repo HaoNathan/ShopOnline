@@ -173,10 +173,12 @@
                 </ul>
                 
                     
-                        <form class="layui-nav-item layui-layout-right" style="margin-top:3%;">
-                            <input type="text" class="layui-input-block" name="" placeholder="Search" >
-                            <i class="layui-icon layui-icon-search" style="color: white; font-size: 18px;cursor: pointer"></i>
-                        </form>
+                        <div class="layui-nav-item layui-layout-right layui-form" style="margin-top:3%;">
+                            <input type="text" class="layui-input-block" name="searchName" placeholder="Search" >
+                            <button class="layui-btn layui-btn-sm layui-btn-primary" type="submit" id="search" layui-submit  lay-filter="searchBtn">
+                                <i class="layui-icon layui-icon-search" style="font-size: 18px;"></i>
+                            </button> 
+                        </div>
              
             </div>
         </div>
@@ -294,11 +296,14 @@
         layui.use('form', function () {
             var form = layui.form;
 
-            //监听提交
-            form.on('submit(formDemo)', function (data) {
-
-                return false;
-            });
+            
+                
+            
+        });
+        $("#search").click(function() {
+            console.log("222");
+            var searchName = $("input[name='searchName']").val();
+            location.href = "/Product/GetProductList?searchName="+searchName;
         });
         $(".container a").click(function () {
             var text = $(this).text();

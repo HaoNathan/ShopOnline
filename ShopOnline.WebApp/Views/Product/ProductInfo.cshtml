@@ -1,0 +1,175 @@
+﻿
+@{
+    ViewBag.Title = "ProductInfo";
+}
+@model ShopOnline.Dto.ProductDto
+@section css
+{
+    <style type="text/css">
+       
+
+
+        /*主体部分*/
+
+        .bodybox {
+            position: relative;
+            left: 220px;
+            top: 120px;
+        }
+
+        .box {
+            height: 400px;
+            width: 100%;
+            /*border: 1px gainsboro solid;*/
+        }
+        /*按钮样式*/
+
+        #buttonstyle {
+            background-color: black;
+            color: white;
+            height: 40px;
+            width: 100px
+        }
+
+        .box > span {
+            line-height: 50px;
+            font-size: 16px;
+            font-family: "微软雅黑";
+        }
+
+        .layui-tab {
+            height: 300px;
+        }
+    </style>
+}
+    <div class="bodybox">
+
+
+        <div class="layui-row ">
+            <div class="layui-col-md12 bodycontain">
+                <a href="">首页</a>><a href="">xxx</a>
+            </div>
+            <div class="layui-col-md12 bodycontainn">
+                <div class="layui-row grid-demo">
+                    <div class="layui-col-md1 bodycontainn " style="margin-left: 20px;">
+                        <div class="grid-demo grid-demo-bg1">
+                            <!--图片-->
+                            <ul>
+                                @{
+                                    var img = Model.ProductImagePath;
+                                    if (img.Contains("#"))
+                                    {
+                                        var arr = img.Split('#');
+                                        foreach (var item in arr)
+                                        {
+                                            <li><img src="@item" width="50px" style="margin-top: 10px;border:1px solid black" /></li>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <li><img src="@Model.ProductImagePath" width="50px" style="margin-top: 10px;border:1px solid black" /></li>
+                                    }
+                                }
+
+                            </ul>
+
+                        </div>
+                    </div>
+                    <div class="layui-col-md3 bodycontainn " style="margin-right:100px;margin-left: 50px;">
+                        <div class="grid-demo grid-demo-bg1">
+
+                            <div class="box">
+                                <img src="~/Asset/images/Perfume1.png" height="400px" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md6 bodycontainn">
+                        <div class="grid-demo grid-demo-bg2">
+                            <div class="box">
+                                <span id="productname">
+                                    xxx香水
+                                </span><br />
+                                <span id="star">
+                                    推荐指数
+                                    <div id="test9"></div>
+
+                                </span><br>
+                                <span id="price">
+                                    价格
+                                </span><br />
+                                <span id="size">
+                                    尺寸/规格&nbsp;&nbsp;&nbsp;
+                                    <input type="button" style="background-color:#981f25;width:50px">
+                                    <input type="button" style="background-color:#951708;width:50px">
+                                    <input type="button" style="background-color:#c32514;width:50px">
+                                    <input type="button" style="background-color:#7f1d00;width:50px">
+
+                                </span><br />
+
+                                <input type="button" id="buttonstyle" value="加入购物车" />
+                                <input type="button" id="buttonstyle" value="即可拥有" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="layui-col-md12 bodycontainn">
+                <div class="box">
+                    <div class="layui-row grid-demo grid-demo-bg1">
+
+                        <div class="layui-tab layui-tab-card">
+                            <ul class="layui-tab-title">
+                                <li class="layui-this">商品描述</li>
+                                <li>使用方法</li>
+                                <li>评论</li>
+
+                            </ul>
+                            <div class="layui-tab-content" style="height: 100px;">
+
+                                <div class="layui-tab-item layui-show">
+                                    <!--描述-->
+                                    <ul>
+                                        <li>【长效水润，立体丰满】阿玛尼「红管」哑光唇釉长效水润不干燥，即刻令双唇立体丰满，感觉水润舒适</li>
+                                        <li>【哑光质地，色彩饱和】阿玛尼「红管」哑光唇釉特别色彩饱和度，无论是红色、紫色或紫红色，都能兼具光泽与雾面效果"</li>
+                                    </ul>
+                                    <img src="~/Asset/images/Perfume1.png" height="150px" />
+                                </div>
+                                <div class="layui-tab-item ">
+                                    <!--使用方法-->
+                                    描述 使用方法
+                                    将唇釉涂抹在嘴唇的中心，用双唇抿开，延展到唇周，即可完成一个完美的唇妆。若想打造一个较淡的哑光唇妆，可以用指腹轻轻拍开唇釉。
+                                    <br />
+                                    后台建议： 使用臻致造型美眸膏，勾勒眉形，填充眉毛，可以打造更加完美的整体妆容。
+                                </div>
+                                <div class="layui-tab-item ">
+                                    <!--评论-->
+
+                                    <ul>
+                                        <li>用户:<input type="text"></li>
+                                        <li>上色很好看</li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+@section scripts
+{
+    <script>
+
+        layui.use('element', function() {
+            var element = layui.element;
+
+            //…
+        });
+    </script>
+   
+}

@@ -1,4 +1,5 @@
-﻿
+﻿@using ShopOnline.Dto
+@model IDictionary<string, object>
 @{
     ViewBag.Title = "Index";
 }
@@ -246,24 +247,41 @@
         </ul>
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <div class="imgbox"><img src="~/Asset/images/Lip Glaze1.png" /><br />阿玛尼[传奇红管]臻致丝绒哑光唇釉</div>
-                <div class="imgbox"><img src="~/Asset/images/Lip Glaze2.png" /><br />阿玛尼黑管镜面唇釉 </div>
-                <div class="imgbox"><img src="~/Asset/images/Lip Glaze3.png" /><br />阿玛尼[小胖丁]染唇液*持色凝彩哑光染唇 </div>
+
+                @foreach (var item in (List<ProductDto>)Model["T1"])
+                {
+                    if (item.ProductImagePath.Contains("#"))
+                    {
+                        var imagePath = item.ProductImagePath.Split('#');
+                       <a href="@Url.Action("","",new {id=item.Id})"> <div class="imgbox"><img src="@imagePath[0]" /><br />@item.ProductName</div></a>
+                    }
+                    else
+                    {
+                        <div class="imgbox"><img src="@item.ProductImagePath" /><br />@item.ProductName</div>
+                    }
+                }
+
             </div>
             <div class="layui-tab-item">
-                <div class="imgbox"><img src="~/Asset/images/Foundation make-up1.png" /><br />阿玛尼[权利粉底]无痕持妆粉底液 </div>
-                <div class="imgbox"><img src="~/Asset/images/Foundation make-up2.png" /><br />阿玛尼[大师粉底液]造型紧颜粉底液 </div>
-                <div class="imgbox"><img src="~/Asset/images/Foundation make-up3.png" /><br />阿玛尼[红气垫]轻垫精华粉底液 </div>
+                @foreach (var item in (List<ProductDto>)Model["T2"])
+                {
+
+                }
+               
             </div>
             <div class="layui-tab-item">
-                <div class="imgbox"><img src="~/Asset/images/Perfume1.png" /><br />高定私藏香氛 </div>
-                <div class="imgbox"><img src="~/Asset/images/Perfume2.png" /><br />阿玛尼[红色挚爱]香水*迷情挚爱女士香 </div>
-                <div class="imgbox"><img src="~/Asset/images/Perfume3.png" /><br />阿玛尼寄情男士香水 </div>
+                @foreach (var item in (List<ProductDto>)Model["T3"])
+                {
+
+                }
+                
             </div>
             <div class="layui-tab-item">
-                <div class="imgbox"><img src="~/Asset/images/Gift box1.png" /><br />阿玛尼唇情恋色礼盒 </div>
-                <div class="imgbox"><img src="~/Asset/images/Gift box2.png" /><br />阿玛尼唇情无暇礼盒 </div>
-                <div class="imgbox"><img src="~/Asset/images/Gift box3.png" /><br />阿玛尼挚爱红唇礼盒 </div>
+                @foreach (var item in (List<ProductDto>)Model["T4"])
+                {
+
+                }
+                
             </div>
         </div>
     </div>

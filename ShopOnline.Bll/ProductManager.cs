@@ -121,6 +121,23 @@ namespace ShopOnline.Bll
             return productDto;
         }
 
+        public  IQueryable<ProductDto> QueryProduct(string name)
+        {
+            return _service.QueryAllAsync()
+                .Where(m => m.ProductName
+                    .Contains(name) && m.IsRemove == false).Select(m => new ProductDto()
+                {
+                    Id = m.Id,
+                    ProductName = m.ProductName,
+                 
+                    ProductImagePath = m.ProductImagePath,
+                    ColorName = m.Color.ColorName,
+                    SizeName = m.Size.SizeName,
+                    ProductPrice = m.ProductPrice
+
+                });
+        }
+
         public IQueryable<ProductDto> QueryProductByCategory(int index, string categoryName)
         {
             if (index==1)

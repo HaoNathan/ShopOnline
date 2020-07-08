@@ -1,7 +1,236 @@
-﻿
+﻿@model List<ShopOnline.Dto.ProductDto>
 @{
     ViewBag.Title = "GetProductList";
 }
+@section css
+{
+
+    <link href="~/Asset/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Asset/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Asset/css/banner3.css" rel="stylesheet" />
+    <style type="text/css">
+    
+        .brade {
+           
+            border-bottom: 1px solid darkgray;
+            margin-bottom: 0;
+            margin-top: -4.5%;
+        }
+
+        .layui-breadcrumb {
+            margin-left: 1%;
+        }
+
+        .layui-breadcrumb a {
+            color: darkgray;
+            font-size: 16px;
+            line-height: 45px;
+        }
+
+        .left {
+            width: 20%;
+            height: 100%;
+            position: absolute;
+        }
+          
+        .left a {
+            text-decoration: underline;
+            color: darkgray;
+            margin-left: 2%;
+        }
+
+        .left h2 {
+            font-weight: 600;
+            margin-left: 2%;
+        }
+            
+        .left li {
+            margin-bottom: 8%;
+            font-size: 16px;
+            margin-left: 2%;
+        }
+            
+        .left span img {
+            float: right;
+            margin-right: 5%;
+            width: 7%;
+            height: 7%;
+        }
+
+        .left .p-first {
+            font-size: 18px;
+            margin-top: 10%;
+            margin-left: 2%;
+        }
+        
+        .left .p-second {
+            font-size: 16px;
+            margin-top: 10%;
+            margin-left: 2%;
+        }
+        
+       
+        
+        .right h2 {
+            float: left;
+            margin-left: 2%;
+            font-weight: 600;
+            margin-bottom: 1.7%;
+        }
+            
+        .dropdown {
+            color: darkgray;
+            float: right;
+            width: 10%;
+          
+            margin-top: 1.5%;
+        }
+            
+        .text {
+            position: relative;
+            margin-top: -2%;
+            text-align: center;
+            top: 0;
+            z-index: 999;
+        }
+             
+        .text span {
+            color: dimgray;
+        }
+        .text .price {
+            line-height: 32px;
+            text-align: center;
+            font-size: 25px;
+            background-color: black;
+            color: white;
+            width: 20%;
+            margin-left: 40%;
+        }
+                
+        .text .box-small-gray {
+            width: 90px;
+            height: 30px;
+            line-height: 30px;
+            color: white;
+            background-color: #424242;
+            margin-left: 20%;
+        }
+
+        .text .box-small-black {
+            width: 90px;
+            height: 29.5px;
+            color: white;
+            line-height: 30px;
+            background-color: #141414;
+            margin-top: -11.6%;
+            margin-left: 45%;
+        }
+
+        .text-miaoshu {
+            width: 100%;
+        }
+
+        input {
+            z-index: 99;
+            width: 300px;
+            height: 40px;
+            font-size: 16px;
+            color: darkgray;
+            border: none;
+        }
+    </style>
+}
+<div class="container-fluid " style="margin-top: 12%">
+    <div class="row">
+        <div class="col-md-3" style="border-right: 1px solid lightgray">
+            <h2>女士香水系列</h2>
+            <hr />
+            <ul>
+                <li><a href="#">阿玛尼挚爱香水</a></li>
+                <li><a href="#">阿玛尼新寄情香水</a></li>
+            </ul>
+            <p class="p-first">产品筛选</p>
+
+        </div>
+        
+        <div class=" col-md-8">
+            
+            <div class="right ">
+                <h2>产品列表</h2>
+               
+                <hr />
+
+                <div class=" row">
+                    
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-md-4">
+                            <div class="fullSlide">
+                                <div class="bd">
+                                    <ul>
+                                        @{
+                                            var imagePath = item.ProductImagePath;
+                                            if (imagePath.Contains("#"))
+                                            {
+                                                var arr = imagePath.Split('#');
+                                                <li><img src="@arr[0]"/></li>
+                                                <li><img src="@arr[1]"/></li>
+                                            }
+                                            else
+                                            {
+                                                <li><img src="@item.ProductImagePath" /></li>
+                                            }
+                                        }
+                                        
+                                    </ul>
+                                    <div class="text">
+                                        <p class="price">￥@item.ProductPrice</p>
+
+                                        <p>@item.ProductName</p>
+
+                                         <button class="layui-btn layui-btn-primary layui-btn-small" onclick="window.location.href = '@Url.Action("index","Home",new {id=item.Id})'">立即购买</button>
+                                    </div>
+                                </div>
+                                <div class="prev "> <i class="layui-icon layui-icon-left" style="color: white; line-height: 60px; font-size: 20px"></i> </div>
+                                <div class="next"> <i class="layui-icon layui-icon-right" style="color: white; line-height: 60px; font-size: 20px"></i> </div>
+                            </div>
+                        </div>
+                    }
+                    
 
 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="~/Asset/js/jquery.js"></script>
+    <script src="~/Asset/js/superslide.2.1.js"></script>
+
+    <script>
+        $(".fullSlide").hover(function () {
+            $(this).find(".prev,.next").stop(true, true).fadeTo("show", 0.5)
+        },
+            function () {
+                $(this).find(".prev,.next").fadeOut();
+            });
+        $(".fullSlide").slide({
+            titCell: ".hd ul",
+            mainCell: ".bd ul",
+            effect: "fold",
+            autoPlay: true,
+            autoPage: true,
+            trigger: "click",
+            startFun: function (i) {
+                var curLi = jQuery(".fullSlide .bd li").eq(i);
+                if (!!curLi.attr("_src")) {
+                    curLi.css("background-image", curLi.attr("_src")).removeAttr("_src");
+                }
+            }
+        });
+    </script>
+}
 

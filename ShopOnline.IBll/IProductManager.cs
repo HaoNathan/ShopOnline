@@ -17,6 +17,13 @@ namespace ShopOnline.IBll
 
         Task<ProductDto> QueryProduct(Guid id);
         /// <summary>
+        /// 按名称查询
+        /// </summary>
+        /// <param name="name">商品名</param>
+        /// <returns></returns>
+         IQueryable<ProductDto> QueryProduct(string name);
+
+        /// <summary>
         /// 按类别名查询商品
         /// </summary>
         /// <param name="index">按哪一种类别进行查询</param>

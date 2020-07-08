@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using ShopOnline.IBll;
@@ -18,10 +20,17 @@ namespace ShopOnline.WebApp.Controllers
             _manager = manager;
         }
         // GET: Product
-        public ActionResult GetProductList()
+        [HttpGet]
+        public async Task< ActionResult> GetProductList(string searchName)
         {
-
-            return View();
+            var data =await _manager.QueryProduct(searchName).ToListAsync();
+            return View(data);
+        }
+        [HttpGet]
+        public async Task<ActionResult>ProductInfo(string id)
+        {
+            var data = await _manager.QueryProduct(Guid.Parse(id));
+            return View(data);
         }
     }
 }
