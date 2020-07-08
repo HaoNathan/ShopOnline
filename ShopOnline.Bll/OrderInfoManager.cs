@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using ShopOnline.Dal;
 using ShopOnline.Dto;
 using ShopOnline.IBll;
 using ShopOnline.IDal;
@@ -48,6 +49,19 @@ namespace ShopOnline.Bll
             order.IsRemove = state;
 
             return await _service.EditAsync(order);
+        }
+
+        public async Task<ProductDto> GetProduct(Guid id)
+        {
+            IProductService service=new ProductService();
+            var product= await service.QueryAsync(id);
+            return new ProductDto()
+            {
+                Id = product.Id,
+                ProductImagePath = product.ProductImagePath,
+                ProductName = product.ProductName,
+                ProductPrice = product.ProductPrice
+            };
         }
 
         public async Task<OrderInfoDto> QueryOrder(Guid id)

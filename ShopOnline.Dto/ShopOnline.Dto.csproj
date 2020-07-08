@@ -54,6 +54,7 @@
     <Compile Include="RolesDto.cs" />
     <Compile Include="ShoppingCartDto.cs" />
     <Compile Include="SizeDto.cs" />
+    <Compile Include="UserDistributionDto.cs" />
     <Compile Include="UserDto.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -55,6 +55,7 @@
     <Compile Include="ShoppingCartManager.cs" />
     <Compile Include="StatisticsManager.cs" />
     <Compile Include="ThirdCategoryManager.cs" />
+    <Compile Include="UserDistributionManager.cs" />
     <Compile Include="UserManager.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -16,13 +16,17 @@ namespace ShopOnline.WebApp.Controllers
     [UserAuthorize()]
     public class HomeController : Controller
     {
-        private IProductManager _manager;
+        private readonly IProductManager _manager;
 
         public HomeController(IProductManager manager)
         {
             _manager = manager;
         }
 
+        /// <summary>
+        /// 首页推荐商品
+        /// </summary>
+        /// <returns>泛型字典</returns>
         public async Task<ActionResult> Index()
         {
             List<ProductDto> list = new List<ProductDto>();
@@ -36,7 +40,7 @@ namespace ShopOnline.WebApp.Controllers
             list4 = await _manager.QueryProductByCategory(2, "限量礼盒").Take(3).ToListAsync();
 
             IDictionary<string, object> test = new Dictionary<string, object>();
-
+            
             test.Add("T1", list);
             test.Add("T2", list2);
             test.Add("T3", list3);
@@ -44,6 +48,9 @@ namespace ShopOnline.WebApp.Controllers
             return View(test);
 
         }
+
+
+
 
 
     }

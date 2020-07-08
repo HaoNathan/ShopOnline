@@ -144,7 +144,7 @@
             <!--  //选项卡-->
             <div class="layui-col-md12 layui-col-xs12 layui-col-sm12 " style="line-height: 30px;">
 
-                <div class="layui-tab layui-tab-card">
+                <div class="layui-tab layui-tab-card" lay-filter="test1">
                     <ul class="layui-tab-title" id="menu">
                         <li class="layui-this">个人资料</li>
                         <li >收货地址</li>
@@ -233,15 +233,35 @@
                         <div class="layui-tab-item ">
                             <h2>收货地址</h2>
                             <hr>
-                            <label class="layui-form-label">您的收货地址：</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="text" required lay-verify="required" autocomplete="off"
-                                       class="layui-input">
-                            </div>
+                            <div class="layui-row">
+                                <div class="layui-form layui-col-md6">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">收件人昵称:</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" name="ConsigneeName" value="" required lay-verify="required"
+                                                   autocomplete="off" class="layui-input">
+                                        </div>
 
-                            <div class="layui-input-inline">
-                                <label class="layui-form-label">添加新的收货地址</label>
-                                <input type="button" id="buttonstyle" value="+" style="border: none;" />
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">手机号:</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" name="ConsigneePhone"   lay-verify="required"
+                                                   autocomplete="off" class="layui-input">
+                                        </div>
+
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">收件人地址:</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" name="ConsigneeAddress"   lay-verify="required"
+                                                   autocomplete="off" class="layui-input">
+                                        </div>
+
+                                    </div>
+                                    <button type="submit" lay-filter="addConsignee" class="layui-btn layui-btn-primary layui-btn-sm layui-col-md3 layui-col-md-offset6"  lay-submit=""  >新增地址</button>
+                                </div>
+                                <div class="layui-col-md5" id="UserDistribution"></div>
                             </div>
                         </div>
 
@@ -351,7 +371,7 @@
                                 <br />
                                 <ul id="formul" style="margin-top: 30px;">
                                     <li>
-                                        <img src="img/Perfume2.png" width="100px" />
+                                        <img src="~/Asset/images/Perfume2.png" width="100px" />
                                         <div class="layui-form-item">
                                             <label class="layui-form-label">物流最新更新日期</label>
                                             <div class="layui-input-inline">
@@ -470,9 +490,9 @@
 
 @section scripts
 {
-    
+
     <script>
-        layui.use(['form', 'layer', 'upload','element'],
+        layui.use(['form', 'layer', 'upload', 'element'],
             function() {
                 $ = layui.jquery;
                 var form = layui.form;
@@ -524,25 +544,45 @@
 
                         return false;
                     });
+                element.on('tab(test1)',
+                    function(data) {
+                        if (data.index === 1) {
+                            $.post("@Url.Action("GetConsigneeInfo", "Consignee")",
+                                {},
+                                function (res) {
+                                    if (res!=null) {
+                                        var htmlText =$( "<blockquote class='layui-elem-quote layui-quote-nm'>地址："
+                                            + res.ConsigneeAddress + "<br>收件人：" + res.ConsigneeName
+                                            + "联系方式：" + res.ConsigneePhone + "</blockquote>");
+                                        $("#UserDistribution").append(htmlText);
+
+                                    }
+                                   
+                                });
+                        } else if (data.index === 2) {
+
+                        } else if (data.index === 4) {
+
+                        } else {
+                            return;
+                        }
+
+                    });
+                form.on('submit(addConsignee)',
+                    function (data) {
+                        console.log("15");
+                        //发异步,
+                        $.post("@Url.Action("AddConsigneeInfo", "Consignee")",
+                            data.field,
+                            function(res) {
+                                layer.msg(res.Info);
+                                if (res.IsSuccess) {
+                                   location.href.reload();
+                                }
+                            });
+                    });
 
             });
-
-        $("#menu li").click(function() {
-            var str = $(this).text();
-            console.log(str);
-            if (str==="收货地址") {
-                console.log("666");
-            } else if (str === "我的订单") {
-                console.log("556");
-
-            } else if (str === "购物车") {
-                console.log("776");
-
-            } else {
-                return;
-
-            }
-        });
 
 
     </script>

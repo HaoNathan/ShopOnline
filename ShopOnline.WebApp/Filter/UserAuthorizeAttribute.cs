@@ -47,6 +47,7 @@ namespace ShopOnline.WebApp.Filter
                     };
                     filterContext.HttpContext.Session["User"] = user;
                 }
+                
             }
         }
 

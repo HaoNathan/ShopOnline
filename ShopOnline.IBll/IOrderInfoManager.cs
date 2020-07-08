@@ -10,7 +10,7 @@ namespace ShopOnline.IBll
         Task<int> AddOrder(OrderInfoDto model);
         Task<int> UpdateOrder(OrderInfoDto model);
         Task<int> UpdateOrderState(Guid id,bool state);
-
+        Task<ProductDto> GetProduct(Guid id);
         Task<OrderInfoDto> QueryOrder(Guid id);
         IQueryable<OrderInfoDto> QueryAllOrder(bool isRemove);
     }
