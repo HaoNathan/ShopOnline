@@ -12,7 +12,7 @@ namespace ShopOnline.WebApp.Controllers
 {
     public class ProductController : Controller
     {
-        private  IProductManager _manager;
+        private readonly  IProductManager _manager;
         private MsgResult _msg;
 
         public ProductController(IProductManager manager)

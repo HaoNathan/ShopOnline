@@ -79,7 +79,20 @@
                         <div class="grid-demo grid-demo-bg1">
 
                             <div class="box">
-                                <img src="~/Asset/images/Perfume1.png" height="400px" />
+                                
+                                @{
+                                    if (Model.ProductImagePath.Contains("#"))
+                                    {
+                                        var array = Model.ProductImagePath.Split('#');
+
+                                            <img src="@array[0]" height="400px"/>
+                                    }
+                                    else
+                                    {
+                                        <img src="@Model.ProductImagePath" height="400px"/>
+                                    }
+                                }
+
                             </div>
                         </div>
                     </div>
@@ -87,27 +100,20 @@
                         <div class="grid-demo grid-demo-bg2">
                             <div class="box">
                                 <span id="productname">
-                                    xxx香水
+                                   产品名： @Model.ProductName;
                                 </span><br />
-                                <span id="star">
-                                    推荐指数
-                                    <div id="test9"></div>
-
-                                </span><br>
+                                
                                 <span id="price">
-                                    价格
+                                    产品价格：  @Model.ProductPrice
                                 </span><br />
                                 <span id="size">
-                                    尺寸/规格&nbsp;&nbsp;&nbsp;
-                                    <input type="button" style="background-color:#981f25;width:50px">
-                                    <input type="button" style="background-color:#951708;width:50px">
-                                    <input type="button" style="background-color:#c32514;width:50px">
-                                    <input type="button" style="background-color:#7f1d00;width:50px">
+                                    尺寸/规格：&nbsp;&nbsp;&nbsp;
+                                    @Model.SizeName
 
                                 </span><br />
 
-                                <input type="button" id="buttonstyle" value="加入购物车" />
-                                <input type="button" id="buttonstyle" value="即可拥有" />
+                                <button type="button" class="layui-btn layui-btn-primary">加入购物车</button>
+                                <button type="button" value="即可拥有"  class="layui-btn layui-btn-primary" onclick="window.location.href = '@Url.Action("index","Home",new{id=Model.Id})'" >立即购买</button>
                             </div>
                         </div>
                     </div>
@@ -128,13 +134,9 @@
                             </ul>
                             <div class="layui-tab-content" style="height: 100px;">
 
-                                <div class="layui-tab-item layui-show">
+                                <div class="layui-tab-item layui-show" style="overflow: auto">
                                     <!--描述-->
-                                    <ul>
-                                        <li>【长效水润，立体丰满】阿玛尼「红管」哑光唇釉长效水润不干燥，即刻令双唇立体丰满，感觉水润舒适</li>
-                                        <li>【哑光质地，色彩饱和】阿玛尼「红管」哑光唇釉特别色彩饱和度，无论是红色、紫色或紫红色，都能兼具光泽与雾面效果"</li>
-                                    </ul>
-                                    <img src="~/Asset/images/Perfume1.png" height="150px" />
+                                    @Html.Raw(@Model.ProductDescription)
                                 </div>
                                 <div class="layui-tab-item ">
                                     <!--使用方法-->

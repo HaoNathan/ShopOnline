@@ -248,42 +248,103 @@
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
 
-                @foreach (var item in (List<ProductDto>)Model["T1"])
+                @foreach (var item in (List<ProductDto>) Model["T1"])
                 {
                     if (item.ProductImagePath.Contains("#"))
                     {
                         var imagePath = item.ProductImagePath.Split('#');
-                       <a href="@Url.Action("","",new {id=item.Id})"> <div class="imgbox"><img src="@imagePath[0]" /><br />@item.ProductName</div></a>
+                        <a href="@Url.Action("ProductInfo", "Product", new {id = item.Id})">
+
+                            <div class="imgbox">
+                                <img src="@imagePath[0]"/><br/>@item.ProductName
+                            </div>
+                        </a>
                     }
                     else
                     {
-                        <div class="imgbox"><img src="@item.ProductImagePath" /><br />@item.ProductName</div>
+                            <a href="@Url.Action("ProductInfo", "Product", new {id = item.Id})">
+                                <div class="imgbox">
+                                    <img src="@item.ProductImagePath"/><br/>@item.ProductName
+                                </div>
+                            </a>
                     }
-                }
-
-            </div>
-            <div class="layui-tab-item">
-                @foreach (var item in (List<ProductDto>)Model["T2"])
-                {
 
                 }
-               
-            </div>
-            <div class="layui-tab-item">
-                @foreach (var item in (List<ProductDto>)Model["T3"])
-                {
+                </div>
+                    
+                    <div class="layui-tab-item">
+                        @foreach (var item in (List<ProductDto>)Model["T2"])
+                        {
+                            if (item.ProductImagePath.Contains("#"))
+                            {
+                                var imagePath = item.ProductImagePath.Split('#');
+                                <a href="@Url.Action("ProductInfo", "Product", new {id = item.Id})">
 
-                }
-                
-            </div>
-            <div class="layui-tab-item">
-                @foreach (var item in (List<ProductDto>)Model["T4"])
-                {
+                                    <div class="imgbox">
+                                        <img src="@imagePath[0]"/><br/>@item.ProductName
+                                    </div>
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("ProductInfo", "Product", new {id = item.Id})">
+                                    <div class="imgbox">
+                                        <img src="@item.ProductImagePath"/><br/>@item.ProductName
+                                    </div>
+                                </a>
+                            }
+                        }
 
-                }
-                
-            </div>
-        </div>
+                    </div>
+                    <div class="layui-tab-item">
+                        @foreach (var item in (List<ProductDto>)Model["T3"])
+                        {
+                            if (item.ProductImagePath.Contains("#"))
+                            {
+                                var imagePath = item.ProductImagePath.Split('#');
+                                <a href="@Url.Action("ProductInfo", "Product", new {id = item.Id})">
+
+                                    <div class="imgbox">
+                                        <img src="@imagePath[0]"/><br/>@item.ProductName
+                                    </div>
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("ProductInfo", "Product", new {id = item.Id})">
+                                    <div class="imgbox">
+                                        <img src="@item.ProductImagePath"/><br/>@item.ProductName
+                                    </div>
+                                </a>
+                            }
+                        }
+
+                    </div>
+                    <div class="layui-tab-item">
+                        @foreach (var item in (List<ProductDto>)Model["T4"])
+                        {
+                            if (item.ProductImagePath.Contains("#"))
+                            {
+                                var imagePath = item.ProductImagePath.Split('#');
+                                <a href="@Url.Action("ProductInfo", "Product", new {id = item.Id})">
+
+                                    <div class="imgbox">
+                                        <img src="@imagePath[0]"/><br/>@item.ProductName
+                                    </div>
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("ProductInfo", "Product", new {id = item.Id})">
+                                    <div class="imgbox">
+                                        <img src="@item.ProductImagePath"/><br/>@item.ProductName
+                                    </div>
+                                </a>
+                            }
+                        }
+
+                    </div>
+                </div>
     </div>
 
     <div class="vandi">
