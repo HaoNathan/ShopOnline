@@ -1,0 +1,50 @@
+
+		.containone {
+			border-bottom: 1px solid gray;
+			background-color: black;
+			height: 60px;
+			color: white
+		}
+		
+	
+		
+		.c {
+			margin-left: 30%;
+		}
+		
+		#buttonstyle {
+			border-radius: 5px 5px 5px 5px;
+			color: white;
+			/*	margin-top: 5%;*/
+			background-color: black;
+		}
+		
+		.containtwo {
+			border: 1px solid gainsboro;
+			height: 80px;
+			width: 130px;
+			margin-right: 20px;
+			margin-left: 20px;
+		}
+		
+		.ulfloat li {
+			float: left;
+		}
+		
+		.ulfloat li {
+			position: relative;
+			left: 15%;
+			margin-left: 5%;
+		}
+		
+		.layui-tab-content {
+			height: 150px;
+		}
+		@media only screen and (min-width: 320px) and (max-width: 640px) {
+			.c {
+			margin-left: 0;
+		}
+		
+		}
+		
+		

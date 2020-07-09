@@ -296,19 +296,16 @@
         layui.use('form', function () {
             var form = layui.form;
 
-            
-                
-            
         });
         $("#search").click(function() {
-            console.log("222");
+
             var searchName = $("input[name='searchName']").val();
-            location.href = "/Product/GetProductList?searchName="+searchName;
+            location.href = "/Product/GetProductList?searchName="+searchName+"&index=1";
         });
         $(".container a").click(function () {
             var text = $(this).text();
             console.log(text);
-            return false;
+            $(this).attr( "href","/Product/GetProductList?searchName="+text+"&index=2");
         });
     </script>
     @RenderSection("scripts", required: false)

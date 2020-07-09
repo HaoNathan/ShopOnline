@@ -14,8 +14,6 @@
                 <blockquote class="layui-elem-quote layui-quote-nm">
 
                     <div class="layui-row">
-                        
-                            
                             <div class="layui-col-md10">
                                 
                                 <table class="layui-table" lay-skin="line">
@@ -56,7 +54,15 @@
                                             <td> <button class="layui-btn layui-btn-primary layui-btn-sm deleteBtn" value="@item.Id">删除</button> <td/>
                                         </tr>
                                     }
-                                    <tr><td colspan="4">结算</td> <td colspan="2"> <button class="layui-btn layui-btn-sm layui-btn-primary" onclick="location.href = '@Url.Action("OrderList","Order")'">去结账</button></td>  </tr>
+
+                                    <tr>
+                                        <td colspan="4">结算</td> <td colspan="2">
+                                            @if (@Model.Count > 0)
+                                            {
+                                                <button class="layui-btn layui-btn-sm layui-btn-primary" onclick="location.href = '@Url.Action("OrderList", "Order")'">去结账</button>
+                                            }
+                                        </td>
+                                    </tr>
 
                                     </tbody>
                                 </table>   
@@ -81,7 +87,7 @@
                         var id = $(this).parent().nextAll().eq(1).children().val();
                         console.log(id);
                         $.post("@Url.Action("UpdateCartNum", "ShoppingCart")",
-                            { 'number': num,'id':id },
+                            { 'number': num, 'id': id },
                             function(res) {
                                 layer.msg(res.Info);
                             });

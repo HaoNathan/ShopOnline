@@ -4,6 +4,7 @@
 }
 @section css
 {
+    <link href="~/Asset/css/number.css" rel="stylesheet" />
     <style>
         * {
             margin: 0;
@@ -25,7 +26,7 @@
             margin-top: 3%;
         }
 
-        .classarea>div:first-child {
+        .classarea > div:first-child {
             background: black;
         }
 
@@ -36,7 +37,7 @@
             font-size: 20px;
         }
 
-        .classarea>div>center>p {
+        .classarea > div > center > p {
             color: white;
         }
 
@@ -69,14 +70,14 @@
             color: black;
             width: 850px;
             /*height: 500px;
-			margin-left: 40%;*/
+            margin-left: 40%;*/
         }
 
-        .layui-nav>.layui-nav-item {
+        .layui-nav > .layui-nav-item {
             color: black
         }
 
-        .layui-nav>li {
+        .layui-nav > li {
             color: black
         }
 
@@ -89,9 +90,9 @@
             font-size: 16px;
         }
 
-        #pstyle p {
-            margin-left: 350px;
-        }
+            #pstyle p {
+                margin-left: 350px;
+            }
 
         #buttonstyle {
             background-color: black;
@@ -104,13 +105,13 @@
             float: left
         }
 
-        
 
-        #formul li:nth-child(0) {
-            position: relative;
-            left: 10%;
-            width: 20%;
-        }
+
+            #formul li:nth-child(0) {
+                position: relative;
+                left: 10%;
+                width: 20%;
+            }
 
         #contactus {
             border: 1px solid gainsboro;
@@ -121,10 +122,10 @@
             height: 350px;
         }
 
-        #contactus li {
-            float: none;
-            margin-left: 20px;
-        }
+            #contactus li {
+                float: none;
+                margin-left: 20px;
+            }
 
         #contactus {
             position: relative;
@@ -133,358 +134,270 @@
     </style>
 }
 <!--主体-->
-<div class="layui-card"style="margin-top: 6%">
-    <div class="layui-card-header layui-row">
-        <fieldset class="layui-elem-field layui-field-title " style="margin-top: 30px;">
-            <legend>个人信息设置</legend>
-        </fieldset>
+<div class="layui-card" style="margin-top: 6%">
+<div class="layui-card-header layui-row">
+    <fieldset class="layui-elem-field layui-field-title " style="margin-top: 30px;">
+        <legend>个人信息设置</legend>
+    </fieldset>
+</div>
+<div class="layui-card-body">
+<div class="layui-row bodyer ">
+<!--  //选项卡-->
+<div class="layui-col-md12 layui-col-xs12 layui-col-sm12 " style="line-height: 30px;">
+
+<div class="layui-tab layui-tab-card" lay-filter="test1">
+<ul class="layui-tab-title" id="menu">
+    <li class="layui-this">个人资料</li>
+    <li>收货地址</li>
+    <li>我的订单</li>
+    <li>会员中心</li>
+</ul>
+<div class="layui-tab-content" style="height: 100px;">
+
+<div class="layui-tab-item layui-show">
+    <br />
+
+    <div id="pstyle">
+        <p id="p">我的资料</p>
     </div>
-    <div class="layui-card-body">
-        <div class="layui-row bodyer " >
-            <!--  //选项卡-->
-            <div class="layui-col-md12 layui-col-xs12 layui-col-sm12 " style="line-height: 30px;">
-
-                <div class="layui-tab layui-tab-card" lay-filter="test1">
-                    <ul class="layui-tab-title" id="menu">
-                        <li class="layui-this">个人资料</li>
-                        <li >收货地址</li>
-                        <li >我的订单</li>
-                        <li >物流信息</li>
-                        <li >购物车</li>
-                        <li>其他</li>
-                    </ul>
-                    <div class="layui-tab-content" style="height: 100px;">
-
-                        <div class="layui-tab-item layui-show">
-                            <br />
-
-                            <div id="pstyle">
-                                <p id="p">我的资料</p>
-                            </div>
-                            <br />
-                            <!--//表单-->
-                            <div class="layui-row">
-                                <div class="layui-form layui-col-md5" >
-                               @Html.HiddenFor(m => m.Id)
-                               @Html.HiddenFor(m=>m.ImagePath)
-                               <div class="layui-form-item ">
-                                   <label class="layui-form-label">头像：</label>
-                                   <div class="layui-input-inline">
-                                       <img src="@Model.ImagePath" id="displayImg" width="50%" alt="Alternate Text" />
-                                       <button type="button" class="layui-btn layui-btn-sm layui-btn-primary" id="UploadImage">
-                                           <i class="layui-icon">&#xe67c;</i>上传图片
-                                       </button>
-                                   </div>
-                               </div>
-                               <div class="layui-form-item ">
-                                   <label class="layui-form-label">账号名称：</label>
-                                   <div class="layui-input-inline">
-                                       <input type="text" name="UserName" value="@Model.UserName" required lay-verify="required"
-                                              autocomplete="off" class="layui-input">
-                                   </div>
-                               </div>
-                               <div class="layui-form-item">
-                                   <label class="layui-form-label">您的密码:</label>
-                                   <div class="layui-input-inline">
-                                       <input type="password" name="UserPassword" value="" required lay-verify="required"
-                                              autocomplete="off" class="layui-input">
-                                   </div>
-
-                               </div>
-                                    <div class="layui-form-item">
-                                        <label class="layui-form-label">您的手机号:</label>
-                                        <div class="layui-input-inline">
-                                            <input type="text" name="Phone" value="@Model.Phone"  lay-verify="required"
-                                                   autocomplete="off" class="layui-input">
-                                        </div>
-
-                                    </div>
-                                    <div class="layui-form-item">
-                                        <label class="layui-form-label">您的邮箱:</label>
-                                        <div class="layui-input-inline">
-                                            <input type="email" name="Email" value="@Model.Email " required lay-verify="required"
-                                                   autocomplete="off" class="layui-input">
-                                        </div>
-
-                                    </div>
-                                    <button type="submit" lay-filter="updateUser" lay-submit="" class="layui-btn layui-btn-sm layui-btn-primary layui-col-md3 layui-col-md-offset7">修改 </button>
-
-                                </div>
-
-                                <div id="contactus" class="layui-col-md5">
-                                    <h2>客服中心</h2>
-                                    <hr />
-                                    <ul>
-                                        <li>客服电话：028-820-4888</li>
-                                        <li></li>
-                                        <li><input type="button" id="buttonstyle" value="在线咨询" style="border: none;" /></li>
-                                        <li>常见问题</li>
-                                        <hr />
-                                        <li>如何下订单?</li>
-                                        <li>如何查看订单配送状况?</li>
-                                        <li>如何修改和取消订单?</li>
-                                        <li>查看所有</li>
-                                    </ul>
-
-                                </div>
-                            
-                            </div>
-                        </div>
-                        <div class="layui-tab-item ">
-                            <h2>收货地址</h2>
-                            <hr>
-                            <div class="layui-row">
-                                <div class="layui-form layui-col-md6">
-                                    <div class="layui-form-item">
-                                        <label class="layui-form-label">收件人昵称:</label>
-                                        <div class="layui-input-inline">
-                                            <input type="text" name="ConsigneeName" value="" required lay-verify="required"
-                                                   autocomplete="off" class="layui-input">
-                                        </div>
-
-                                    </div>
-                                    <div class="layui-form-item">
-                                        <label class="layui-form-label">手机号:</label>
-                                        <div class="layui-input-inline">
-                                            <input type="text" name="ConsigneePhone"   lay-verify="required"
-                                                   autocomplete="off" class="layui-input">
-                                        </div>
-
-                                    </div>
-                                    <div class="layui-form-item">
-                                        <label class="layui-form-label">收件人地址:</label>
-                                        <div class="layui-input-inline">
-                                            <input type="text" name="ConsigneeAddress"   lay-verify="required"
-                                                   autocomplete="off" class="layui-input">
-                                        </div>
-
-                                    </div>
-                                    <button type="submit" lay-filter="addConsignee" class="layui-btn layui-btn-primary layui-btn-sm layui-col-md3 layui-col-md-offset6"  lay-submit=""  >新增地址</button>
-                                </div>
-                                <div class="layui-col-md5" id="UserDistribution"></div>
-                            </div>
-                        </div>
-
-                        <div class="layui-tab-item ">
-                            <div class="layui-form-item">
-                                <h2>订单详情</h2>
-                                <div id="pstyle">
-                                    <p id="p">我的订单</p>
-                                </div>
-                                <br />
-                                <form id="formul" style="margin-top: 30px;">
-                                    <div class="layui-row">
-                                        <div class="layui-form-item ">
-                                            <label class="layui-form-label">商品单号：</label>
-                                            <div class="layui-input-inline">
-                                                <input type="password" name="password" required lay-verify="required"
-                                                       autocomplete="off" class="layui-input">
-                                            </div>
-                                        </div>
-                                        <div class="layui-form-item">
-                                            <label class="layui-form-label">商品名称</label>
-                                            <div class="layui-input-inline">
-                                                <input type="password" name="password" required lay-verify="required"
-                                                       autocomplete="off" class="layui-input">
-                                            </div>
-
-                                        </div>
-                                        <div class="layui-form-item">
-                                            <label class="layui-form-label">商品数量</label>
-                                            <div class="layui-input-inline">
-                                                <input type="password" name="password" required lay-verify="required"
-                                                       autocomplete="off" class="layui-input">
-                                            </div>
-
-                                        </div>
-                                        <div class="layui-form-item">
-                                            <label class="layui-form-label">商品价格：</label>
-                                            <div class="layui-input-inline">
-                                                <input type="password" name="password" required lay-verify="required"
-                                                       autocomplete="off" class="layui-input">
-                                            </div>
-
-                                        </div>
-                                        <div class="layui-form-item">
-                                            <label class="layui-form-label">优惠券：</label>
-                                            <div class="layui-input-inline">
-                                                <input type="password" name="password" required lay-verify="required"
-                                                       autocomplete="off" class="layui-input">
-                                            </div>
-
-                                        </div>
-                                        <div class="layui-form-item">
-                                            <label class="layui-form-label">商品总价</label>
-                                            <div class="layui-input-inline">
-                                                <input type="password" name="password" required lay-verify="required"
-                                                       autocomplete="off" class="layui-input">
-                                            </div>
-
-                                        </div>
-                                        <div class="layui-form-item">
-                                            <label class="layui-form-label">交易时间</label>
-                                            <div class="layui-input-inline">
-                                                <input type="datetime" name="password" required lay-verify="required"
-                                                       autocomplete="off" class="layui-input">
-                                            </div>
-
-                                        </div>
-                                        <div class="layui-form-item">
-                                            <label class="layui-form-label">交易状态</label>
-                                            <div class="layui-input-inline">
-                                                <input type="checkbox" checked="checked" value="成功" />成功
-                                                <input type="checkbox" value="失败" />失败
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                    <li id="contactus">
-                                        <h2>客服中心</h2>
-                                        <hr />
-                                        <ul>
-                                            <li>客服电话：028-820-4888</li>
-                                            <li></li>
-                                            <li>
-                                                <input type="button" id="buttonstyle" value="在线咨询" style="border: none;" />
-                                            </li>
-                                            <li>常见问题</li>
-                                            <hr />
-                                            <li>如何下订单?</li>
-                                            <li>如何查看订单配送状况?</li>
-                                            <li>如何修改和取消订单?</li>
-                                            <li>查看所有</li>
-                                        </ul>
-
-                                    </li>
-                                </form>
-
-                            </div>
-                        </div>
-                        <div class="layui-tab-item ">
-                            <div class="layui-form-item">
-                                <h2>物流详情</h2>
-                                <div id="pstyle">
-                                    <p id="p">我的物流</p>
-                                </div>
-                                <br />
-                                <ul id="formul" style="margin-top: 30px;">
-                                    <li>
-                                        <img src="~/Asset/images/Perfume2.png" width="100px" />
-                                        <div class="layui-form-item">
-                                            <label class="layui-form-label">物流最新更新日期</label>
-                                            <div class="layui-input-inline">
-                                                <input type="datetime" name="datetime" required lay-verify="required"
-                                                       autocomplete="off" class="layui-input">
-                                            </div>
-
-                                        </div>
-                                        <p>
-                                            <a href="">
-                                                查看更多
-                                            </a>
-                                        </p>
-                                    </li>
-                                    <li id="contactus">
-                                        <h2>客服中心</h2>
-                                        <hr />
-                                        <ul>
-                                            <li>客服电话：028-820-4888</li>
-                                            <li></li>
-                                            <li>
-                                                <input type="button" id="buttonstyle" value="在线咨询"
-                                                       style="border: none;" />
-                                            </li>
-                                            <li>常见问题</li>
-                                            <hr />
-                                            <li>如何下订单?</li>
-                                            <li>如何查看订单配送状况?</li>
-                                            <li>如何修改和取消订单?</li>
-                                            <li>查看所有</li>
-                                        </ul>
-
-                                    </li>
-                                </ul>
-
-                            </div>
-                        </div>
-                        <div class="layui-tab-item">
-                            <div class="layui-form-item">
-                                <h2>购物车</h2>
-                                <div id="pstyle">
-
-                                    <label id="p" class="layui-form-label">商品数量</label>
-                                    <div class="layui-input-inline">
-                                        <input type="text" name="text" required lay-verify="required" autocomplete="off"
-                                               class="layui-input">
-                                    </div>
-                                </div>
-                                <br />
-
-
-                                <table class="layui-table"
-                                       lay-data="{width: 840, height:330, url:'/demo/table/user/', page:true, id:'idTest'}"
-                                       lay-filter="demo">
-                                    
-                                    <thead>
-                                        <tr>
-                                            <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
-                                            <th lay-data="{field:'id', width:80, sort: true, fixed: true}">商品ID</th>
-                                            <th lay-data="{field:'username', width:80}">商品名称</th>
-                                            <th lay-data="{field:'sex', width:80, sort: true}">单价</th>
-                                            <th lay-data="{field:'city', width:80}">规格</th>
-                                            <th lay-data="{field:'sign', width:160}">数量</th>
-                                            <th lay-data="{field:'experience', width:80, sort: true}">价格</th>
-
-                                            <th lay-data="{field:'classify', width:80}">其他...</th>
-
-                                        </tr>
-                                    </thead>
-                                </table>
-
-                            </div>
-                        </div>
-
-                        <div class="layui-tab-item">
-                            <div class="layui-form-item">
-                                <h2>其他</h2>
-                                <div id="pstyle">
-                                    <p id="p">客服中心</p>
-                                </div>
-                                <br />
-                                <ul id="formul" style="margin-top: 30px;">
-                                    <li>其他更多请咨询客服中心</li>
-
-
-
-                                    <li id="contactus">
-                                        <h2>客服中心</h2>
-                                        <hr />
-                                        <ul>
-                                            <li>客服电话：028-820-4888</li>
-                                            <li></li>
-                                            <li>
-                                                <input type="button" id="buttonstyle" value="在线咨询" style="border: none;" />
-                                            </li>
-                                            <li>常见问题</li>
-                                            <hr />
-                                            <li>如何下订单?</li>
-                                            <li>如何查看订单配送状况?</li>
-                                            <li>如何修改和取消订单?</li>
-                                            <li>查看所有</li>
-                                        </ul>
-
-                                    </li>
-                                </ul>
-
-                            </div>
-                        </div>
-                    </div>
+    <br />
+    <!--//表单-->
+    <div class="layui-row">
+        <div class="layui-form layui-col-md5">
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.ImagePath)
+            <div class="layui-form-item ">
+                <label class="layui-form-label">头像：</label>
+                <div class="layui-input-inline">
+                    <img src="@Model.ImagePath" id="displayImg" width="50%" alt="Alternate Text" />
+                    <button type="button" class="layui-btn layui-btn-sm layui-btn-primary" id="UploadImage">
+                        <i class="layui-icon">&#xe67c;</i>上传图片
+                    </button>
                 </div>
             </div>
+            <div class="layui-form-item ">
+                <label class="layui-form-label">账号名称：</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="UserName" value="@Model.UserName" required lay-verify="required"
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">您的密码:</label>
+                <div class="layui-input-inline">
+                    <input type="password" name="UserPassword" value="" required lay-verify="required"
+                           autocomplete="off" class="layui-input">
+                </div>
+
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">您的手机号:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="Phone" value="@Model.Phone" lay-verify="required"
+                           autocomplete="off" class="layui-input">
+                </div>
+
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">您的邮箱:</label>
+                <div class="layui-input-inline">
+                    <input type="email" name="Email" value="@Model.Email " required lay-verify="required"
+                           autocomplete="off" class="layui-input">
+                </div>
+
+            </div>
+            <button type="submit" lay-filter="updateUser" lay-submit="" class="layui-btn layui-btn-sm layui-btn-primary layui-col-md3 layui-col-md-offset7">修改 </button>
+
         </div>
+
+        <div id="contactus" class="layui-col-md5">
+            <h2>客服中心</h2>
+            <hr />
+            <ul>
+                <li>客服电话：028-820-4888</li>
+                <li></li>
+                <li><input type="button" id="buttonstyle" value="在线咨询" style="border: none;" /></li>
+                <li>常见问题</li>
+                <hr />
+                <li>如何下订单?</li>
+                <li>如何查看订单配送状况?</li>
+                <li>如何修改和取消订单?</li>
+                <li>查看所有</li>
+            </ul>
+
+        </div>
+
     </div>
+</div>
+<div class="layui-tab-item ">
+    <h2>收货地址</h2>
+    <hr>
+    <div class="layui-row">
+        <div class="layui-form layui-col-md6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">收件人昵称:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="ConsigneeName" value="" required lay-verify="required"
+                           autocomplete="off" class="layui-input">
+                </div>
+
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">手机号:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="ConsigneePhone" lay-verify="required"
+                           autocomplete="off" class="layui-input">
+                </div>
+
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">收件人地址:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="ConsigneeAddress" lay-verify="required"
+                           autocomplete="off" class="layui-input">
+                </div>
+
+            </div>
+            <button type="submit" lay-filter="addConsignee" class="layui-btn layui-btn-primary layui-btn-sm layui-col-md3 layui-col-md-offset6" lay-submit="">新增地址</button>
+        </div>
+        <div class="layui-col-md5" id="UserDistribution"></div>
+    </div>
+</div>
+
+<div class="layui-tab-item ">
+    <div class="layui-form-item">
+        <h2>订单详情</h2>
+        <div id="pstyle">
+            <p id="p">我的订单</p>
+        </div>
+        <br />
+        <form id="formul" style="margin-top: 30px;">
+            <div class="layui-row">
+                <div class="layui-form-item ">
+                    <label class="layui-form-label">商品单号：</label>
+                    <div class="layui-input-inline">
+                        <input type="password" name="password" required lay-verify="required"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">商品名称</label>
+                    <div class="layui-input-inline">
+                        <input type="password" name="password" required lay-verify="required"
+                               autocomplete="off" class="layui-input">
+                    </div>
+
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">商品数量</label>
+                    <div class="layui-input-inline">
+                        <input type="password" name="password" required lay-verify="required"
+                               autocomplete="off" class="layui-input">
+                    </div>
+
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">商品价格：</label>
+                    <div class="layui-input-inline">
+                        <input type="password" name="password" required lay-verify="required"
+                               autocomplete="off" class="layui-input">
+                    </div>
+
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">优惠券：</label>
+                    <div class="layui-input-inline">
+                        <input type="password" name="password" required lay-verify="required"
+                               autocomplete="off" class="layui-input">
+                    </div>
+
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">商品总价</label>
+                    <div class="layui-input-inline">
+                        <input type="password" name="password" required lay-verify="required"
+                               autocomplete="off" class="layui-input">
+                    </div>
+
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">交易时间</label>
+                    <div class="layui-input-inline">
+                        <input type="datetime" name="password" required lay-verify="required"
+                               autocomplete="off" class="layui-input">
+                    </div>
+
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">交易状态</label>
+                    <div class="layui-input-inline">
+                        <input type="checkbox" checked="checked" value="成功" />成功
+                        <input type="checkbox" value="失败" />失败
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </form>
+
+    </div>
+</div>
+
+
+
+<div class="layui-tab-item">
+    <div class="layui-form-item">
+        <h2>其他</h2>
+
+
+
+        <div class="layui-col-md10 contains">
+            <div class="layui-tab" lay-filter="test">
+                <ul class="layui-tab-title">
+                    <li class="layui-this" lay-id="11"></li>
+                    <li lay-id="22"></li>
+                    <li lay-id="33">扫码支付</li>
+                    <li lay-id="44">银行卡支付</li>
+                    <li lay-id="55"></li>
+                    <li lay-id="55"></li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item ">
+
+                    </div>
+                    <div class="layui-tab-item"></div>
+                    <div class="layui-tab-item layui-show">
+                        <ul class="ulfloat">
+                            <li>
+                                <img src="~/Asset/images/二维码.jpg" width="100px" /><br /><br />
+                                <input type="button" name="" id="buttonstyle" value="会员服务协议" />
+                            </li>
+                            <li>
+                                <img src="~/Asset/images/支.PNG" width="180px" /><br /><br />
+                                <button type="submit" name="GetMember" class="layui-btn layui-btn-primary"  > 点击充值</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="layui-tab-item">
+                        请输入银行卡号：
+                        <input type="text" name="" id="" value="" placeholder="请输入正确的银行卡号" /><br />
+                        <input type="button" name="" id="buttonstyle" value="   支付    " style="margin-left: 30%;margin-top: 5%" />
+                    </div>
+                                     
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 </div>
 
@@ -549,19 +462,16 @@
                         if (data.index === 1) {
                             $.post("@Url.Action("GetConsigneeInfo", "Consignee")",
                                 {},
-                                function (res) {
-                                    if (res!=null) {
-                                        var htmlText =$( "<blockquote class='layui-elem-quote layui-quote-nm'>地址："
-                                            + res.ConsigneeAddress + "<br>收件人：" + res.ConsigneeName
-                                            + "联系方式：" + res.ConsigneePhone + "</blockquote>");
+                                function(res) {
+                                    if (res != null) {
+                                        var htmlText = $("<blockquote class='layui-elem-quote layui-quote-nm'>地址：" + res.ConsigneeAddress
+                                            + "<br>收件人：" + res.ConsigneeName + "联系方式：" + res.ConsigneePhone + "</blockquote>");
+                                        $("#UserDistribution").children().remove();
                                         $("#UserDistribution").append(htmlText);
-
                                     }
-                                   
+
                                 });
                         } else if (data.index === 2) {
-
-                        } else if (data.index === 4) {
 
                         } else {
                             return;
@@ -569,7 +479,7 @@
 
                     });
                 form.on('submit(addConsignee)',
-                    function (data) {
+                    function(data) {
                         console.log("15");
                         //发异步,
                         $.post("@Url.Action("AddConsigneeInfo", "Consignee")",
@@ -577,11 +487,15 @@
                             function(res) {
                                 layer.msg(res.Info);
                                 if (res.IsSuccess) {
-                                   location.href.reload();
+                                    location.href.reload();
                                 }
                             });
                     });
-
+                $("button[name='GetMember']").click(function() {
+                    $.post("@Url.Action("GetMember","User")",true, function(res) {
+                        layer.msg(res.Info);
+                    });
+                });
             });
 
 

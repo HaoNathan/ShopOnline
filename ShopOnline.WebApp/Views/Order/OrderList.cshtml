@@ -43,13 +43,30 @@
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
-                                        <label class="layui-form-label">总价</label>
-                                        <div class="layui-input-block">
-                                            @{
-                                                var sumMoney = (int) Model["money"];
+                                        @{
+                                            var sumMoney1 =(int)Model["money"] * 0.8;
+
+                                            if ((bool)Model["member"])
+                                            {
+                                                var sumMoney2 = (int)Model["money"] * 0.8;
+                                                <label class="layui-form-label">Vip优惠价</label>
+
+                                                <div class="layui-input-block">
+                                                    <input type="text" name="TotalPrice" value="@sumMoney2" autocomplete="off" placeholder="请输入地址" class="layui-input layui-disabled">
+                                                </div>
                                             }
-                                            <input type="text" name="TotalPrice" value="@sumMoney" autocomplete="off" placeholder="请输入地址" class="layui-input layui-disabled">
-                                        </div>
+                                            else
+                                            {
+                                                <label class="layui-form-label">总价</label>
+                                                <div class="layui-input-block">
+                                                    <input type="text" name="TotalPrice" value="@sumMoney1" autocomplete="off" placeholder="请输入地址" class="layui-input layui-disabled">
+                                                </div>
+                                            }
+
+
+                                        }
+
+
                                     </div>
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">支付方式</label>
@@ -116,7 +133,6 @@
                 form.on('submit(addOrder)',
                     function(data) {
                         data.field.PayState = 1;
-
                         $.post("@Url.Action("AddOrder", "Order")",
                             data.field,
                             function(res) {
@@ -131,6 +147,7 @@
                 form.on('submit(addOrderFalse)',
                     function(data) {
                         data.field.PayState = 0;
+                        data.field.PayType = "暂无";
                         $.post("@Url.Action("AddOrder", "Order")",
                             data.field,
                             function(res) {
@@ -139,7 +156,6 @@
                                     location.href = "@Url.Action("EditUserInfo", "User")";
                                 }
                             });
-
 
                     });
 

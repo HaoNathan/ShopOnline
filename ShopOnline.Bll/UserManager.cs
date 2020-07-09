@@ -81,6 +81,12 @@ namespace ShopOnline.Bll
         }
 
         public async Task<bool> IsExistUser(string name) => await _service.IsExistsAsync(m => m.UserName.Equals(name));
+        public async Task<int> GetMember(Guid id)
+        {
+            var user = await _service.QueryAsync(id);
+            user.IsMember = true;
+            return await _service.EditAsync(user);
+        }
 
         public async Task<int> AddUser(UserDto model)
         {

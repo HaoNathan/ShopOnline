@@ -30,6 +30,7 @@ namespace ShopOnline.Bll
                 TotalPrice = model.TotalPrice,
                 PayType = model.PayType
             });
+            
         }
 
         public async Task<int> UpdateOrder(OrderInfoDto model)
@@ -46,7 +47,7 @@ namespace ShopOnline.Bll
         public async Task<int> UpdateOrderState(Guid id, bool state)
         {
             var order = await _service.QueryAsync(id);
-            order.IsRemove = state;
+            order.DeliverySate = state;
 
             return await _service.EditAsync(order);
         }
@@ -82,6 +83,7 @@ namespace ShopOnline.Bll
                 await service.EditAsync(item);
 
             }
+
             return 0;
         }
 
@@ -95,7 +97,9 @@ namespace ShopOnline.Bll
                     ProductImagePath = m.Product.ProductImagePath,
                     ProductName = m.Product.ProductName,
                     ProductPrice = m.Product.ProductPrice,
-                    Number = m.Number
+                    Number = m.Number,
+                    ProductId = m.ProductId
+
                 });
         }
 
@@ -117,21 +121,31 @@ namespace ShopOnline.Bll
                 return _service.QueryAllAsync().Select(m => new OrderInfoDto()
                 {
                     PayState = m.PayState,
+                    Id = m.Id,
                     DeliverySate = m.DeliverySate,
-   
+                    PayType = m.PayType,
+                    TotalPrice = m.TotalPrice,
+                    Phone = m.Phone,
+                    Address = m.Address,
                     UserId = m.UserId,
                     CreateTime = m.CreateTime,
-                    IsRemove = m.IsRemove
+                    IsRemove = m.IsRemove,
+                    AcceptName = m.AcceptName
                 });
             else
                 return _service.QueryAllAsync().Where(m => m.IsRemove == false).Select(m => new OrderInfoDto()
                 {
+                    Id=m.Id,
                     PayState = m.PayState,
                     DeliverySate = m.DeliverySate,
-
+                    PayType = m.PayType,
+                    TotalPrice = m.TotalPrice,
+                    Phone = m.Phone,
+                    Address = m.Address,
                     UserId = m.UserId,
                     CreateTime = m.CreateTime,
-                    IsRemove = m.IsRemove
+                    IsRemove = m.IsRemove,
+                    AcceptName = m.AcceptName
                 });
         }
     }

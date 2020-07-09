@@ -84,20 +84,14 @@
                     cols: [
                         [//表头
                             { field: 'Id', title: 'ID', width: '10%', hide: true },
-                            { field: 'UserName', title: '买家名称', width: '10%' },
-                            { field: 'ProductName', title: '商品名称', width: '10%' },
-                            
-                            { field: 'Email', title: '邮箱', width: '10%', sort: true },
+                            { field: 'AcceptName', title: '商品名称', width: '10%' },
                             { field: 'Phone', title: '手机号', width: '10%', sort: true },
                             { field: 'Address', title: '住址', width: '10%', sort: true },
-
                             { title: '创建时间', templet: "#newDate", width: '6%' },
                             { title: '支付状态', templet: '#payState', width: '5%' },
-
-                            {  title: '是否发货', templet: '#switchTpl2', width: '5%' },
+                            { title: '是否发货', templet: '#switchTpl2', width: '5%' },
                             { field: 'IsRemove', title: '状态', templet: '#switchTpl', width: '5%' },
-
-                            { title: '操作', templet: '#barDemo', width: '5%' , fixed: 'right'}
+                            { title: '操作', templet: '#barDemo', width: '5%', fixed: 'right' }
                         ]
                     ],
                     limits: [8, 16, 24],
@@ -107,14 +101,13 @@
                     var name = $("input[name='userName']").val();
                     var name2 = $("input[name='productName']").val();
                     var time = $("input[name='start']").val();
-                  
+
                     table.reload("OrderTable",
                         {
                             where: {
                                 acceptName: name,
                                 productName: name2,
                                 createTime: time,
-                                
                             }
                         });
                 });
@@ -122,7 +115,7 @@
                     function(obj) {
                         var state = false;
                         var productId = this.value;
-                        if (obj.elem.checked === false) {
+                        if (obj.elem.checked !== false) {
                             state = true;
                         };
                         $.post('@Url.Action("UpdateOrderState", "Order")',
@@ -137,8 +130,9 @@
                         layer = self === parent ? self : top.layui.layer;
                         var data = obj.data; //获得当前行数据
                         var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
-                        var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
                         if (layEvent === 'edit') { //编辑
+                            xadmin.open('个人信息', '/Admin/Product/UpdateProduct?id=' + data.Id, 1100, 780);
+                        }else if (layEvent==="check") {
                             xadmin.open('个人信息', '/Admin/Product/UpdateProduct?id=' + data.Id, 1100, 780);
                         }
                     });
@@ -150,13 +144,17 @@
         {{newTime}}
     </script>
     <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="check">查看</a>
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     </script>
-    <script type="text/html" id="switchTpl">
-        <input type="checkbox" name="StateName" value="{{d.Id}}"  lay-text="已取消|未取消" lay-filter="stateDemo1" {{ d.IsRemove== false ? 'checked' : ' ' }}>
+    <script type="text/html" id="payState">
+        <button class="layui-btn layui-btn-sm   {{d.PayState==0?'layui-btn-danger' :'layui-btn layui-btn-sm'}}"> {{d.PayState==0?'未支付' :'已支付'}} </button>
     </script>
     <script type="text/html" id="switchTpl2">
-        <input type="checkbox" name="StateName" value="{{d.Id}}" lay-skin="switch" lay-text="上架|下架" lay-filter="stateDemo" {{ d.DeliverySate== false ? 'checked' : ' ' }}>
+        <input type="checkbox" name="StateName" value="{{d.Id}}" lay-skin="switch" lay-text="已发货|未发货" lay-filter="stateDemo" {{ d.DeliverySate== false ? '' : 'checked ' }}>
+    </script>
+    <script type="text/html" id="switchTpl">
+        <button class="layui-btn layui-btn-sm   {{d.IsRemove==true?'layui-btn-danger' :''}}"> {{d.IsRemove==0?'正常' :'已失效'}} </button>
     </script>
     <script type="text/html" id="productImage">
         <!--拆分图片路径 -->

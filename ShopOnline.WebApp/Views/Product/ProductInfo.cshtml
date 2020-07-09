@@ -116,8 +116,8 @@
 
                                 </span><br />
 
-                                <button type="button" class="layui-btn layui-btn-primary">加入购物车</button>
-                                <button type="button" value="即可拥有"  class="layui-btn layui-btn-primary" onclick="window.location.href = '@Url.Action("AddCart","ShoppingCart",new{id=Model.Id})'" >立即购买</button>
+                                <button type="button" class="layui-btn layui-btn-primary" id="addCard">加入购物车</button>
+                                <button type="button" class="layui-btn layui-btn-primary" onclick="window.location.href = '@Url.Action("AddCart","ShoppingCart",new{id=Model.Id,isBuy="true"})'" >立即购买</button>
                             </div>
                         </div>
                     </div>
@@ -176,10 +176,16 @@
                 var element = layui.element;
 
             });
+        $("#addCard").click(function () {
+
+            $.get('@Url.Action("AddCart","ShoppingCart",new{id=Model.Id,isBuy="false"})',function(res) {
+                layer.msg(res.Info);
+            });
+        });
         //小图切换大图片
-        $("#imgBox img").click(function () {
+        $("#imgBox img").click(function() {
             var imgPath = $(this).attr("src");
-            $(".box").children("img").attr("src",imgPath);
+            $(".box").children("img").attr("src", imgPath);
         });
     </script>
 

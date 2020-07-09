@@ -21,11 +21,23 @@ namespace ShopOnline.WebApp.Controllers
         }
         // GET: Product
         [HttpGet]
-        public async Task< ActionResult> GetProductList(string searchName)
+        public async Task< ActionResult> GetProductList(string searchName,int index)
         {
-            var data =await _manager.QueryProduct(searchName).ToListAsync();
-            return View(data);
+            if (index==1)
+            {
+                var data = await _manager.QueryProduct(searchName).ToListAsync();
+                return View(data);
+
+            }
+            else
+            {
+                var data = await _manager.QueryProductByCategory(searchName).ToListAsync();
+                return View(data);
+
+            }
+
         }
+        
         [HttpGet]
         public async Task<ActionResult>ProductInfo(string id)
         {

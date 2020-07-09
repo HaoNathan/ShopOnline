@@ -405,9 +405,14 @@
     <Content Include="Asset\css\bootstrap.css" />
     <Content Include="Asset\css\bootstrap.min.css" />
     <Content Include="Asset\css\footer.css" />
+    <Content Include="Asset\css\number.css" />
+    <Content Include="Asset\images\15.PNG" />
     <Content Include="Asset\images\150ml CN .png" />
     <Content Include="Asset\images\150ml.png" />
+    <Content Include="Asset\images\178.PNG" />
+    <Content Include="Asset\images\198.PNG" />
     <Content Include="Asset\images\30ml.png" />
+    <Content Include="Asset\images\45.PNG" />
     <Content Include="Asset\images\acqua-for-life-1.jpg" />
     <Content Include="Asset\images\add.png" />
     <Content Include="Asset\images\banner1.jpg" />
@@ -464,6 +469,8 @@
     <Content Include="Asset\images\tissu_1920x1000.jpg" />
     <Content Include="Asset\images\video.png" />
     <Content Include="Asset\images\weixin.png" />
+    <Content Include="Asset\images\二维码.jpg" />
+    <Content Include="Asset\images\代金券.PNG" />
     <Content Include="Asset\images\大师匠心.jpg" />
     <Content Include="Asset\images\微博.png" />
     <Content Include="Asset\images\护肤1.png" />
@@ -479,6 +486,7 @@
     <Content Include="Asset\images\护肤8.png" />
     <Content Include="Asset\images\护肤9.png" />
     <Content Include="Asset\images\护肤一级海报图片.jpg" />
+    <Content Include="Asset\images\支.PNG" />
     <Content Include="Asset\images\支付宝支付.png" />
     <Content Include="Asset\images\无忧购物.png" />
     <Content Include="Asset\images\联系我们.png" />

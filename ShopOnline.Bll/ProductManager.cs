@@ -187,6 +187,25 @@ namespace ShopOnline.Bll
                         });
         }
 
+        public IQueryable<ProductDto> QueryProductByCategory(string categoryName)
+        {
+            return _service.QueryAllAsync()
+                .Where(m => m.ThirdProductCategory.ThirdProductCategoryName
+                    .Equals(categoryName) || m.SecondProductCategory.SecondProductCategoryName
+                    .Equals(categoryName)  ||m.ThirdProductCategory.ThirdProductCategoryName
+                    .Equals(categoryName))
+                    .Where(m=>!m.IsRemove).Select(m => new ProductDto()
+                {
+                    Id = m.Id,
+                    ProductName = m.ProductName,
+                    ProductDescription = m.ProductDescription,
+                    ProductImagePath = m.ProductImagePath,
+                    ColorName = m.Color.ColorName,
+                    SizeName = m.Size.SizeName,
+                    ProductPrice = m.ProductPrice
+                });
+        }
+
         public IQueryable<ProductCategoryDto> GetFirstCategoryList()
         {
             IFirstCategoryService service = new FirstCategoryService();

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using ShopOnline.Bll;
 using ShopOnline.Dto;
 using ShopOnline.IBll;
 using ShopOnline.WebApp.Common;
@@ -175,6 +175,38 @@ namespace ShopOnline.WebApp.Controllers
                 _msg.Info = "该昵称已存在";
             }
             return Json(_msg);
+        }
+
+        public async Task<JsonResult> GetMember()
+        {
+            var user = (UserDto)Session["User"];
+            var result = await _manager.GetMember(user.Id);
+            if (result==1)
+            {
+                _msg=new MsgResult()
+                {
+                    IsSuccess = true,
+                    Info = "恭喜您成为了尊贵的VIP"
+                };
+            }
+            else
+            {
+                _msg = new MsgResult()
+                {
+                    IsSuccess = false,
+                    Info = "VIP其实没什么用"
+                };
+            }
+            return Json(_msg);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> GetOrder()
+        {
+            
+    
+
+            return Json(null);
         }
     }
 }
