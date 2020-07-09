@@ -10,10 +10,7 @@ namespace ShopOnline.Model
     public partial class OrderInfo:BaseEntity
     {
 
-        [ForeignKey(nameof(Product))]
-        public Guid ProductId { get; set; }
-        public Product Product { get; set; }
-
+      
         [ForeignKey(nameof(User))]
         public Guid UserId { get; set; }
         public User User { get; set; }
@@ -21,6 +18,9 @@ namespace ShopOnline.Model
         public int PayState { get; set; }
         [StringLength(11)]
         public string Phone { get; set; }
+
+        public decimal TotalPrice { get; set; }
+        public string PayType { get; set; }
 
         public string AcceptName { get; set; }
         [Required]

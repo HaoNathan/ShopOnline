@@ -80,6 +80,18 @@
     <Compile Include="Migrations\202007070849266_UpdateImagePathLength.designer.cs">
       <DependentUpon>202007070849266_UpdateImagePathLength.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007081356009_updateOrderTable.cs" />
+    <Compile Include="Migrations\202007081356009_updateOrderTable.designer.cs">
+      <DependentUpon>202007081356009_updateOrderTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007090242244_addOrderTotalPrice.cs" />
+    <Compile Include="Migrations\202007090242244_addOrderTotalPrice.designer.cs">
+      <DependentUpon>202007090242244_addOrderTotalPrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007090306009_AddPayType.cs" />
+    <Compile Include="Migrations\202007090306009_AddPayType.designer.cs">
+      <DependentUpon>202007090306009_AddPayType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderInfo.cs" />
@@ -114,6 +126,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007070849266_UpdateImagePathLength.resx">
       <DependentUpon>202007070849266_UpdateImagePathLength.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007081356009_updateOrderTable.resx">
+      <DependentUpon>202007081356009_updateOrderTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007090242244_addOrderTotalPrice.resx">
+      <DependentUpon>202007090242244_addOrderTotalPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007090306009_AddPayType.resx">
+      <DependentUpon>202007090306009_AddPayType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

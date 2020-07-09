@@ -50,7 +50,8 @@ namespace ShopOnline.Bll
 
         public  IQueryable<ShoppingCartDto> QueryShoppingCart(Guid id)
         {
-            return  _service.QueryAllAsync(m=>m.UserId.Equals(id)&&m.IsRemove==false).Select(m=>new ShoppingCartDto()
+            return  _service.QueryAllAsync(m=>m.UserId.Equals(id)&&m.IsRemove==false)
+                .Select(m=>new ShoppingCartDto()
             {
                 ProductId = m.ProductId,
                 ColorId = m.ColorId,

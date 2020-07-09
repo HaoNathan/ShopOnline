@@ -23,11 +23,12 @@ namespace ShopOnline.Bll
             return await _service.AddAsync(new OrderInfo()
             {
                 PayState = model.PayState,
-                ProductId = model.ProductId,
                 UserId = model.UserId,
                 Phone = model.Phone,
                 Address = model.Address,
-                AcceptName = model.AcceptName
+                AcceptName = model.AcceptName,
+                TotalPrice = model.TotalPrice,
+                PayType = model.PayType
             });
         }
 
@@ -38,7 +39,6 @@ namespace ShopOnline.Bll
             order.PayState = order.PayState;
             order.DeliverySate = order.DeliverySate;
             order.UpdateTime = DateTime.Now;
-            order.ProductId = model.ProductId;
 
             return await _service.EditAsync(order);
         }
@@ -51,17 +51,52 @@ namespace ShopOnline.Bll
             return await _service.EditAsync(order);
         }
 
-        public async Task<ProductDto> GetProduct(Guid id)
+        public  UserDistributionDto QueryOrderDistribution(Guid id)
         {
-            IProductService service=new ProductService();
-            var product= await service.QueryAsync(id);
-            return new ProductDto()
+            IUserDistributionService service=new UserDistributionService();
+
+            var data =  service.QueryAllAsync(m =>!m.IsRemove
+                                                   && m.UserId.Equals(id)).FirstOrDefault();
+            if (data==null)
             {
-                Id = product.Id,
-                ProductImagePath = product.ProductImagePath,
-                ProductName = product.ProductName,
-                ProductPrice = product.ProductPrice
+                return null;
+            }
+
+            return new UserDistributionDto()
+            {
+                ConsigneePhone = data.ConsigneePhone,
+                ConsigneeName = data.ConsigneeName,
+                ConsigneeAddress = data.ConsigneeAddress
             };
+        }
+
+        public async Task<int> DeleteShoppingCard(Guid id)
+        {
+            IShoppingCartService service=new ShoppingCartService();
+            var data = service.QueryAllAsync(m => !m.IsRemove && m.UserId.Equals(id)).ToList();
+
+            foreach (var item in data)
+            {
+
+                item.IsRemove = true;
+                await service.EditAsync(item);
+
+            }
+            return 0;
+        }
+
+        public IQueryable<ShoppingCartDto> GetShoppingCarts(Guid id)
+        {
+            IShoppingCartService service = new ShoppingCartService();
+            return service.QueryAllAsync(m => m.UserId.Equals(id) && !m.IsRemove)
+                .Select(m => new ShoppingCartDto()
+                {
+                    Id = m.Id,
+                    ProductImagePath = m.Product.ProductImagePath,
+                    ProductName = m.Product.ProductName,
+                    ProductPrice = m.Product.ProductPrice,
+                    Number = m.Number
+                });
         }
 
         public async Task<OrderInfoDto> QueryOrder(Guid id)
@@ -71,7 +106,7 @@ namespace ShopOnline.Bll
             {
                 PayState = order.PayState,
                 DeliverySate = order.DeliverySate,
-                ProductId = order.ProductId,
+
                 UserId = order.UserId
             };
         }
@@ -83,7 +118,7 @@ namespace ShopOnline.Bll
                 {
                     PayState = m.PayState,
                     DeliverySate = m.DeliverySate,
-                    ProductId = m.ProductId,
+   
                     UserId = m.UserId,
                     CreateTime = m.CreateTime,
                     IsRemove = m.IsRemove
@@ -93,7 +128,7 @@ namespace ShopOnline.Bll
                 {
                     PayState = m.PayState,
                     DeliverySate = m.DeliverySate,
-                    ProductId = m.ProductId,
+
                     UserId = m.UserId,
                     CreateTime = m.CreateTime,
                     IsRemove = m.IsRemove

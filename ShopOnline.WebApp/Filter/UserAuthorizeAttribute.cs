@@ -11,31 +11,15 @@ namespace ShopOnline.WebApp.Filter
     public class UserAuthorizeAttribute : AuthorizeAttribute
     {
        
-            //base.OnAuthorization(filterContext);
-           
-        
-        public UserAuthorizeAttribute(string strLoginUrl = "~/Home/Index")
-        {
-            this._LoginUrl = strLoginUrl;
-        }
-
-        #region 字段
-        //登录地址
-        private string _LoginUrl = string.Empty;
-        #endregion
-
-        #region 属性
-
-        #endregion
-
-
+     
         /// <summary>
         /// 重写系统自带的授权认证方法
         /// </summary>
         /// <param name="filterContext"></param>
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
-            if (filterContext.HttpContext.Session["User"] == null)
+
+            if (filterContext.HttpContext.Session["User"] == null&& !(filterContext.HttpContext.Session["User"] is UserDto))
             {
 
                 if (filterContext.HttpContext.Request.Cookies["userId"] != null &&
@@ -43,11 +27,12 @@ namespace ShopOnline.WebApp.Filter
                 {
                     var user = new UserDto()
                     {
-                        Id = Guid.Parse(filterContext.HttpContext.Request.Cookies["userId"].Value.ToString()),
+                        Id = Guid.Parse(filterContext.HttpContext.Request.Cookies["userId"].Value),
                     };
                     filterContext.HttpContext.Session["User"] = user;
                 }
-                
+               
+
             }
         }
 

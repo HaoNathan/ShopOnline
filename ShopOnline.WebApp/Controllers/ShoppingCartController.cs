@@ -8,9 +8,11 @@ using System.Web.Mvc;
 using ShopOnline.Dto;
 using ShopOnline.IBll;
 using ShopOnline.WebApp.Common;
+using ShopOnline.WebApp.Filter;
 
 namespace ShopOnline.WebApp.Controllers
 {
+    [UserAuthorize]
     public class ShoppingCartController : Controller
     {
         // GET: ShoppingCart

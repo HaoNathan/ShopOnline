@@ -14,7 +14,7 @@ using ShopOnlineTools;
 
 namespace ShopOnline.WebApp.Controllers
 {
-    [UserAuthorize()]
+    [UserAuthorize]
     public class UserController : Controller
     {
         private readonly IUserManager _manager;
@@ -31,13 +31,15 @@ namespace ShopOnline.WebApp.Controllers
         {
             return View();
         }
+
+        
         [HttpGet]
         public async Task< ActionResult> EditUserInfo()
         {
             var data =(UserDto)Session["User"];
             if (data==null)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("index", "Home");
             }
             var user = await _manager.QueryUser(data.Id);
             return View(user);

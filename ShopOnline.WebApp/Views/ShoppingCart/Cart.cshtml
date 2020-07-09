@@ -30,9 +30,8 @@
                                             <th>商品图</th>
                                             <th>商品名称</th>
                                             <th>数量</th>
-                                            <th>价格</th>
+                                            <th>单价</th>
                                             <th>操作</th>
-
                                         </tr> 
                                     </thead>
                                     <tbody>
@@ -52,21 +51,17 @@
                                                 }
                                             }
                                             <td>@item.ProductName</td>
-                                            <td ><input type="number" class="layui-input updateNum" max="3" step="1" min="1" value=" @item.Number"> </td>
+                                            <td ><input type="number" class="layui-input updateNum" max="3" step="1" min="1" onkeydown="return false" value=" @item.Number"> </td>
                                             <td>@item.ProductPrice</td>
                                             <td> <button class="layui-btn layui-btn-primary layui-btn-sm deleteBtn" value="@item.Id">删除</button> <td/>
                                         </tr>
                                     }
-                                    <tr><td colspan="4">结算</td> <td colspan="2"> <button class="layui-btn layui-btn-sm layui-btn-primary">去结账</button></td>  </tr>
+                                    <tr><td colspan="4">结算</td> <td colspan="2"> <button class="layui-btn layui-btn-sm layui-btn-primary" onclick="location.href = '@Url.Action("OrderList","Order")'">去结账</button></td>  </tr>
 
                                     </tbody>
                                 </table>   
 
                             </div>
-
-
-
-                        
                     </div>
                 </blockquote>
             </div>
