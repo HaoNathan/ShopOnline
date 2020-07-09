@@ -53,8 +53,6 @@ namespace ShopOnline.IBll
         /// <returns></returns>
         Task<int> AddUser(UserDto model);
 
-        IQueryable<OrderInfoDto> GetOrderInfo();
-        IQueryable<OrderDto> GetOrder();
 
     }
 }

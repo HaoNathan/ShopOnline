@@ -31,24 +31,45 @@ namespace ShopOnline.WebApp.Controllers
         public async Task<ActionResult> AddCart(string id,string isBuy)
         {
             var user = (UserDto)Session["User"];
-            var result = await _manager.AddShoppingCart(new ShoppingCartDto()
-            {
-                UserId = user.Id,
-                ProductId = Guid.Parse(id)
-            });
 
-            if (result == 1)
+            var shopCart = _manager.IsExist(Guid.Parse(id));
+            if (shopCart==null)
             {
-                if (isBuy=="true")
+                var result = await _manager.AddShoppingCart(new ShoppingCartDto()
                 {
-                    return RedirectToAction("Cart", "ShoppingCart");
+                    UserId = user.Id,
+                    ProductId = Guid.Parse(id)
+                });
+
+                if (result == 1)
+                {
+                    if (isBuy == "true")
+                        return RedirectToAction("Cart", "ShoppingCart");
+                    else
+                        _msg = new MsgResult()
+                        {
+                            IsSuccess = true,
+                            Info = "该商品已成功添加进您的购物车"
+                        };
+                }
+            }
+            else
+            {
+                var res = await _manager.UpdateShoppingCart(shopCart);
+                if (res == 1)
+                {
+                    _msg = new MsgResult()
+                    {
+                        IsSuccess = true,
+                        Info = "该商品已存在于您的购物车,已为您更新数量"
+                    };
                 }
                 else
                 {
-                    _msg=new MsgResult()
+                    _msg = new MsgResult()
                     {
-                        IsSuccess = true,
-                        Info = "该商品已成功添加进您的购物车"
+                        IsSuccess = false,
+                        Info = "更新数量失败"
                     };
                 }
             }

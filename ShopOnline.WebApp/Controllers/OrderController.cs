@@ -24,7 +24,10 @@ namespace ShopOnline.WebApp.Controllers
         {
             _manager = manager;
         }
-
+        /// <summary>
+        /// 个人信息及订单查看
+        /// </summary>
+        /// <returns></returns>
         public async Task<ActionResult> OrderList()
         {
             var user = (UserDto)Session["User"];
@@ -47,6 +50,11 @@ namespace ShopOnline.WebApp.Controllers
 
             return View(dc);
         }
+        /// <summary>
+        /// 添加订单
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<JsonResult> AddOrder(OrderInfoDto model)
         {
@@ -74,7 +82,7 @@ namespace ShopOnline.WebApp.Controllers
                 {
                     foreach (var item in data)
                     {
-                        await manager.AddOrder(new OrderDto()
+                        await manager.AddOrder(orderInfo.PayState,new OrderDto()
                         {
                             OrderId = orderInfo.Id,
                             ProductId = item.ProductId,
@@ -94,6 +102,52 @@ namespace ShopOnline.WebApp.Controllers
                 {
                     IsSuccess = false,
                     Info = "购买失败"
+                };
+            }
+            return Json(_msg);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> UpdatePayState(string id)
+        {
+            var result = await _manager.UpdateOrderPayState(Guid.Parse(id));
+            if (result==1)
+            {
+                _msg=new MsgResult()
+                {
+                    IsSuccess = true,
+                    Info = "订单支付状态以成功更新"
+                };
+            }
+            else
+            {
+                _msg = new MsgResult()
+                {
+                    IsSuccess = false,
+                    Info = "订单支付状态更新失败"
+                };
+            }
+
+            return Json(_msg);
+        }
+        [HttpPost]
+        public async Task<JsonResult> DeleteOrder(string id)
+        {
+            var result = await _manager.DeleteOrder(Guid.Parse(id));
+            if (result == 1)
+            {
+                _msg = new MsgResult()
+                {
+                    IsSuccess = true,
+                    Info = "订单已成功移除"
+                };
+            }
+            else
+            {
+                _msg = new MsgResult()
+                {
+                    IsSuccess = false,
+                    Info = "订单支移除失败"
                 };
             }
             return Json(_msg);

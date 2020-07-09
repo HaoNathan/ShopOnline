@@ -14,8 +14,34 @@ namespace ShopOnline.IBll
         /// <returns></returns>
         Task<int> AddOrder(OrderInfoDto model);
         Task<int> UpdateOrder(OrderInfoDto model);
+
+        /// <summary>
+        /// 移除订单
+        /// </summary>
+        /// <param name="id">订单id</param>
+        /// <returns></returns>
+        Task<int> DeleteOrder(Guid id);
+
+        /// <summary>
+        ///更新支付状态
+        /// </summary>
+        /// <param name="id">订单id</param>
+        /// <returns></returns>
+        Task<int> UpdateOrderPayState(Guid id);
+
+        /// <summary>
+        /// 更新发货状态
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="state"></param>
+        /// <returns></returns>
         Task<int> UpdateOrderState(Guid id,bool state);
 
+        /// <summary>
+        /// 获取收件人的信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         UserDistributionDto QueryOrderDistribution(Guid id);
 
         /// <summary>
@@ -38,6 +64,13 @@ namespace ShopOnline.IBll
         /// <param name="id">订单编号</param>
         /// <returns></returns>
         Task<OrderInfoDto> QueryOrder(Guid id);
+
+        /// <summary>
+        /// 查询某一订单
+        /// </summary>
+        /// <param name="id">用户编号</param>
+        /// <returns></returns>
+        IQueryable<OrderInfoDto> QueryOrderByUserId(Guid id);
 
         /// <summary>
         /// 后台获取所有订单

@@ -16,6 +16,13 @@ namespace ShopOnline.IBll
         Task<int> AddShoppingCart(ShoppingCartDto model);
 
         /// <summary>
+        /// 查询用户购物车中是否有同一商品
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        ShoppingCartDto IsExist(Guid id);
+
+        /// <summary>
         /// 修改商品数量
         /// </summary>
         /// <param name="id"></param>
@@ -23,7 +30,12 @@ namespace ShopOnline.IBll
         /// <returns></returns>
         Task<int> UpdateShoppingCart(Guid id, int number);
 
-       
+        /// <summary>
+        /// 修改商品数量(有重复)
+        /// </summary>
+        /// <returns></returns>
+        Task<int> UpdateShoppingCart(ShoppingCartDto model);
+
         /// <summary>
         /// 删除购物车中的商品
         /// </summary>

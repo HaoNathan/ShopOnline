@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using ShopOnline.Dal;
 using ShopOnline.Dto;
@@ -8,7 +9,7 @@ using ShopOnline.Model;
 
 namespace ShopOnline.Bll
 {
-    public class OrderManager:IOrderManager
+    public class OrderManager : IOrderManager
     {
         private readonly IOrderService _service;
 
@@ -16,17 +17,18 @@ namespace ShopOnline.Bll
         {
             _service = service;
         }
-        public async Task<int> AddOrder(OrderDto model)
+
+        public async Task<int> AddOrder(int isPay,OrderDto model)
         {
-            var result= await _service.AddAsync(new Order()
+            var result = await _service.AddAsync(new Order()
             {
                 OrderId = model.OrderId,
-                ProductId =model.ProductId,
+                ProductId = model.ProductId,
                 Quantity = model.Quantity,
                 UnitPrice = model.UnitPrice
             });
 
-            if (result==1)
+            if (result == 1&&isPay==1)
             {
                 IProductService service = new ProductService();
                 var product = await service.QueryAsync(model.ProductId);
@@ -37,6 +39,19 @@ namespace ShopOnline.Bll
 
             return result;
 
+        }
+
+        public IQueryable<OrderDto> QueryAllOrder(Guid id)
+        {
+            return _service.QueryAllAsync(m => !m.IsRemove
+                                               && m.OrderId.Equals(id))
+                .Select(m => new OrderDto()
+                {
+                    OrderId = m.OrderId,
+                    ProductId = m.ProductId,
+                    Quantity = m.Quantity,
+                    UnitPrice = m.UnitPrice
+                });
         }
     }
 }

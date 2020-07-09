@@ -44,6 +44,20 @@ namespace ShopOnline.Bll
             return await _service.EditAsync(order);
         }
 
+        public async Task<int> DeleteOrder(Guid id)
+        {
+            var order = await _service.QueryAsync(id);
+            order.IsRemove = true;
+            return await _service.EditAsync(order);
+        }
+
+        public async Task<int> UpdateOrderPayState(Guid id)
+        {
+            var order = await _service.QueryAsync(id);
+            order.PayState = 1;
+            return await _service.EditAsync(order);
+        }
+
         public async Task<int> UpdateOrderState(Guid id, bool state)
         {
             var order = await _service.QueryAsync(id);
@@ -113,6 +127,24 @@ namespace ShopOnline.Bll
 
                 UserId = order.UserId
             };
+        }
+
+        public  IQueryable<OrderInfoDto> QueryOrderByUserId(Guid id)
+        {
+            return _service.QueryAllAsync(m => m.UserId.Equals(id)
+                                               && !m.IsRemove).Select(m => new OrderInfoDto()
+            {
+                PayState = m.PayState,
+                Id = m.Id,
+                DeliverySate = m.DeliverySate,
+                TotalPrice = m.TotalPrice,
+                Phone = m.Phone,
+                Address = m.Address,
+                CreateTime = m.CreateTime,
+                AcceptName = m.AcceptName
+            });
+
+
         }
 
         public IQueryable<OrderInfoDto> QueryAllOrder(bool isRemove)

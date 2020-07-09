@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using ShopOnline.Bll;
+using ShopOnline.Dal;
 using ShopOnline.Dto;
 using ShopOnline.IBll;
+using ShopOnline.IDal;
 using ShopOnline.WebApp.Common;
 using ShopOnline.WebApp.Filter;
 using ShopOnlineTools;
@@ -36,13 +40,37 @@ namespace ShopOnline.WebApp.Controllers
         [HttpGet]
         public async Task< ActionResult> EditUserInfo()
         {
-            var data =(UserDto)Session["User"];
-            if (data==null)
+            var user =(UserDto)Session["User"];
+            if (user==null)
             {
                 return RedirectToAction("index", "Home");
             }
-            var user = await _manager.QueryUser(data.Id);
-            return View(user);
+
+            var userObj = await _manager.QueryUser(user.Id);
+            IDictionary<string, object> dic = new Dictionary<string, object>();
+            IOrderInfoManager manager = new OrderInfoManager(new OrderInfoService());
+            IOrderManager manager2 = new OrderManager(new OrderService());
+            IProductManager manager3 = new ProductManager(new ProductService());
+
+            var orderInfo =await  manager.QueryOrderByUserId(user.Id).ToListAsync();
+
+            List<OrderDto> data = new List<OrderDto>();
+            foreach (var item in orderInfo)
+            {
+                data.AddRange(manager2.QueryAllOrder(item.Id));
+            }
+
+            List<ProductDto> list = new List<ProductDto>();
+            foreach (var item in data)
+            {
+                list.Add(await manager3.QueryProduct(item.ProductId));
+            }
+            dic.Add("ProductList", list);
+            dic.Add("OrderInfo", orderInfo);
+            dic.Add("Order", data);
+            dic.Add("User",userObj);
+            
+            return View(dic);
         }
         [HttpPost]
         public JsonResult UploadImage(HttpPostedFileBase file)
@@ -194,19 +222,15 @@ namespace ShopOnline.WebApp.Controllers
                 _msg = new MsgResult()
                 {
                     IsSuccess = false,
-                    Info = "VIP其实没什么用"
+                    Info = "VIP其实没什么用,别充钱了"
                 };
             }
             return Json(_msg);
         }
 
-        [HttpPost]
-        public async Task<JsonResult> GetOrder()
-        {
-            
     
-
-            return Json(null);
-        }
+        
+            
+        
     }
 }

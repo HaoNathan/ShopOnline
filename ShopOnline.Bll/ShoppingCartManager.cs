@@ -31,6 +31,23 @@ namespace ShopOnline.Bll
             });
         }
 
+        public  ShoppingCartDto IsExist(Guid id)
+        {
+            var shopCart= _service.QueryAllAsync(m => !m.IsRemove 
+                                                      && m.ProductId.Equals(id)).FirstOrDefault();
+            
+            if (shopCart==null)
+            {
+                return null;
+            }
+            return new ShoppingCartDto()
+            {
+                Number = shopCart.Number,
+                ProductId = shopCart.ProductId,
+                Id = shopCart.Id
+            };
+        }
+
         public async Task<int> UpdateShoppingCart(Guid id,int number)
         {
             var shoppingCart = await _service.QueryAsync(id);
@@ -39,6 +56,13 @@ namespace ShopOnline.Bll
             shoppingCart.UpdateTime=DateTime.Now;
 
             return await _service.EditAsync(shoppingCart);
+        }
+
+        public async Task<int> UpdateShoppingCart(ShoppingCartDto model)
+        {
+            var shopCart = await _service.QueryAsync(model.Id);
+            shopCart.Number +=1;
+            return await _service.EditAsync(shopCart);
         }
 
         public async Task<int> DeleteShoppingCart(Guid id)

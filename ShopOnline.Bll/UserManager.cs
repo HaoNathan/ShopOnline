@@ -99,5 +99,7 @@ namespace ShopOnline.Bll
                 ImagePath ="/Upload/User/defaultPhoto.jpg"
             });
         }
+
+       
     }
 }

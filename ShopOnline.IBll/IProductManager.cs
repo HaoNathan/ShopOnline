@@ -15,6 +15,11 @@ namespace ShopOnline.IBll
 
         Task<int> AddProduct(ProductDto model);
 
+        /// <summary>
+        /// 根据主键查询商品
+        /// </summary>
+        /// <param name="id">主键</param>
+        /// <returns></returns>
         Task<ProductDto> QueryProduct(Guid id);
         /// <summary>
         /// 按名称查询
