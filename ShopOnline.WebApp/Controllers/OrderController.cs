@@ -70,6 +70,7 @@ namespace ShopOnline.WebApp.Controllers
                     IsSuccess = true,
                     Info = "购买成功"
                 };
+
                 var orderInfo = await _manager.QueryAllOrder(false)
                     .Where(m => m.UserId.Equals(user.Id))
                     .OrderByDescending(m => m.CreateTime).FirstOrDefaultAsync();
@@ -107,13 +108,28 @@ namespace ShopOnline.WebApp.Controllers
             return Json(_msg);
         }
 
+      
+
         [HttpPost]
         public async Task<JsonResult> UpdatePayState(string id)
         {
+     
             var result = await _manager.UpdateOrderPayState(Guid.Parse(id));
             if (result==1)
             {
-                _msg=new MsgResult()
+                IOrderManager manager=new OrderManager(new OrderService());
+                var data= manager.QueryAllOrder(Guid.Parse(id));
+
+                IProductManager product=new ProductManager(new ProductService());
+
+                foreach (var item in data)
+                {
+                    var temp =await product.QueryProduct(item.ProductId);
+                    temp.ProductNumber -=int.Parse(item.Quantity);
+                    await product.EditProduct(temp);
+                }
+
+                _msg =new MsgResult()
                 {
                     IsSuccess = true,
                     Info = "订单支付状态以成功更新"

@@ -40,7 +40,7 @@ namespace ShopOnline.IBll
         /// <summary>
         /// 获取收件人的信息
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">用户Id</param>
         /// <returns></returns>
         UserDistributionDto QueryOrderDistribution(Guid id);
 

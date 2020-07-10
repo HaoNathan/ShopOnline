@@ -1,0 +1,228 @@
+﻿@using ShopOnline.Dto
+@model IDictionary<string,object>
+@{
+    ViewBag.Title = "Cosmetics";
+}
+
+@section css
+{
+    <style type="text/css">
+        .classarea > div:first-child {
+            background: black;
+        }
+
+        .classarea h1 {
+            text-align: center;
+            color: white;
+            line-height: 80px;
+            font-size: 20px;
+        }
+
+        .classarea > div > center > p {
+            color: white;
+        }
+
+        .product {
+            background-color: white;
+            height: 400px;
+            margin: 0;
+        }
+
+        #boxul ul li {
+            float: left;
+            text-align: center;
+            margin-right: 20px;
+            margin-left: 20px;
+        }
+
+        #boxul ul {
+            margin-left: 450px;
+            margin-top: -15px;
+        }
+
+        #boxul {
+            background-color: gainsboro;
+        }
+
+        .floatleft {
+            margin-left: 600px;
+        }
+
+            .floatleft li {
+                float: left;
+            }
+
+        .contain {
+            margin-left: 5%;
+            height: 500px;
+            text-align: center;
+        }
+
+            .contain p {
+                text-align: center;
+                margin-top: 2%;
+            }
+
+            .contain input {
+                background-color: black;
+                color: white;
+                margin: 0;
+                height: 30px;
+                width: 80px;
+                border: none;
+            }
+
+        #position {
+            background-color: gainsboro;
+            height: 40px;
+            margin-top: 20%;
+            line-height: 40px;
+        }
+
+            #position span {
+                margin-left: 40%;
+                font-size: 14px;
+            }
+    </style>
+}
+<div class="layui-row" style="margin-top: 7%">
+    <div class="layui-col-md12 layui-col-xs12 layui-col-sm12" style="line-height: 30px;background: #e8e6e6;">
+        <span id="boxul">
+            <ul>
+                <li><a href="" name="cunbu">唇部</a></li>
+                <li><a href="">面部</a></li>
+                <li><a href="">眼部</a></li>
+                <li><a href="">发现更多</a></li>
+            </ul>
+        </span>
+    </div>
+    <div class="layui-col-md12 layui-col-xs12 layui-col-sm12" style="line-height: 30px;">
+        <img src="~/Asset/images/彩妆海报.jpg" style="height: 424px;width:100%;position: relative;;" />
+        <div style="position: absolute;top: 25%;width: 33%;right: 15%;color:black">
+            <h1 style="margin-bottom: 10px;">彩妆</h1>
+            <h2 style="margin-bottom: 10px;">甄选阿玛尼大师级彩妆单品</h2>
+            <p>
+
+                灵感源自高级时装的精美面料与上乘质地，阿玛尼将之衍生至美妆领域，
+                以致力于非凡的精神，赋予每一次产品创新的配方与高级简约的包装，
+                即使是要求近乎苛刻的女性也为之倾心。
+            </p>
+        </div>
+    </div>
+</div>
+
+<!--
+      作者：offline
+      时间：2020-07-01
+      描述：分类专区例子  js添加
+-->
+<div class="layui-row classarea">
+    <div class="layui-col-md12 layui-col-xs12 layui-col-sm12">
+        <h1>唇部</h1>
+        <ul class="floatleft">
+            <li><a href=""><img src="~/Asset/images/icon1.PNG" /><br />查看产品</a></li>
+            <li><img src="~/Asset/images/icon3.PNG" /></li>
+            <li><a href=""><img src="~/Asset/images/icon2.PNG" /><br />品牌故事</a></li>
+        </ul>
+
+    </div>
+    <!--//一级商品-->
+    <div class="product" style="position: relative;">
+        @{
+
+            foreach (var item in (List<ProductDto>)Model["list1"])
+            {
+                <div class="layui-col-md3 layui-col-xs3 layui-col-sm6 contain">
+                    @if (item.ProductImagePath.Contains('#'))
+                    {
+                        var arr = item.ProductImagePath.Split('#');
+                        <img src="@arr[0]" width="50%"/>
+                    }
+                    else
+                    {
+                    <img src="@item.ProductImagePath" width="50%" />
+                    }
+                    <p>@item.ProductName</p>
+
+                    <p>@item.SizeName</p>
+                    <br/>
+                    <input type="button" name="" id="" value="￥@Convert.ToDouble(item.ProductPrice)"/>
+                    <button type="button" class="layui-btn layui-btn-sm layui-btn-primary" onclick="location.href = '@Url.Action("ProductInfo","Product",new{id=item.Id})'" >购买 </button>
+                </div>
+            }
+        }
+        
+        
+    </div>
+   
+    <!--//二级商品-->
+    <div class="layui-row classarea">
+        <div class="layui-col-md12 layui-col-xs12 layui-col-sm12">
+            <h1>光钥新肌护肤系列</h1>
+        </div>
+
+        <div class="product">
+            @{
+
+                foreach (var item in (List<ProductDto>)Model["list2"])
+                {
+                    <div class="layui-col-md3 layui-col-xs3 layui-col-sm6 contain">
+                        @if (item.ProductImagePath.Contains('#'))
+                        {
+                            var arr = item.ProductImagePath.Split('#');
+                            <img src="@arr[0]" width="50%"/>
+                        }
+                        else
+                        {
+                            <img src="@item.ProductImagePath"width="50%"/>
+                        }
+                        <p>@item.ProductName</p>
+
+                        <p>@item.SizeName</p>
+                        <br/>
+                        <input type="button" name="" id="" value="￥@Convert.ToDouble(item.ProductPrice)"/>
+                        <button type="button" class="layui-btn layui-btn-sm layui-btn-primary" onclick="location.href = '@Url.Action("ProductInfo","Product",new{id=item.Id})'" >购买 </button>
+                    </div>
+                }
+            }
+
+        </div>
+        
+    </div>
+    <!--//三级-->
+    <div class="layui-row classarea">
+        <div class="layui-col-md12 layui-col-xs12 layui-col-sm12">
+            <h1>清洁防晒综合系列</h1>
+
+        </div>
+        <div class="product">
+            @{
+
+                foreach (var item in (List<ProductDto>)Model["list3"])
+                {
+                    <div class="layui-col-md3 layui-col-xs3 layui-col-sm6 contain">
+                        @if (item.ProductImagePath.Contains('#'))
+                        {
+                            var arr = item.ProductImagePath.Split('#');
+                            <img src="@arr[0]" width="50%"/>
+                        }
+                        else
+                        {
+                            <img src="@item.ProductImagePath" width="50%"/>
+                        }
+                        <p>@item.ProductName</p>
+
+                        <p>@item.SizeName</p>
+                        <br/>
+                        <input type="button" name="" id="" value="￥@Convert.ToDouble(item.ProductPrice)"/>
+                        <button type="button" class="layui-btn layui-btn-sm layui-btn-primary" onclick="location.href = '@Url.Action("ProductInfo","Product",new{id=item.Id})'" >购买 </button>
+                    </div>
+                }
+            }
+
+        </div>
+        
+    </div>
+
+
+</div>

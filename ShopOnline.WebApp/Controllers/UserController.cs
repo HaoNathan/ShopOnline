@@ -51,6 +51,7 @@ namespace ShopOnline.WebApp.Controllers
             IOrderInfoManager manager = new OrderInfoManager(new OrderInfoService());
             IOrderManager manager2 = new OrderManager(new OrderService());
             IProductManager manager3 = new ProductManager(new ProductService());
+            var distribution =  manager.QueryOrderDistribution(user.Id);
 
             var orderInfo =await  manager.QueryOrderByUserId(user.Id).ToListAsync();
 
@@ -69,7 +70,8 @@ namespace ShopOnline.WebApp.Controllers
             dic.Add("OrderInfo", orderInfo);
             dic.Add("Order", data);
             dic.Add("User",userObj);
-            
+            dic.Add("distribution", distribution);
+
             return View(dic);
         }
         [HttpPost]

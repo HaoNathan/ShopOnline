@@ -49,7 +49,10 @@
             <div class="container">
                 <ul class="nav-menu">
                     <li class="nav-item">
-                        <a href="">彩妆专区</a>
+                        <a onclick="location.href='@Url.Action("Index","Home")'">首页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Url.Action("Cosmetics","Home")">彩妆专区</a>
                         <div class="item-directory yc">
                             <ul class="directory-list" style="margin-left: 20%;">
                                 <li>
@@ -78,7 +81,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a href="">护肤专区</a>
+                        <a href="@Url.Action("Skincare","Home")">护肤专区</a>
                         <div class="item-directory yc">
                             <ul class="directory-list" style="margin-left: 10%;">
                                 <li>
@@ -91,7 +94,7 @@
                                     <a href="">修颜面霜</a>
                                 </li>
                                 <li>
-                                    <h4>光钥新肌护肤系列	</h4>
+                                    <h4>光钥新肌护肤系列 </h4>
                                     <a href="">基础清洁</a>
                                     <a href="">眼唇保养</a>
                                     <a href="">精华护肤</a>
@@ -111,7 +114,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a href="">香水专区</a>
+                        <a href="@Url.Action("Perfume","Home")">香水专区</a>
                         <div class="item-directory yc">
                             <ul class="directory-list" style="margin-left: 10%;">
                                 <li>
@@ -156,10 +159,10 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a href="">大师匠心</a>
+                        <a href="@Url.Action("Master","Home")">大师匠心</a>
                         <div class="item-directory yc">
                             <ul class="directory-list" style="margin-left: 20%; height: 300px;">
-                                <li style="margin-right: 40%; ">
+                                <li style="margin-right: 40%;">
                                     <h4>DESIGNED TO LAST</h4>
                                     <a href=""><img src="~/Asset/images/desigh-to-last.jpg" /></a>
                                 </li>
@@ -269,11 +272,12 @@
             <br />
             <p>国家药监局提示您：宣称用于祛斑美白、防晒、染发、烫发等的化妆品为特殊用途化妆品，产品标签上应标注“国妆特字”或者“国妆特进字”的标准文号。</p>
             <br />
-            <p>
-                使用条款 &nbsp;&nbsp;&nbsp;cookies政策&nbsp;&nbsp;&nbsp;隐私政策&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                沪公网安备：12345678910111号&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                中国工商 沪ICP备：12345678号-90
-            </p>
+           
+                <div style="width:300px;margin:0 auto; padding:20px 0;">
+                    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=51160202511805" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="" style="float:left;"/><p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">川公网安备 51160202511805号</p></a>
+                </div>
+
+
             <br /><br /><br />
             <p>©L'Oreal China 欧莱雅 (中国)有限公司版权所有</p>
             <br /><br /><br />
@@ -302,7 +306,7 @@
             var searchName = $("input[name='searchName']").val();
             location.href = "/Product/GetProductList?searchName="+searchName+"&index=1";
         });
-        $(".container a").click(function () {
+        $(".yc a").click(function () {
             var text = $(this).text();
             console.log(text);
             $(this).attr( "href","/Product/GetProductList?searchName="+text+"&index=2");

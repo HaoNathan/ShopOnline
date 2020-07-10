@@ -472,6 +472,7 @@
     <Content Include="Asset\images\二维码.jpg" />
     <Content Include="Asset\images\代金券.PNG" />
     <Content Include="Asset\images\大师匠心.jpg" />
+    <Content Include="Asset\images\彩妆海报.jpg" />
     <Content Include="Asset\images\微博.png" />
     <Content Include="Asset\images\护肤1.png" />
     <Content Include="Asset\images\护肤10.png" />
@@ -556,6 +557,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Areas\Admin\Views\Order\OrderList.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\OrderInfo.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -590,6 +592,10 @@
     <Content Include="Views\Product\ProductInfo.cshtml" />
     <Content Include="Views\Order\OrderList.cshtml" />
     <Content Include="Views\ShoppingCart\Cart.cshtml" />
+    <Content Include="Views\Home\Master.cshtml" />
+    <Content Include="Views\Home\Skincare.cshtml" />
+    <Content Include="Views\Home\Cosmetics.cshtml" />
+    <Content Include="Views\Home\Perfume.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

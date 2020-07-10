@@ -15,8 +15,9 @@ namespace ShopOnline.IBll
         /// <summary>
         /// 查询订单
         /// </summary>
-        /// <param name="id">商品Id</param>
+        /// <param name="id">订单详情Id</param>
         /// <returns></returns>
         IQueryable<OrderDto> QueryAllOrder(Guid id);
+
     }
 }

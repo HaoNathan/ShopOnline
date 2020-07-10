@@ -1,0 +1,173 @@
+﻿@using ShopOnline.Dto
+@model IDictionary<string, object>
+@{
+    ViewBag.Title = "香水系列";
+}
+
+@section css
+{
+    <style type="text/css">
+        .classarea > div:first-child {
+            background: black;
+        }
+
+        .classarea h1 {
+            text-align: center;
+            color: white;
+            line-height: 80px;
+            font-size: 20px;
+        }
+
+        .classarea > div > center > p {
+            color: white;
+        }
+
+        .product {
+            background-color: white;
+            height: 400px;
+            margin: 0;
+        }
+
+        #boxul ul li {
+            float: left;
+            text-align: center;
+            margin-right: 20px;
+            margin-left: 20px;
+        }
+
+        #boxul ul {
+            margin-left: 300px;
+            margin-top: -15px;
+        }
+
+        #boxul {
+            background-color: gainsboro;
+        }
+
+        .floatleft {
+            margin-left: 600px;
+        }
+
+            .floatleft li {
+                float: left;
+            }
+
+        .contain {
+            margin-left: 5%;
+            height: 500px;
+            text-align: center;
+        }
+
+            .contain p {
+                text-align: center;
+                margin-top: 2%;
+            }
+
+            .contain input {
+                background-color: black;
+                color: white;
+                margin: 0;
+                height: 30px;
+                width: 80px;
+                border: none;
+            }
+
+        #position {
+            background-color: gainsboro;
+            height: 40px;
+            margin-top: 20%;
+            line-height: 40px;
+        }
+
+            #position span {
+                margin-left: 40%;
+                font-size: 14px;
+            }
+    </style>
+}
+<div class="layui-row" style="margin-top: 7%">
+    <div class="layui-col-md12 layui-col-xs12 layui-col-sm12" style="line-height: 30px;background: #e8e6e6;">
+        <span id="boxul">
+            <ul>
+                <li><a href="">女士香水系列</a></li>
+                <li><a href="">男士香水系列</a></li>
+            </ul>
+        </span>
+    </div>
+    <div class="layui-col-md12 layui-col-xs12 layui-col-sm12" style="line-height: 30px;">
+        <img src="~/Asset/images/man-1920X636.jpg" style="height: 424px;width:100%;position: relative;;" />
+       
+    </div>
+</div>
+<div class="layui-row classarea" style="margin-top: 5%">
+    <div class="layui-col-md12 layui-col-xs12 layui-col-sm12">
+        <h1>女士香水系列</h1>
+    </div>
+    <!--//一级商品-->
+    <div class="product layui-col-md12" style="position: relative;">
+        @{
+            foreach (var item in (List<ProductDto>)Model["list1"])
+            {
+                <div class="layui-col-md3 layui-col-xs3 layui-col-sm6 contain">
+
+                    @if (item.ProductImagePath.Contains('#'))
+                    {
+                        var arr = item.ProductImagePath.Split('#');
+                        <img src="@arr[0]" width="50%" />
+                    }
+                    else
+                    {
+                        <img src="@item.ProductImagePath" width="50%" />
+                    }
+                    <p>@item.ProductName</p>
+                    <br /><br />
+                    <p>@item.SizeName</p>
+                    <br />
+                    <input type="button" name="" id="" value="￥@Convert.ToDouble(item.ProductPrice)" />
+                    <button type="button" class="layui-btn layui-btn-sm layui-btn-primary" onclick="location.href = '@Url.Action("ProductInfo","Product",new{id=item.Id})'">购买 </button>
+                </div>
+            }
+        }
+
+
+    </div>
+
+    <!--//二级商品-->
+    <div class="layui-row classarea" >
+        <div class="layui-col-md12 layui-col-xs12 layui-col-sm12">
+            <h1>男士香水系列</h1>
+        </div>
+
+        <div class="product">
+            @{
+                foreach (var item in (List<ProductDto>)Model["list2"])
+                {
+                    <div class="layui-col-md3 layui-col-xs3 layui-col-sm6 contain">
+
+                        @if (item.ProductImagePath.Contains('#'))
+                        {
+                            var arr = item.ProductImagePath.Split('#');
+                            <img src="@arr[0]" width="50%" />
+                        }
+                        else
+                        {
+                            <img src="@item.ProductImagePath" width="50%" />
+                        }
+                        <p>@item.ProductName</p>
+                        <br /><br />
+                        <p>@item.SizeName</p>
+                        <br />
+                        <input type="button" name="" id="" value="￥@Convert.ToDouble(item.ProductPrice)" />
+                        <button type="button" class="layui-btn layui-btn-sm layui-btn-primary" onclick="location.href = '@Url.Action("ProductInfo","Product",new{id=item.Id})'">购买 </button>
+                    </div>
+                }
+            }
+        </div>
+
+    </div>
+    
+</div>
+@section scripts
+{
+
+}

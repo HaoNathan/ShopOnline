@@ -48,6 +48,65 @@ namespace ShopOnline.WebApp.Controllers
             return View(test);
 
         }
+        /// <summary>
+        /// 大师匠心页面
+        /// </summary>
+ 
+        public ActionResult Master()
+        {
+            
+            return View();
+
+        }
+        public async Task<ActionResult> Skincare()
+        {
+            IDictionary<string,object>dic=new Dictionary<string, object>();
+
+            var data = await _manager.QueryProductByCategory(2, "【黑钥匙】护肤系列").Take(3).ToListAsync();
+            var data2 =await _manager.QueryProductByCategory(2, "光钥新肌护肤系列").ToListAsync();
+            var data3 =await _manager.QueryProductByCategory(2, "清洁防晒系列").ToListAsync();
+            var data4 = await _manager.QueryProductByCategory(2, "男士综合护肤系列").ToListAsync();
+
+            dic.Add("list1",data);
+            dic.Add("list2", data2);
+            dic.Add("list3", data3);
+            dic.Add("list4", data4);
+
+            return View(dic);
+
+        }
+        public async Task<ActionResult> Cosmetics()
+        {
+            IDictionary<string, object> dictionary = new Dictionary<string, object>();
+
+            var data =await _manager.QueryProductByCategory(2, "唇部").ToListAsync();
+            var data2 =await _manager.QueryProductByCategory(2, "面部").ToListAsync();
+            var data3 =await _manager.QueryProductByCategory(2, "眼部").ToListAsync();
+
+            dictionary.Add("list1", data);
+            dictionary.Add("list2", data2);
+            dictionary.Add("list3", data3);
+
+            return View(dictionary);
+       
+
+        }
+
+        public async Task<ActionResult> Perfume()
+        {
+            IDictionary<string, object> dictionary = new Dictionary<string, object>();
+
+            var data = await _manager.QueryProductByCategory(2, "女士香水系列").ToListAsync();
+            var data2 = await _manager.QueryProductByCategory(2, "男士香水系列").ToListAsync();
+           
+
+            dictionary.Add("list1", data);
+            dictionary.Add("list2", data2);
+         
+
+            return View(dictionary);
+        }
+
 
 
 

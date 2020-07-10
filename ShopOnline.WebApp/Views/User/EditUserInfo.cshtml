@@ -316,11 +316,11 @@
                                                             if (item.ProductImagePath.Contains("#"))
                                                             {
                                                                 var arr = item.ProductImagePath.Split('#');
-                                                                <img src="@arr[0]" width="50%" />
+                                                                <img src="@arr[0]" width="50%"/>
                                                             }
                                                             else
                                                             {
-                                                                <img src="@item.ProductImagePath" width="50%" />
+                                                                <img src="@item.ProductImagePath" width="50%"/>
                                                             }
                                                         }
                                                     </td>
@@ -331,8 +331,9 @@
                                                         @Convert.ToDouble(item.ProductPrice)
                                                     </td>
                                                     <td>
-
-                                                    <td />
+                                                    <p>收件人住址：@item1.Address</p>
+                                                    <p>收件人名称：  <strong> @item1.AcceptName</strong> 手机号：@item1.Phone </p>
+                                                    <td/>
                                                 </tr>
 
                                             }
@@ -340,33 +341,35 @@
                                         }
                                     }
                                 }
-                                <tr>
-                                    <td colspan="4">订单创建时间： @item1.CreateTime</td>
-                                    <td style="margin-left: 20%">
-                                        @{
-                                            if (item1.PayState == 0)
-                                            {
-                                                <span style="font-weight: bold; color: red">您还未支付，请尽快支付</span>
-                                                <button type="submit" class="layui-btn layui-btn-small layui-btn-primary payMoney" value="@item1.Id">支付</button>
-                                                <button type="submit" class="layui-btn layui-btn-small layui-btn-danger deleteOrder" value="@item1.Id">取消订单</button>
-                                            }
-                                            else
-                                            {
-                                                if (item1.DeliverySate == true)
-                                                {
-                                                    <button type="button" class="layui-btn layui-btn-sm">已发货</button>
+                    <tr>
+                        <td colspan="2">订单创建时间： @item1.CreateTime</td>
+                        <td colspan="2">总金额： @item1.TotalPrice</td>
 
-                                                }
-                                                else
-                                                {
-                                                    <button type="button" class="layui-btn layui-btn-sm layui-btn-danger">未发货</button>
+                        <td >
+                            @{
+                                if (item1.PayState == 0)
+                                {
+                                    <span style="font-weight: bold; color: red">您还未支付，请尽快支付</span>
+                                    <button type="submit" class="layui-btn layui-btn-small layui-btn-primary payMoney" value="@item1.Id">支付</button>
+                                    <button type="submit" class="layui-btn layui-btn-small layui-btn-danger deleteOrder" value="@item1.Id">取消订单</button>
+                                }
+                                else
+                                {
+                                    if (item1.DeliverySate == true)
+                                    {
+                                        <button type="button" class="layui-btn layui-btn-sm">已发货</button>
 
-                                                }
-                                            }
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="layui-btn layui-btn-sm layui-btn-danger">未发货</button>
 
-                                        }
-                                    <td />
-                                </tr>
+                                    }
+                                }
+
+                            }
+                        <td />
+                    </tr>
                             }
 
                         }

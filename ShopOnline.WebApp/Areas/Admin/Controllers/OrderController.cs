@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
+using ShopOnline.Bll;
+using ShopOnline.Dal;
+using ShopOnline.Dto;
 using ShopOnline.IBll;
 using ShopOnline.WebApp.Common;
 using ShopOnline.WebApp.Filter;
@@ -78,5 +82,27 @@ namespace ShopOnline.WebApp.Areas.Admin.Controllers
             return Json(_msg);
         }
 
+        public async Task<ActionResult> OrderInfo(string id)
+        {
+            var data =await _manager.QueryOrder(Guid.Parse(id));
+
+            IOrderManager manager=new OrderManager(new OrderService());
+            IDictionary<string,object> dic= new Dictionary<string, object>();
+            IProductManager manager1=new ProductManager(new ProductService());
+            var data2=manager.QueryAllOrder(data.Id);
+            var distribution= _manager.QueryOrderDistribution(data.Id);
+            List<ProductDto>list=new List<ProductDto>();
+
+            foreach (var item in data2)
+            {
+                list.Add(await manager1.QueryProduct(item.ProductId));
+            }
+
+            dic.Add("OrderInfo",data);
+            dic.Add("Distribution", distribution);
+            dic.Add("ProductList", list);
+
+            return View(dic);
+        }
     }
 }
