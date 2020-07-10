@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -89,8 +90,8 @@ namespace ShopOnline.WebApp.Areas.Admin.Controllers
             IOrderManager manager=new OrderManager(new OrderService());
             IDictionary<string,object> dic= new Dictionary<string, object>();
             IProductManager manager1=new ProductManager(new ProductService());
-            var data2=manager.QueryAllOrder(data.Id);
-            var distribution= _manager.QueryOrderDistribution(data.Id);
+            var data2=await manager.QueryAllOrder(data.Id).ToListAsync();
+     
             List<ProductDto>list=new List<ProductDto>();
 
             foreach (var item in data2)
@@ -99,10 +100,36 @@ namespace ShopOnline.WebApp.Areas.Admin.Controllers
             }
 
             dic.Add("OrderInfo",data);
-            dic.Add("Distribution", distribution);
+      
             dic.Add("ProductList", list);
 
             return View(dic);
         }
+        [HttpPost]
+        public async Task<JsonResult> UpdateOrderInfo(OrderInfoDto model)
+        {
+            IOrderInfoManager manager = new OrderInfoManager(new OrderInfoService());
+            var result = await manager.UpdateOrder(model);
+
+            if (result == 1)
+            {
+                _msg = new MsgResult()
+                {
+                    IsSuccess = true,
+                    Info = "修改成功"
+                };
+            }
+            else
+            {
+                _msg = new MsgResult()
+                {
+                    IsSuccess = false,
+                    Info = "修改失败"
+                };
+            }
+            return Json(_msg);
+        }
+
     }
+   
 }

@@ -30,58 +30,76 @@ namespace ShopOnline.WebApp.Controllers
         /// <returns></returns>
         public async Task<ActionResult> AddCart(string id,string isBuy)
         {
-            var user = (UserDto)Session["User"];
-
-            var shopCart = _manager.IsExist(Guid.Parse(id));
-            if (shopCart==null)
+            try
             {
-                var result = await _manager.AddShoppingCart(new ShoppingCartDto()
-                {
-                    UserId = user.Id,
-                    ProductId = Guid.Parse(id)
-                });
+                var user = (UserDto)Session["User"];
 
-                if (result == 1)
+                var shopCart = _manager.IsExist(Guid.Parse(id));
+
+                if (shopCart == null)
                 {
-                    if (isBuy == "true")
-                        return RedirectToAction("Cart", "ShoppingCart");
-                    else
-                        _msg = new MsgResult()
-                        {
-                            IsSuccess = true,
-                            Info = "该商品已成功添加进您的购物车"
-                        };
-                }
-            }
-            else
-            {
-                var res = await _manager.UpdateShoppingCart(shopCart);
-                if (res == 1)
-                {
-                    _msg = new MsgResult()
+                    var result = await _manager.AddShoppingCart(new ShoppingCartDto()
                     {
-                        IsSuccess = true,
-                        Info = "该商品已存在于您的购物车,已为您更新数量"
-                    };
+                        UserId = user.Id,
+                        ProductId = Guid.Parse(id)
+                    });
+
+                    if (result == 1)
+                    {
+                        if (isBuy == "true")
+                            return RedirectToAction("Cart", "ShoppingCart");
+                        else
+                            _msg = new MsgResult()
+                            {
+                                IsSuccess = true,
+                                Info = "该商品已成功添加进您的购物车"
+                            };
+                    }
                 }
                 else
                 {
-                    _msg = new MsgResult()
+                    var res = await _manager.UpdateShoppingCart(shopCart);
+
+                    if (res == 1)
                     {
-                        IsSuccess = false,
-                        Info = "更新数量失败"
-                    };
+                        _msg = new MsgResult()
+                        {
+                            IsSuccess = true,
+                            Info = "该商品已存在于您的购物车,已为您更新数量"
+                        };
+                    }
+                    else
+                    {
+                        _msg = new MsgResult()
+                        {
+                            IsSuccess = false,
+                            Info = "更新数量失败"
+                        };
+                    }
                 }
+
+            }
+            catch (Exception e)
+            {
+               return RedirectToAction("Index", "Home");
             }
 
             return Json(_msg,JsonRequestBehavior.AllowGet);
         }
         public async Task<ActionResult> Cart()
         {
-            var user =(UserDto)Session["User"];
-           
-            var card =await _manager.QueryShoppingCart(user.Id).ToListAsync();
-            return View(card);
+            try
+            {
+                var user = (UserDto)Session["User"];
+
+                var card = await _manager.QueryShoppingCart(user.Id).ToListAsync();
+                return View(card);
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
         }
         [HttpPost]
         public async Task<JsonResult> UpdateCartState(string id)

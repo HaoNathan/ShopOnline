@@ -7,10 +7,12 @@ using System.Web.Mvc;
 using ShopOnline.Bll;
 using ShopOnline.IBll;
 using ShopOnline.WebApp.Common;
+using ShopOnline.WebApp.Filter;
 using ShopOnlineTools;
 
 namespace ShopOnline.WebApp.Areas.Admin.Controllers
 {
+    [AdminAuthorize()]
     public class ProductAttributesController : Controller
     {
         // GET: Admin/ProductAttributes

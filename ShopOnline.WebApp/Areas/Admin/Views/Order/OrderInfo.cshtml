@@ -1,4 +1,5 @@
-﻿
+﻿@using ShopOnline.Dto
+@model IDictionary<string,object>
 @{
     ViewBag.Title = "OrderInfo";
 }
@@ -18,19 +19,75 @@
                         <col>
                     </colgroup>
                     <thead>
-                        <tr>
-                            <th>商品图</th>
-                            <th>商品名</th>
-                            <th>数量</th>
-                            <th>单价</th>
-                            <th>收件人信息</th>
-                        </tr>
+                    <tr>
+                        <th>商品图</th>
+                        <th>商品名</th>
+                        <th>总金额</th>
+                       
+                    </tr>
                     </thead>
                     <tbody>
+                    @{
+                        var orderInfo = (OrderInfoDto)Model["OrderInfo"];
 
+                        foreach (var item in (List<ProductDto>)Model["ProductList"])
+                        {
+                            <tr>
+                                <td>
+                                    @if (item.ProductImagePath.Contains("#"))
+                                    {
+                                        var arr = item.ProductImagePath.Split('#');
+                                        <img src="@arr[0]" width="50%" />
+                                    }
+                                </td>
+                                <td>商品名： @item.ProductName</td>
 
+                                <td>总金额： @orderInfo.TotalPrice</td>
+                                                
+                            </tr>
+                        }
+                        
+                        
+                    }
                     </tbody>
                 </table>
+
+                    
+                <div class="layui-form">
+                    <div class="layui-form-item">
+                        @Html.Hidden("Id",orderInfo.Id);
+                        <label class="layui-form-label">
+                            <span class="x-red">*</span>收件人
+                        </label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="AcceptName" lay-verify="required"
+                                   autocomplete="off" class="layui-input" value="@orderInfo.AcceptName">
+
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">
+                            <span class="x-red">*</span>手机号
+                        </label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="Phone" lay-verify="required"
+                                   autocomplete="off" class="layui-input" value="@orderInfo.Phone">
+
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">
+                            <span class="x-red">*</span>住址
+                        </label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="Address" lay-verify="required"
+                                   autocomplete="off" class="layui-input" value="@orderInfo.Address">
+                            <button type="submit" lay-filter="UpdateOrderInfo" lay-submit="" class="layui-btn layui-btn-sm layui-col-md-offset9" >
+                                <i class="layui-icon layui-icon-add-circle-fine"></i> 修改
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
 
@@ -40,3 +97,23 @@
 
     </div>
 
+@section js
+{
+    <script>
+        layui.use(['form','layer','jquery'],function() {
+            var layer = layui.layer;
+            var form = layui.form;
+            $ = layui.$;
+            form.on('submit(UpdateOrderInfo)',
+                function (data) {
+                    //发异步,
+                    $.post("@Url.Action("UpdateOrderInfo","Order")", data.field, function(res) {
+                        layer.msg(res.Info);
+                       
+                    });
+
+                    return false;
+                });
+        });
+    </script>
+}

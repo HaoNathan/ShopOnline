@@ -9,7 +9,7 @@
                     <blockquote class="layui-elem-quote">
                         欢迎管理员：
                         <span class="x-red">@Model.AdminName</span>！当前时间：
-                         <span id="time" class="time"></span><br />
+                        <span id="time"></span><br />
                     </blockquote>
                 </div>
             </div>
@@ -21,25 +21,9 @@
                     <ul class="layui-row layui-col-space10 layui-this x-admin-carousel x-admin-backlog">
                         <li class="layui-col-md2 layui-col-xs6">
                             <a href="javascript:;" class="x-admin-backlog-body">
-                                <h3>文章数</h3>
-                                <p>
-                                    <cite>66</cite>
-                                </p>
-                            </a>
-                        </li>
-                        <li class="layui-col-md2 layui-col-xs6">
-                            <a href="javascript:;" class="x-admin-backlog-body">
                                 <h3>会员数</h3>
                                 <p>
-                                    <cite>12</cite>
-                                </p>
-                            </a>
-                        </li>
-                        <li class="layui-col-md2 layui-col-xs6">
-                            <a href="javascript:;" class="x-admin-backlog-body">
-                                <h3>回复数</h3>
-                                <p>
-                                    <cite>99</cite>
+                                    <cite id="userCount">0</cite>
                                 </p>
                             </a>
                         </li>
@@ -47,23 +31,23 @@
                             <a href="javascript:;" class="x-admin-backlog-body">
                                 <h3>商品数</h3>
                                 <p>
-                                    <cite>67</cite>
-                                </p>
-                            </a>
-                        </li>
-                        <li class="layui-col-md2 layui-col-xs6">
-                            <a href="javascript:;" class="x-admin-backlog-body">
-                                <h3>文章数</h3>
-                                <p>
-                                    <cite>67</cite>
+                                    <cite id="productCount">0</cite>
                                 </p>
                             </a>
                         </li>
                         <li class="layui-col-md2 layui-col-xs6 ">
                             <a href="javascript:;" class="x-admin-backlog-body">
-                                <h3>文章数</h3>
+                                <h3>订单数</h3>
                                 <p>
-                                    <cite>6766</cite>
+                                    <cite id="orderCount">0</cite>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="layui-col-md2 layui-col-xs6 ">
+                            <a href="javascript:;" class="x-admin-backlog-body">
+                                <h3>本月销售额</h3>
+                                <p>
+                                    <cite id="businessMoney">0</cite>
                                 </p>
                             </a>
                         </li>
@@ -71,94 +55,19 @@
                 </div>
             </div>
         </div>
-        <div class="layui-col-sm6 layui-col-md3">
-            <div class="layui-card">
-                <div class="layui-card-header">
-                    下载
-                    <span class="layui-badge layui-bg-cyan layuiadmin-badge">月</span>
-                </div>
-                <div class="layui-card-body  ">
-                    <p class="layuiadmin-big-font">33,555</p>
-                    <p>
-                        新下载
-                        <span class="layuiadmin-span-color">
-                            10%
-                            <i class="layui-inline layui-icon layui-icon-face-smile-b"></i>
-                        </span>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="layui-col-sm6 layui-col-md3">
-            <div class="layui-card">
-                <div class="layui-card-header">
-                    下载
-                    <span class="layui-badge layui-bg-cyan layuiadmin-badge">月</span>
-                </div>
-                <div class="layui-card-body ">
-                    <p class="layuiadmin-big-font">33,555</p>
-                    <p>
-                        新下载
-                        <span class="layuiadmin-span-color">
-                            10%
-                            <i class="layui-inline layui-icon layui-icon-face-smile-b"></i>
-                        </span>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="layui-col-sm6 layui-col-md3">
-            <div class="layui-card">
-                <div class="layui-card-header">
-                    下载
-                    <span class="layui-badge layui-bg-cyan layuiadmin-badge">月</span>
-                </div>
-                <div class="layui-card-body ">
-                    <p class="layuiadmin-big-font">33,555</p>
-                    <p>
-                        新下载
-                        <span class="layuiadmin-span-color">
-                            10%
-                            <i class="layui-inline layui-icon layui-icon-face-smile-b"></i>
-                        </span>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="layui-col-sm6 layui-col-md3">
-            <div class="layui-card">
-                <div class="layui-card-header">
-                    下载
-                    <span class="layui-badge layui-bg-cyan layuiadmin-badge">月</span>
-                </div>
-                <div class="layui-card-body ">
-                    <p class="layuiadmin-big-font">33,555</p>
-                    <p>
-                        新下载
-                        <span class="layuiadmin-span-color">
-                            10%
-                            <i class="layui-inline layui-icon layui-icon-face-smile-b"></i>
-                        </span>
-                    </p>
-                </div>
-            </div>
-        </div>
+
+
+
+
         <div class="layui-col-md12">
             <div class="layui-card">
                 <div class="layui-card-header">商品信息</div>
                 <div class="layui-card-body ">
-                    
+                    <div id="container"></div>
                 </div>
             </div>
         </div>
-        <div class="layui-col-md12">
-            <div class="layui-card">
-                <div class="layui-card-header">开发团队</div>
-                <div class="layui-card-body ">
-                    
-                </div>
-            </div>
-        </div>
+
         <style id="welcome_style"></style>
         <div class="layui-col-md12">
             <blockquote class="layui-elem-quote layui-quote-nm">
@@ -167,11 +76,22 @@
         </div>
     </div>
 </div>
+
 @section js
 {
+    <script src="https://code.highcharts.com.cn/highcharts/highcharts.js"></script>
+    <script src="https://code.highcharts.com.cn/highcharts/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com.cn/highcharts/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com.cn/highcharts/modules/oldie.js"></script>
+    <script src="https://code.highcharts.com.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+
     <script type="text/javascript" src="~/Areas/Admin/Asset/js/xadmin.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script>
-        window.load(startInterval());
+        startInterval();
+        getCount();
+        getChart();
+
         function getTime() {
             var now = new Date();
             //获取相对于1900的时间差，比如2019年，获取的数字是 119
@@ -179,11 +99,11 @@
             //获取完整的年份
             year = now.getFullYear();
             //范围0~11， 跟中国的月份相差1
-            var month = now.getMonth()+1;
+            var month = now.getMonth() + 1;
             //getDate表示获取当前时间对应的月份中的天数
-            var days = now.getDate(); 
+            var days = now.getDate();
             //表示获取星期数 ,西方国家的星期数是 0~6,0代表的是周日,其他的分别是周一到周六
-            var  dayOfWeek = now.getDay() ;  
+            var dayOfWeek = now.getDay();
             //获取当前小时
             var hour = now.getHours();
             //获取当前分钟
@@ -191,25 +111,78 @@
             //获取当前秒
             var seconds = now.getSeconds();
             //拼接时间格式, 年-月-日  时:分:秒
-            var time1 = year+"-"+month+"-"+days+"  "+hour+":"+minutes+":"+seconds;
-                         
+            var time1 = year + "-" + month + "-" + days + "  " + hour + ":" + minutes + ":" + seconds;
+
             document.getElementById("time").innerText = time1;
         }
+
         //定义将使用的定时器
         var timeout = setInterval();
-            
+
         //打开定时器
         function startInterval() {
-            timeout = setInterval("getTime()",1000);
+            timeout = setInterval("getTime()", 1000);
         }
-        //setInterval(调用方法，刷新间隔)
-        $(document).ready(function() {
-            $.get("@Url.Action("GetCount","AdminDesktop")",
-                { },
+
+        //异步获取统计数据
+        function getCount() {
+
+            $.post("@Url.Action("GetCount", "AdminDesktop")",
                 function(res) {
 
+                    $("#userCount").text(res.UserCount);
+                    $("#productCount").text(res.ProductCount);
+                    $("#orderCount").text(res.OrderCount);
+                    $("#businessMoney").text(res.BusinessMoney + "￥");
+                    console.log(res.UserCount);
                 });
-        });
+        }
+
+        function getChart() {
+            $.post("@Url.Action("Index","Report")", function(res) {
+                var chart = Highcharts.chart('container',{
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: '本年月销售额'
+                    },
+                    xAxis: {
+                        categories: [
+                            '一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'
+                        ],
+                        crosshair: true
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: '销售额'
+                        }
+                    },tooltip: {
+                        // head + 每个 point + footer 拼接成完整的 table
+                        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                            '<td style="padding:0"><b>{point.y:.1f}￥</b></td></tr>',
+                        footerFormat: '</table>',
+                        shared: true,
+                        useHTML: true
+                    },
+                    plotOptions: {
+                        column: {
+                            borderWidth: 0
+                        }
+                    },
+                    series: [{
+                        name: '销售额',
+                        data: res.list2
+                    }]
+                });
+            });
+
+
+        };
+
+
     </script>
 }
 

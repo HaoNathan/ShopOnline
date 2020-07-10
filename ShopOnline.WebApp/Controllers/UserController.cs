@@ -139,7 +139,7 @@ namespace ShopOnline.WebApp.Controllers
                     cookie.Expires=DateTime.Now.AddDays(30);
                     Response.AppendCookie(cookie);
 
-                    HttpCookie cookie2 = new HttpCookie("imagePath");
+                    HttpCookie cookie2 = new HttpCookie("ImagePath");
                     cookie2.Value = result.ImagePath;
                     cookie.Expires = DateTime.Now.AddDays(30);
                     Response.AppendCookie(cookie2);

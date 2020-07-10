@@ -49,9 +49,7 @@
                 </div>
                 <div class="layui-card-header">
 
-                    <button class="layui-btn layui-col-md-offset11" onclick="xadmin.open('添加产品', '@Url.Action("AddProduct", "Product")', 1000, 700)">
-                        <i class="layui-icon"></i>添加
-                    </button>
+                    
                 </div>
                 <div class="layui-card-body ">
                     <table id="OrderTable" lay-filter="OrderList"></table>
@@ -88,10 +86,10 @@
                             { field: 'Phone', title: '手机号', width: '10%', sort: true },
                             { field: 'Address', title: '住址', width: '10%', sort: true },
                             { title: '创建时间', templet: "#newDate", width: '6%' },
-                            { title: '支付状态', templet: '#payState', width: '5%' },
-                            { title: '是否发货', templet: '#switchTpl2', width: '5%' },
-                            { field: 'IsRemove', title: '状态', templet: '#switchTpl', width: '5%' },
-                            { title: '操作', templet: '#barDemo', width: '5%', fixed: 'right' }
+                            { title: '支付状态', templet: '#payState', width: '6%' },
+                            { title: '是否发货', templet: '#switchTpl2', width: '6%' },
+                            { field: 'IsRemove', title: '状态', templet: '#switchTpl', width: '6%' },
+                            { title: '操作', templet: '#barDemo', width: '8%', fixed: 'right' }
                         ]
                     ],
                     limits: [8, 16, 24],
@@ -107,7 +105,7 @@
                             where: {
                                 acceptName: name,
                                 productName: name2,
-                                createTime: time,
+                                createTime: time
                             }
                         });
                 });
@@ -131,9 +129,8 @@
                         var data = obj.data; //获得当前行数据
                         var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
                         if (layEvent === 'edit') { //编辑
+                            console.log(data.Id);
                             xadmin.open('个人信息', '/Admin/Order/OrderInfo?id=' + data.Id, 1100, 780);
-                        }else if (layEvent==="check") {
-                            xadmin.open('个人信息', '/Admin/Product/UpdateProduct?id=' + data.Id, 1100, 780);
                         }
                     });
             });
@@ -159,7 +156,7 @@
     <script type="text/html" id="productImage">
         <!--拆分图片路径 -->
         {{# var imagePath=d.ProductImagePath; var str=imagePath.split('#'); }}
-        <img src="{{str[0]}}" alt="Alternate Text" />
+        <img src="{{str[0]}}" alt="Alternate Text"/>
     </script>
 }
 

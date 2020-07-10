@@ -171,17 +171,20 @@
 {
     <script>
         //加载layui组件
-        layui.use('element',
+        layui.use(['element','layer'],
             function() {
                 var element = layui.element;
+                var layer = layui.layer;
 
+                $("#addCard").click(function () {
+                    $.get('@Url.Action("AddCart","ShoppingCart",new{id=Model.Id,isBuy="false"})',function (res) {
+                        if (res.IsSuccess) {
+                            layer.msg(res.Info);
+                        }
+                    });
+                });
             });
-        $("#addCard").click(function () {
-
-            $.get('@Url.Action("AddCart","ShoppingCart",new{id=Model.Id,isBuy="false"})',function(res) {
-                layer.msg(res.Info);
-            });
-        });
+        
         //小图切换大图片
         $("#imgBox img").click(function() {
             var imgPath = $(this).attr("src");

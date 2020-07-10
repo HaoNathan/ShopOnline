@@ -1,14 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using ShopOnline.Bll;
+using ShopOnline.Dal;
+using ShopOnline.Dto;
 using ShopOnline.IBll;
 using ShopOnline.WebApp.Common;
+using ShopOnline.WebApp.Filter;
 using ShopOnlineTools;
 
 namespace ShopOnline.WebApp.Areas.Admin.Controllers
 {
+    [AdminAuthorize()]
     public class UserController : Controller
     {
         private readonly IUserManager _manager;
@@ -62,10 +68,6 @@ namespace ShopOnline.WebApp.Areas.Admin.Controllers
 
 
 
-        [HttpPost]
-        public JsonResult UpdateUserState()
-        {
-            return Json(null);
-        }
+       
     }
 }

@@ -31,7 +31,7 @@
                     @{
                         try
                         {
-                            var imagePath = HttpContext.Current.Request.Cookies["imagePath"].Value;
+                            var imagePath = HttpContext.Current.Request.Cookies["ImagePath"].Value;
                         
                                 <img src="@imagePath" class="layui-nav-img">   <a href="@Url.Action("EditUserInfo","User")">个人中心</a>
                         }

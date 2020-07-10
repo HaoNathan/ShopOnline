@@ -36,10 +36,11 @@ namespace ShopOnline.Bll
         public async Task<int> UpdateOrder(OrderInfoDto model)
         {
             var order = await _service.QueryAsync(model.Id);
-
-            order.PayState = order.PayState;
-            order.DeliverySate = order.DeliverySate;
+         
             order.UpdateTime = DateTime.Now;
+            order.AcceptName = model.AcceptName;
+            order.Phone = model.Phone;
+            order.Address = model.Address;
 
             return await _service.EditAsync(order);
         }
@@ -124,7 +125,11 @@ namespace ShopOnline.Bll
             {
                 PayState = order.PayState,
                 DeliverySate = order.DeliverySate,
-
+                AcceptName = order.AcceptName,
+                Address = order.Address,
+                Phone = order.Phone,
+                Id = order.Id,
+                TotalPrice = order.TotalPrice,
                 UserId = order.UserId
             };
         }
