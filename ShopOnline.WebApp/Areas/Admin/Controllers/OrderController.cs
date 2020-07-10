@@ -32,11 +32,15 @@ namespace ShopOnline.WebApp.Areas.Admin.Controllers
             return View();
         }
         [HttpGet]
-        public JsonResult GetOrderList(int page, int limit, string acceptName, string phone, string createTime)
+        public JsonResult GetOrderList(int page, int limit, string id, string phone, string createTime)
         {
             var data = _manager.QueryAllOrder(true);
 
-            if (!string.IsNullOrEmpty(acceptName)) data = data.Where(m => m.AcceptName .Contains(acceptName));
+            if (!string.IsNullOrEmpty(id))
+            {
+                var iD = Guid.Parse(id.ToString().Trim());
+                data = data.Where(m => m.Id.Equals(iD));
+            }
 
             if (!string.IsNullOrEmpty(phone))
             {

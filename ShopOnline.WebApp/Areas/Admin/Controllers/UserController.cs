@@ -65,9 +65,27 @@ namespace ShopOnline.WebApp.Areas.Admin.Controllers
             return Json(jsonResult, JsonRequestBehavior.AllowGet);
         }
 
-
-
-
+        public async Task<JsonResult> UpdateUserState(string id ,bool state)
+        {
+            var result = await _manager.UpdateUserState(Guid.Parse(id), state);
+            if (result==1)
+            {
+                _msg=new MsgResult()
+                {
+                    IsSuccess = true,
+                    Info = "修改状态成功"
+                };
+            }
+            else
+            {
+                _msg = new MsgResult()
+                {
+                    IsSuccess = true,
+                    Info = "修改状态成功"
+                };
+            }
+            return Json(_msg);
+        }
        
     }
 }

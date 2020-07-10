@@ -110,7 +110,7 @@
                             state = true;
                         };
                         $.post('@Url.Action("UpdateUserState", "User")',
-                            { stateId: state, adminId: id },
+                            { state: state, id: id },
                             function(res) {
                                 layer.msg(res.Info);
                             });
@@ -133,15 +133,15 @@
         {{# var newTime=(new Date(date)).toLocaleDateString(); }}
         {{newTime}}
     </script>
-    <script type="text/html" id="barDemo">
+    @*<script type="text/html" id="barDemo">
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-    </script>
+    </script>*@
     <script type="text/html" id="switchTpl">
         <input type="checkbox" name="StateName" value="{{d.Id}}" lay-skin="switch" lay-text="在使用|注销" lay-filter="stateDemo" {{ d.IsRemove== false ? 'checked' : ' ' }}>
     </script>
     <script type="text/html" id="member">
 
-        <button name="StateName" class="layui-btn layui-btn-sm  {{d.IsRemove== true ? 'layui-btn-warm' : ' layui-btn-primary' }} "> {{ d.IsRemove== true ? '会员用户' : ' 普通用户' }}</button>
+        <button name="StateName" class="layui-btn layui-btn-sm  {{d.IsMember== true ? 'layui-btn-warm' : ' layui-btn-primary' }} "> {{ d.IsMember== true ? '会员用户' : ' 普通用户' }}</button>
 
     </script>
 }

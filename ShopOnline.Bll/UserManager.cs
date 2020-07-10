@@ -100,6 +100,11 @@ namespace ShopOnline.Bll
             });
         }
 
-       
+        public async Task<int> UpdateUserState(Guid id,bool state)
+        {
+            var user = await _service.QueryAsync(id);
+            user.IsRemove = state;
+            return await _service.EditAsync(user);
+        }
     }
 }

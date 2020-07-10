@@ -116,12 +116,11 @@
             document.getElementById("time").innerText = time1;
         }
 
-        //定义将使用的定时器
-        var timeout = setInterval();
+        
 
         //打开定时器
         function startInterval() {
-            timeout = setInterval("getTime()", 1000);
+            var timeout = setInterval("getTime()", 1000);
         }
 
         //异步获取统计数据
@@ -148,9 +147,7 @@
                         text: '本年月销售额'
                     },
                     xAxis: {
-                        categories: [
-                            '一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'
-                        ],
+                        categories: res.list1,
                         crosshair: true
                     },
                     yAxis: {

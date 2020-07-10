@@ -54,10 +54,12 @@ namespace ShopOnline.WebApp.Controllers
  
         public ActionResult Master()
         {
-            
             return View();
-
         }
+        /// <summary>
+        /// 彩妆页面
+        /// </summary>
+        /// <returns></returns>
         public async Task<ActionResult> Skincare()
         {
             IDictionary<string,object>dic=new Dictionary<string, object>();
@@ -75,6 +77,10 @@ namespace ShopOnline.WebApp.Controllers
             return View(dic);
 
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public async Task<ActionResult> Cosmetics()
         {
             IDictionary<string, object> dictionary = new Dictionary<string, object>();
@@ -103,6 +109,20 @@ namespace ShopOnline.WebApp.Controllers
             dictionary.Add("list1", data);
             dictionary.Add("list2", data2);
          
+
+            return View(dictionary);
+        }
+        public async Task<ActionResult> Government()
+        {
+            IDictionary<string, object> dictionary = new Dictionary<string, object>();
+
+            var data = await _manager.QueryProductByCategory(2, "女士香水系列").ToListAsync();
+            var data2 = await _manager.QueryProductByCategory(2, "男士香水系列").ToListAsync();
+
+
+            dictionary.Add("list1", data);
+            dictionary.Add("list2", data2);
+
 
             return View(dictionary);
         }

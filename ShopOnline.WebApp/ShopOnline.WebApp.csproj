@@ -446,6 +446,15 @@
     <Content Include="Asset\images\Lip Glaze7.png" />
     <Content Include="Asset\images\Lip Glaze8.png" />
     <Content Include="Asset\images\Logo.png" />
+    <Content Include="Asset\images\LP-PC_04.jpg" />
+    <Content Include="Asset\images\LP-PC_05.jpg" />
+    <Content Include="Asset\images\LP-PC_06.jpg" />
+    <Content Include="Asset\images\LP-PC_07.jpg" />
+    <Content Include="Asset\images\LP-PC_08 %281%29.jpg" />
+    <Content Include="Asset\images\LP-PC_08.jpg" />
+    <Content Include="Asset\images\LP-PC_09.jpg" />
+    <Content Include="Asset\images\LP-PC_10.jpg" />
+    <Content Include="Asset\images\LP-PC_11.jpg" />
     <Content Include="Asset\images\man-1920X636.jpg" />
     <Content Include="Asset\images\mod_header_sig.jpg" />
     <Content Include="Asset\images\Mosaic_01.jpg" />
@@ -473,6 +482,11 @@
     <Content Include="Asset\images\二维码.jpg" />
     <Content Include="Asset\images\代金券.PNG" />
     <Content Include="Asset\images\大师匠心.jpg" />
+    <Content Include="Asset\images\官方礼遇轮播01.jpg" />
+    <Content Include="Asset\images\官方礼遇轮播02.jpg" />
+    <Content Include="Asset\images\官方礼遇轮播03.jpg" />
+    <Content Include="Asset\images\官方礼遇轮播04.jpg" />
+    <Content Include="Asset\images\官网01.PNG" />
     <Content Include="Asset\images\彩妆海报.jpg" />
     <Content Include="Asset\images\微博.png" />
     <Content Include="Asset\images\护肤1.png" />
@@ -494,6 +508,7 @@
     <Content Include="Asset\images\联系我们.png" />
     <Content Include="Asset\images\臻品速享.png" />
     <Content Include="Asset\images\返回.png" />
+    <Content Include="Asset\images\香水海报.jpg" />
     <Content Include="Asset\js\bootstrap.js" />
     <Content Include="Asset\js\bootstrap.min.js" />
     <Content Include="Asset\js\jquery-1.11.0.min.js" />
@@ -597,11 +612,11 @@
     <Content Include="Views\Home\Skincare.cshtml" />
     <Content Include="Views\Home\Cosmetics.cshtml" />
     <Content Include="Views\Home\Perfume.cshtml" />
+    <Content Include="Views\Home\Government.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\ProductAttributes\" />
     <Folder Include="Areas\Admin\Views\Report\" />
     <Folder Include="Models\" />
     <Folder Include="Upload\Product\" />

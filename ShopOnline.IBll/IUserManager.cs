@@ -53,6 +53,12 @@ namespace ShopOnline.IBll
         /// <returns></returns>
         Task<int> AddUser(UserDto model);
 
+        /// <summary>
+        /// 修改用户状态
+        /// </summary>
+        /// <param name="id">用户Id</param>
+        /// <returns></returns>
+        Task<int> UpdateUserState(Guid id,bool state);
 
     }
 }
