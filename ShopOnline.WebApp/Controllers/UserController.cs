@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -11,7 +10,6 @@ using ShopOnline.Bll;
 using ShopOnline.Dal;
 using ShopOnline.Dto;
 using ShopOnline.IBll;
-using ShopOnline.IDal;
 using ShopOnline.WebApp.Common;
 using ShopOnline.WebApp.Filter;
 using ShopOnlineTools;
@@ -93,7 +91,7 @@ namespace ShopOnline.WebApp.Controllers
         {
             _msg= new MsgResult();
             model.UserPassword = new Md5().MD5Encrypt(model.UserPassword);
-            var result = await _manager.EditUser(model);
+            var result = await _manager.EditUser(true,model);
             if (result==1)
             {
                 _msg.IsSuccess = true;

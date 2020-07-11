@@ -1,8 +1,5 @@
 ﻿
-@model ShopOnline.Dto.AdminDto
-
-
-
+@model ShopOnline.Dto.UserDto
 
 <div class="layui-fluid">
     <div class="layui-row">
@@ -12,66 +9,63 @@
                     <span class="x-red">*</span>头像
                 </label>
                 <div class="layui-input-inline">
-                    <img src="@Model.ImagePath" id="displayImg" alt="Alternate Text" width="50%"/>
+                    <img src="@Model.ImagePath" id="displayImg" alt="Alternate Text" width="50%" />
                     <button type="button" class="layui-btn" id="UploadImage">
                         <i class="layui-icon">&#xe67c;</i>上传图片
                     </button>
                 </div>
-                <div class="layui-form-mid layui-word-aux">
-                    6到16个字符
-                </div>
             </div>
             <div class="layui-form-item">
                 @Html.HiddenFor(m => m.Id)
+                @Html.HiddenFor(m => m.ImagePath)
+
                 @Html.Hidden("imageUrl")
                 <label for="username" class="layui-form-label">
                     <span class="x-red">*</span>登录名
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" id="username" value="@Model.AdminName" name="AdminName" required="" lay-verify="required"
+                    <input type="text" id="username" value="@Model.UserName" name="UserName" required="" lay-verify="required"
                            autocomplete="off" class="layui-input">
                 </div>
-                <div class="layui-form-mid layui-word-aux">
-                    <span class="x-red">*</span>将会成为您唯一的登入名
-                </div>
+
             </div>
-            <div class="layui-form-item layui-col-xs7">
-                <label class="layui-form-label "><span class="x-red">*</span>角色</label>
-                <div class="layui-input-block ">
-                    <select name="RolesId" lay-filter="aihao" disabled="disabled">
-                        @foreach (var item in (SelectList)ViewBag.RolesList)
-                        {
-                            if (Guid.Parse(item.Value).Equals(Model.RolesId))
-                            {
-                                <option value="@item.Value" selected="selected">@item.Text</option>
-                            }
-                            else
-                            {
-                                <option value="@item.Value" >@item.Text</option>
-                            }
-                        }
-                    </select>
-                   
+
+            <div class="layui-form-item">
+                <label for="L_pass" class="layui-form-label">
+
+                    <span class="x-red">*</span>邮箱
+                </label>
+                <div class="layui-input-inline">
+                    <input type="email" id="L_pass" value="@Model.Email" name="Email" required="" lay-verify="pass"
+                           autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label for="L_pass" class="layui-form-label">
 
-                    <span class="x-red">*</span>密码
+                    <span class="x-red">*</span>电话
                 </label>
                 <div class="layui-input-inline">
-                    <input type="password" id="L_pass" value="@Model.AdminPassword" name="AdminPassword" required="" lay-verify="pass"
+                    <input type="email" id="L_pass" value="@Model.Phone" name="Phone" required="" lay-verify="pass"
                            autocomplete="off" class="layui-input">
                 </div>
-                
             </div>
             <div class="layui-form-item">
-                <label for="L_repass" class="layui-form-label">
-                    <span class="x-red">*</span>确认密码
+                <label for="L_pass" class="layui-form-label">
+                    是否会员
+                    <span class="x-red">*</span>
                 </label>
                 <div class="layui-input-inline">
-                    <input type="password"  name="repass" required="" lay-verify="repass"
-                           autocomplete="off" class="layui-input">
+
+                    @if (Model.IsMember)
+                    {
+                        <input type="radio" name="IsMember"  title="" checked="checked">
+                    }
+                    else
+                    {
+                        <input type="radio" name="IsMember"  title="" >
+                    }
+
                 </div>
             </div>
             <div class="layui-form-item">
@@ -100,17 +94,12 @@
                         if (value.length < 5) {
                             return '昵称至少得5个字符啊';
                         }
-                    },
-                    pass: [/(.+){6,12}$/, '密码必须6到12位'],
-                    repass: function(value) {
-                        if ($('#L_pass').val() !== $('#L_repass').val()) {
-                            return '两次密码不一致';
-                        }
                     }
+                    
                 });
                 upload.render({
                     elem: '#UploadImage',
-                    url: '@Url.Action("UploadImage", "Admin")', //必填项
+                    url: '@Url.Action("UploadImage", "User")', //必填项
                     field: 'file',
                     done: function(res) {
                         //如果上传失败
@@ -123,15 +112,21 @@
                         };
                     }
                 });
+                 
                 //监听提交
                 form.on('submit(add)',
                     function(data) {
                         console.log(data);
+                        if (data.field.IsMember==="on") {
+                            data.field.IsMember = true;
+                        } else {
+                            data.field.IsMember = false;
+                        }
                         //发异步,
-                        $.post("@Url.Action("UpdateAdmin", "Admin")",
+                        $.post("@Url.Action("UpdateUserInfo", "User")",
                             data.field,
                             function(res) {
-                                layer.alert(res.Info + "(请重新登录刷新)",
+                                layer.alert(res.Info,
                                     {
                                         icon: 6
                                     },

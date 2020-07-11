@@ -65,16 +65,27 @@ namespace ShopOnline.Bll
             };
         }
 
-        public async Task<int> EditUser(UserDto model)
+        public async Task<int> EditUser(bool editType,UserDto model)
         {
             var user = await _service.QueryAsync(model.Id);
-
-            user.UserName = model.UserName;
-            user.UserPassword = model.UserPassword;
-            user.Email = model.Email;
-            user.Phone = model.Phone;
-            user.ImagePath = model.ImagePath;
-            user.UpdateTime = DateTime.Now;
+            if (editType)
+            {
+                user.UserName = model.UserName;
+                user.UserPassword = model.UserPassword;
+                user.Email = model.Email;
+                user.Phone = model.Phone;
+                user.ImagePath = model.ImagePath;
+                user.UpdateTime = DateTime.Now;
+            }
+            else
+            {
+                user.UserName = model.UserName;
+                user.Email = model.Email;
+                user.Phone = model.Phone;
+                user.ImagePath = model.ImagePath;
+                user.UpdateTime = DateTime.Now;
+                user.IsMember = model.IsMember;
+            }
 
             return await _service.EditAsync(user);
 

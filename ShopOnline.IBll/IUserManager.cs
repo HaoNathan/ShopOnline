@@ -30,7 +30,7 @@ namespace ShopOnline.IBll
         /// </summary>
         /// <param name="model">用户实体</param>
         /// <returns></returns>
-        Task<int> EditUser(UserDto model);
+        Task<int> EditUser(bool editType,UserDto model);
 
         /// <summary>
         /// 判断是否重名

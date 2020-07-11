@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ShopOnline.Dto;
 using ShopOnline.IBll;
 
 namespace ShopOnline.WebApp.Areas.Admin.Controllers
@@ -41,15 +42,16 @@ namespace ShopOnline.WebApp.Areas.Admin.Controllers
             return Json(dic);
         }
         [HttpPost]
-        public JsonResult Get()
+        public JsonResult GetLineChart()
         {
             var data = _manager.QueryAllOrder(false)
-                .GroupBy(m => new { m.CreateTime.Month })
+                .GroupBy(m=> m.CreateTime.Month )
                 .Select(m => new
                 {
                     month = m.Key,
                     total = m.Sum(x => x.TotalPrice)
                 });
+
             List<string> nameList = new List<string>();
             List<int> countList = new List<int>();
             Dictionary<string, object> dic = new Dictionary<string, object>();
@@ -63,5 +65,6 @@ namespace ShopOnline.WebApp.Areas.Admin.Controllers
             dic.Add("list2", countList);
             return Json(dic);
         }
+       
     }
 }

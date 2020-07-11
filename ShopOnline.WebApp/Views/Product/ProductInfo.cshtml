@@ -45,7 +45,7 @@
         }
     </style>
 }
-<div class="bodybox">
+<div class="layui-container" style="margin-top: 7%">
 
         <div class="layui-row ">
             <div class="layui-col-md12 bodycontain">
@@ -82,7 +82,7 @@
                     <div class="layui-col-md3 bodycontainn " style="margin-right:100px;margin-left: 50px;">
                         <div class="grid-demo grid-demo-bg1">
 
-                            <div class="box">
+                            <div class="box" >
                                 
                                 @{
                                     if (Model.ProductImagePath.Contains("#"))
@@ -117,7 +117,7 @@
                                 </span><br />
 
                                 <button type="button" class="layui-btn layui-btn-primary" id="addCard">加入购物车</button>
-                                <button type="button" class="layui-btn layui-btn-primary" onclick="window.location.href = '@Url.Action("AddCart","ShoppingCart",new{id=Model.Id,isBuy="true"})'" >立即购买</button>
+                                <button type="button" class="layui-btn layui-btn-primary" id="buyNow" >立即购买</button>
                             </div>
                         </div>
                     </div>
@@ -125,7 +125,7 @@
                 </div>
             </div>
 
-            <div class="layui-col-md10 bodycontainn">
+            <div class="layui-col-md10 bodycontainn" style="overflow: auto">
                 <div class="box">
                     <div class="layui-row grid-demo grid-demo-bg1">
 
@@ -171,25 +171,36 @@
 {
     <script>
         //加载layui组件
-        layui.use(['element','layer'],
+        layui.use(['element', 'layer'],
             function() {
                 var element = layui.element;
                 var layer = layui.layer;
+                var $ = layui.$;
+                $("#addCard").click(function() {
+                    $.get('@Url.Action("AddCart", "ShoppingCart", new {id = Model.Id, isBuy = "false"})',
+                        function(res) {
+                            if (res.IsSuccess) {
+                                layer.msg(res.Info);
+                            }
+                        });
+                });
+                $("#buyNow").click(function() {
+                    $.get('@Url.Action("AddCart", "ShoppingCart", new {id = Model.Id, isBuy = "true"})',
+                        function(res) {
+                            if (res.IsSuccess&&res.Info!=null) {
+                                layer.msg(res.Info);
+                            }else if (res.RedirectUrl!=null) {
+                                location.href = res.RedirectUrl;
+                            }
+                        });
+                });
 
-                $("#addCard").click(function () {
-                    $.get('@Url.Action("AddCart","ShoppingCart",new{id=Model.Id,isBuy="false"})',function (res) {
-                        if (res.IsSuccess) {
-                            layer.msg(res.Info);
-                        }
-                    });
+                //小图切换大图片
+                $("#imgBox img").click(function() {
+                    var imgPath = $(this).attr("src");
+                    $(".box").children("img").attr("src", imgPath);
                 });
             });
-        
-        //小图切换大图片
-        $("#imgBox img").click(function() {
-            var imgPath = $(this).attr("src");
-            $(".box").children("img").attr("src", imgPath);
-        });
     </script>
 
 }

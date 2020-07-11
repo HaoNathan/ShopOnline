@@ -293,6 +293,7 @@
                             <th>数量</th>
                             <th>单价</th>
                             <th>收件人信息</th>
+                            <th><th>
                         </tr> 
                     </thead>
                     <tbody>
@@ -334,6 +335,7 @@
                                                     <p>收件人住址：@item1.Address</p>
                                                     <p>收件人名称：  <strong> @item1.AcceptName</strong> 手机号：@item1.Phone </p>
                                                     <td/>
+                                                        <td> </td>
                                                 </tr>
 
                                             }
@@ -350,9 +352,9 @@
                                     @{
                                         if (item1.PayState == 0)
                                         {
-                                            <span style="font-weight: bold; color: red">您还未支付，请尽快支付</span>
-                                            <button type="submit" class="layui-btn layui-btn-small layui-btn-primary payMoney" value="@item1.Id">支付</button>
-                                            <button type="submit" class="layui-btn layui-btn-small layui-btn-danger deleteOrder" value="@item1.Id">取消订单</button>
+                                            <p style="font-weight: bold; color: red">您还未支付，请尽快支付</p>
+                                            <button type="submit" class="layui-btn layui-btn-sm layui-btn-primary payMoney" value="@item1.Id">支付</button>
+                                            <button type="submit" class="layui-btn layui-btn-sm layui-btn-danger deleteOrder" value="@item1.Id">取消订单</button>
                                         }
                                         else
                                         {

@@ -22,6 +22,7 @@ namespace ShopOnline.WebApp.Controllers
         {
             _manager = manager;
         }
+
         /// <summary>
         /// 添加进购物车
         /// </summary>
@@ -33,7 +34,6 @@ namespace ShopOnline.WebApp.Controllers
             try
             {
                 var user = (UserDto)Session["User"];
-
                 var shopCart = _manager.IsExist(Guid.Parse(id));
 
                 if (shopCart == null)
@@ -47,7 +47,11 @@ namespace ShopOnline.WebApp.Controllers
                     if (result == 1)
                     {
                         if (isBuy == "true")
-                            return RedirectToAction("Cart", "ShoppingCart");
+                            _msg = new MsgResult()
+                            {
+                                IsSuccess = true,
+                                RedirectUrl =Url.Action("Cart","ShoppingCart")
+                            };
                         else
                             _msg = new MsgResult()
                             {
@@ -81,11 +85,21 @@ namespace ShopOnline.WebApp.Controllers
             }
             catch (Exception e)
             {
-               return RedirectToAction("Index", "Home");
+                _msg = new MsgResult()
+                {
+                    IsSuccess = true,
+                    Info = "请先登陆哦"
+                };
+                return Json(_msg, JsonRequestBehavior.AllowGet);
+
             }
 
             return Json(_msg,JsonRequestBehavior.AllowGet);
         }
+
+
+
+        [HttpGet]
         public async Task<ActionResult> Cart()
         {
             try

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -64,7 +65,7 @@ namespace ShopOnline.WebApp.Areas.Admin.Controllers
 
             return Json(jsonResult, JsonRequestBehavior.AllowGet);
         }
-
+        [HttpPost]
         public async Task<JsonResult> UpdateUserState(string id ,bool state)
         {
             var result = await _manager.UpdateUserState(Guid.Parse(id), state);
@@ -86,6 +87,58 @@ namespace ShopOnline.WebApp.Areas.Admin.Controllers
             }
             return Json(_msg);
         }
-       
+        [HttpPost]
+        public JsonResult UploadImage(HttpPostedFileBase file)
+        {
+            if (file != null && !string.IsNullOrEmpty(file.FileName))
+            {
+                var newName = Guid.NewGuid().ToString("n") + file.FileName;
+                var filePath = Server.MapPath("~/Upload/User/");
+                file.SaveAs(Path.Combine(filePath, newName));
+                var displayPath = "/Upload/User/" + newName;
+                return Json(new { code = 0, data = displayPath, Info = "添加成功" });
+            }
+
+            return Json(new { code = -1, msg = "error", data = "" });
+        }
+
+        public async Task<ActionResult> UpdateUserInfo(string id)
+        {
+            var user = await _manager.QueryUser(Guid.Parse(id));
+
+            return View(user);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> UpdateUserInfo(UserDto model,string imageUrl)
+        {
+            if (!string.IsNullOrEmpty(imageUrl))
+            {
+                model.ImagePath = imageUrl;
+            }
+
+            var result = await _manager.EditUser(false,model);
+
+            if (result == 1)
+            {
+                _msg = new MsgResult()
+                {
+                    IsSuccess = true,
+                    Info = "修改状态成功"
+                };
+            }
+            else
+            {
+                _msg = new MsgResult()
+                {
+                    IsSuccess = true,
+                    Info = "修改状态成功"
+                };
+            }
+            return Json(_msg);
+        }
+
+
+
     }
 }
