@@ -22,7 +22,6 @@ namespace ShopOnline.IBll
         /// </summary>
         /// <param name="id">用户Id</param>
         /// <returns></returns>
-
         Task<UserDto> QueryUser(Guid id);
 
         /// <summary>

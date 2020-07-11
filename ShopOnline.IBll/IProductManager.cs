@@ -7,12 +7,32 @@ namespace ShopOnline.IBll
 {
     public interface IProductManager
     {
+        /// <summary>
+        /// 获取所有商品
+        /// </summary>
+        /// <returns></returns>
         IQueryable<ProductDto> GetAllProducts();
 
+        /// <summary>
+        /// 修改商品信息
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         Task<int> EditProduct(ProductDto model);
 
+        /// <summary>
+        /// 修改商品状态
+        /// </summary>
+        /// <param name="id">商品Id</param>
+        /// <param name="state">状态</param>
+        /// <returns></returns>
         Task<int> UpdateProductState(Guid id, bool state);
 
+        /// <summary>
+        /// 添加商品
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         Task<int> AddProduct(ProductDto model);
 
         /// <summary>
@@ -43,10 +63,22 @@ namespace ShopOnline.IBll
         /// <returns></returns>
         IQueryable<ProductDto> QueryProductByCategory( string categoryName);
 
+        /// <summary>
+        /// 按一级类别查询
+        /// </summary>
+        /// <returns></returns>
         IQueryable<ProductCategoryDto> GetFirstCategoryList();
 
+        /// <summary>
+        /// 按二级类别查询
+        /// </summary>
+        /// <returns></returns>
         IQueryable<ProductCategoryDto> GetSecondCategoryList();
 
+        /// <summary>
+        /// 按三级类别查询
+        /// </summary>
+        /// <returns></returns>
         IQueryable<ProductCategoryDto> GetThirdCategoryList();
 
     }
